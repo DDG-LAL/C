@@ -99,7 +99,7 @@ void success()
 						 { "|                                                            |\n" },
 						 { "|                                                            |\n" },
 						 { "|                                                            |\n" } };
-	char arr2[5][70] = { { "| y   y    ooo    u   u      w   w   w   iii   nn    n    ** |\n" },
+	char arr2[5][70] = { { "| y   y    ooo    u   u      w   w   w   iii   nn    n    ** |\n" },  //you win
 						 { "|  y y    o   o   u   u      w   w   w    i    n n   n    ** |\n" },
 						 { "|   y     o   o   u   u       w w w w     i    n  n  n    ** |\n" },
 						 { "|   y     o   o   u   u        w   w      i    n   n n       |\n" },
