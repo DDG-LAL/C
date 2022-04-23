@@ -6,21 +6,23 @@
 #include<math.h>
 #define MAXSIZE 100
 
-
-void input(double a[MAXSIZE][MAXSIZE + 1], long n)  //输入n阶线性方程组的增广矩阵
+//输入n阶线性方程组的增广矩阵
+void input(double a[][MAXSIZE + 1], long n)  //二维数组传形参时第二维的大小不能省略
 {
 	long i, j;
 	for (i = 0; i < n; i++)
 		for (j = 0; j < n + 1; j++)
 			scanf("%lf", &a[i][j]);
 }
-void output(double x[MAXSIZE], long n)  //输出方程组的解
+//输出方程组的解
+void output(double x[], long n)  //一维数组传形参时省略数组大小，因为本质上传进函数的是数组首元素的地址
 {
 	long k;
 	for (k = 1; k <= n; k++)
 		printf("x[%ld]=%lf ", k, x[k - 1]);
 	printf("\n");
 }
+
 int main()
 {
 	double a[MAXSIZE][MAXSIZE + 1], x[MAXSIZE], max, temp;
