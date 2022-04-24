@@ -181,7 +181,7 @@ void fail()  //失败后输出"You lose"字符串
 int main()
 {
 	//time函数用于获取时间戳，需要time.h，返回值是time_t类型(是一种整型)
-	//srand用于为rand函数设置随机数"种子"，srand函数需要stdlib.h，参数应为unsigned int类型
+	//srand用于为rand函数设置随机数"种子"，srand函数需要stdlib.h，参数应为unsigned int类型，因此对time的返回值使用强制类型转换(unsigned int)
 	//在调用rand之前必须先调用一次srand，否则生成的随机数会不够随机
 	//多次调用srand也会导致不够随机
 	srand((unsigned int)time(NULL));  //随机数初始化，整个工程中只需要进行一次
