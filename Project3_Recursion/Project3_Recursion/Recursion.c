@@ -74,20 +74,62 @@ int fib2(int n)
 }
 
 //汉诺塔问题
-void Hanoi(int n)
+//打印移动步骤
+void move(char x, char y)
 {
-	
+	static int count = 0;  
+	//static修饰局部变量，使其变成静态变量
+	//静态变量count存储在静态区，当move函数调用结束时count不会自动销毁，直到整个程序结束时销毁
+	//若不用static修饰，局部变量count本来存储在栈区，当move函数调用结束时count会自动销毁
+	printf("%c -> %c   ", x, y);
+	count++;
+	if (count % 5 == 0)
+		printf("\n\n");
+}
+//打印n层汉诺塔需要的步骤
+void Hanoi(int n, char a, char b, char c)  //将n层塔借助b从a移动到c
+{
+	if (n > 1)
+	{
+		Hanoi(n - 1, a, c, b);   //将n-1层塔借助c从a移动到b
+		move(a, c);  //将a中剩下的一层塔移动到c
+		Hanoi(n - 1, b, a, c);   //将n-1层塔借助a从b移动到c
+	}
+	else
+	{
+		move(a, c);  //当n==1，将a中的1层塔直接移动到c
+	}
 }
 
+//跳台阶问题
+//每次可以跳1个或2个台阶，求跳上n个台阶有多少种跳法
+int jump(int n)
+{
+	if (n > 2)
+		return jump(n - 1) + jump(n - 2);
+	//else if (n == 2)
+	//	return 2;
+	//else  //(n == 1)
+	//	return 1;
+	else
+		return n;
+}
 
 int main()
 {
+	char arr[100] = { "0" };
+	printf("输入一个字符串:");
+	scanf("%s", arr);
+	printf("\n打印字符串长度:%d", strlength(arr));
+
 	int a = 0, i = 0;
-	printf("输入一个int类型的数:");
+	printf("\n\n输入一个int类型的数:");
 	scanf("%d", &a);
 	printf("\n打印每一位数字:");
 	print_int(a);
+
 	printf("\n打印%d的阶乘:%d", a, Factorial(a));
+
 	printf("\n打印前%d个斐波那契数:\n", a);
 	for (i = 0; i < a; i++)
 		printf("%d ", fib1(i + 1));
@@ -95,12 +137,11 @@ int main()
 	for (i = 0; i < a; i++)
 		printf("%d ", fib2(i + 1));
 
-	char arr[20] = { "0" };
-	printf("\n\n输入一个字符串:");
-	scanf("%s", arr);
-	printf("\n打印字符串长度:%d", strlength(arr));
+	printf("\n\n打印%d层汉诺塔问题需要的步骤:\n", a);
+	char A = 'a', B = 'b', C = 'c';
+	Hanoi(a, A, B, C);
 
-
+	printf("\n\n跳上%d个台阶有%d种跳法", a, jump(a));
 
 	printf("\n");
 	return 0;
