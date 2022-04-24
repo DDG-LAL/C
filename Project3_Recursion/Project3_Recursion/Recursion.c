@@ -1,0 +1,107 @@
+//几个函数递归的例子
+
+//函数递归
+//1、必须存在明确的递归结束条件，称为递归出口，当条件满足的时候，递归不再继续
+//2、每次递归调用之后都会越来越逼近递归结束条件
+//3、递归层次不能太深，因为在递归调用的过程当中系统为每一层的返回点、局部变量等开辟了栈来存储，递归次数过多容易造成栈溢出等问题
+//4、某些情况下使用递归会导致效率降低太多
+//5、以递归的形式解释问题一般比非递归形式更清晰，但是一般迭代实现的效率比递归实现高
+//6、当一个问题非常复杂，难以用迭代实现，此时递归实现的简洁性就可以补偿其效率低的缺陷 
+
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#include<stdio.h>
+
+//接收一个整型，按顺序打印它的每一位
+void print_int(int a)
+{
+	if (a > 9)  //递归出口
+	{
+		print_int(a / 10);  //逼近递归结束条件
+	}
+	printf("%d ", a % 10);
+}
+
+//求字符串的长度(strlen)
+int strlength(char* a)
+{
+	if (*a != '\0')
+		return 1 + strlength(a + 1);
+	else
+		return 0;
+}
+
+//求n的阶乘
+int Factorial(int n)
+{
+	if (n <= 1)
+		return 1;
+	else
+		return n * Factorial(n - 1);
+}
+
+//递归求第n个斐波那契数 ——> n较大时会进行大量重复计算，导致效率低
+int fib1(int n)
+{
+	if (n > 2)
+		return fib1(n - 1) + fib1(n - 2);
+	else 
+		return 1;
+}
+
+//不递归求第n个斐波那契数
+int fib2(int n)
+{
+	int sum = 1, a = 1, b = 1;
+	/*int i = 0;
+	if (n > 2)
+	{
+		for (i = 0; i < n - 2; i++)
+		{
+			sum = a + b;
+			a = b;
+			b = sum;
+		}
+	}*/
+	while (n > 2)
+	{
+		sum = a + b;
+		a = b;
+		b = sum;
+		n--;
+	}
+	return sum;
+}
+
+//汉诺塔问题
+void Hanoi(int n)
+{
+	
+}
+
+
+int main()
+{
+	int a = 0, i = 0;
+	printf("输入一个int类型的数:");
+	scanf("%d", &a);
+	printf("\n打印每一位数字:");
+	print_int(a);
+	printf("\n打印%d的阶乘:%d", a, Factorial(a));
+	printf("\n打印前%d个斐波那契数:\n", a);
+	for (i = 0; i < a; i++)
+		printf("%d ", fib1(i + 1));
+	printf("\n打印前%d个斐波那契数:\n", a);
+	for (i = 0; i < a; i++)
+		printf("%d ", fib2(i + 1));
+
+	char arr[20] = { "0" };
+	printf("\n\n输入一个字符串:");
+	scanf("%s", arr);
+	printf("\n打印字符串长度:%d", strlength(arr));
+
+
+
+	printf("\n");
+	return 0;
+}

@@ -155,7 +155,7 @@ void fail()  //失败后输出"You lose"字符串
 	Sleep(1000);
 	char arr1[] = "                          ";
 	char arr2[] = "You  lose         ";
-	int len1 = strlen(arr1);  //strlen就是string length，求字符串长度，需要string.h
+	int len1 = strlen(arr1);  //strlen就是string length，求字符串长度(求长度时不计算字符串末尾的'\0')，需要string.h
 	int len2 = strlen(arr2);
 	printf("\n\n%s\n\n", arr1);
 	Sleep(200);
