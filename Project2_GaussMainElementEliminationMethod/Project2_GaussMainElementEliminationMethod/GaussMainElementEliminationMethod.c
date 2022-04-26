@@ -1,4 +1,5 @@
 //高斯列主元法求解线性方程组
+//Gauss Main Element Elimination Method
 
 #define _CRT_SECURE_NO_WARNINGS 1
 
