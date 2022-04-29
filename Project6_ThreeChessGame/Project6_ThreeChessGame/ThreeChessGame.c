@@ -3,6 +3,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 
 #include"GameFunc.h"
 
@@ -40,30 +41,32 @@ void game()
 {
 	int gamemode = 0;
 	char chess[X][Y];
-	InitChess(chess);
+	initchess(chess);
 	menu2();
-	printf("输入选择:");
-	scanf("%d", &gamemode);
+	int* m = &gamemode;
+	choose(m, 1, 2);
 	switch (gamemode)
 	{
 	case 1:
 	{
 		system("cls");
-		Human(chess);
+		human(chess);
 		break;
 	}
 	case 2:
 	{
-		int dif;
+		int dif = 0;
+		int* d = &dif;
 		menu3();
-		printf("输入选择:");
-		scanf("%d", &dif);
-		Machine(chess, dif);
+		choose(d, 1, 2);
+		system("cls");
+		machine(chess, dif);
 		break;
 	}
 	default:
 	{
-		printf("\n选择错误\n");
+		printf("\nerr\n");
+		system("pause");
 		break;
 	}
 	}
@@ -71,12 +74,13 @@ void game()
 
 int main()
 {
+	srand((unsigned int)time(NULL));  //随机数初始化
 	int choice ;
 	do
 	{
 		menu1();
-		printf("输入选择:");
-		scanf("%d", &choice);
+		int* c = &choice;
+		choose(c, 1, 0);
 		switch (choice)
 		{
 		case 1:
@@ -91,6 +95,8 @@ int main()
 		}
 		default:
 		{
+			printf("\nerr\n");
+			system("pause");
 			break;
 		}
 		}

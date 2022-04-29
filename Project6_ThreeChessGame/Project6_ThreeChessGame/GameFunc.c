@@ -7,7 +7,20 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void InitChess(char chess[X][Y])  //初始化棋子
+void choose(int* p,int a,int b)  //选项选择
+{
+	while (1)
+	{
+		printf("输入选择:");
+		scanf("%d", p);
+		if (*p != a && *p != b)
+			printf("\n选择错误\n\n");
+		else
+			break;
+	}
+}
+
+void initchess(char chess[X][Y])  //初始化棋子
 {
 	int i = 0, j = 0;
 	for (i = 0; i < X; i++)
@@ -72,72 +85,74 @@ char chesstype(char arr[])  //棋子形状
 	return o;
 }
 
-void Human(char chess[X][Y])  //双人模式
+void round(char* p1, char* p2, char z1, char z2, char chess[X][Y], char* p, char z, int dif)  //进行一个回合
 {
-	char player[][6] = { "玩家1","玩家2" };
-	printf("玩家1为先手\n");
-	char zi0 = chesstype(player[0]);
-	char zi1 = chesstype(player[1]);
-	while (zi0 == zi1)
+	printf("%s:%c   %s:%c\n\n", p1, z1, p2, z2);
+	printf("%s的回合:\n", p);
+	printboard(chess);
+	switch (dif)
 	{
-		printf("\n不能使用相同的棋子\n\n");
-		zi1 = chesstype(player[1]);
-	}
-	int flag = 1, outcome = 0, n = 0;
-	system("cls");
-	while (1)
+	case 0:
 	{
-		char* p;
-		char z;
-		p = (flag == 1) ? player[0] : player[1];
-		z = (flag == 1) ? zi0 : zi1;
-		printf("%s:%c   %s:%c\n\n", player[0], zi0, player[1], zi1);
-		printf("%s的回合:\n",p);
-		printboard(chess);
 		play(chess, z);
-		printboard(chess);
-		flag = -flag;
-		n++;
-		printf("\n");
-		system("pause");
-		system("cls");
-		outcome = judge(chess, zi0, zi1, n);
-		if (outcome != 0)
-			break;
+		break;
 	}
-	printf("%s:%c   %s:%c\n", player[0], zi0, player[1], zi1);
-	switch (outcome)
+	case 1:
+	{
+		easy(chess, z);
+		break;
+	}
+	case 2:
+	{
+		hard(chess, z);
+		break;
+	}
+	default:
+	{
+		printf("\ndiferror\n\n");
+		break;
+	}
+	}
+	printboard(chess);
+	printf("\n");
+	system("pause");
+	system("cls");
+}
+
+void outcome(int o, char chess[X][Y], char* p1, char* p2, char z1, char z2)  //打印游戏结果
+{
+	printf("%s:%c   %s:%c\n", p1, z1, p2, z2);
+	printboard(chess);
+	switch (o)
 	{
 	case 1:
 	{
-		printboard(chess);
-		printf("\n%s获胜\n\n", player[0]);
+		printf("\n%s获胜\n\n", p1);
 		system("pause");
 		break;
 	}
 	case 2:
 	{
-		printboard(chess);
-		printf("\n%s获胜\n\n", player[1]);
+		printf("\n%s获胜\n\n", p2);
 		system("pause");
 		break;
 	}
 	case 3:
 	{
-		printboard(chess);
 		printf("\n平局\n\n");
 		system("pause");
 		break;
 	}
 	default:
 	{
-		printf("\noutcomeError\n");
+		printf("\noutcomeError\n\n");
+		system("pause");
 		break;
 	}
 	}
 }
 
-int judge(char chess[X][Y], char p1, char p2, int n)  //判定胜负
+int judge(char chess[X][Y], char z1, char z2, int n)  //判定胜负
 {
 	int i, flag = 0;
 	char winner;
@@ -199,9 +214,9 @@ int judge(char chess[X][Y], char p1, char p2, int n)  //判定胜负
 	}
 	if (flag == 0)
 		return 0;
-	else if (winner == p1)
+	else if (winner == z1)
 		return 1;
-	else if (winner == p2)
+	else if (winner == z2)
 		return 2;
 	else
 	{
@@ -210,17 +225,41 @@ int judge(char chess[X][Y], char p1, char p2, int n)  //判定胜负
 	}
 }
 
-void Machine(char chess[X][Y], int dif)  //人机模式
+void human(char chess[X][Y])  //双人模式
 {
-	int n = 0, flag = 0;
-	while (flag != 1 && flag != 2)
+	char player[][6] = { "玩家1","玩家2" };
+	printf("玩家1为先手\n");
+	char zi0 = chesstype(player[0]);
+	char zi1 = chesstype(player[1]);
+	while (zi0 == zi1)
 	{
-		system("cls");
-		printf("选择先手的一方:\n1.电脑  2.玩家\n\n输入选择:");
-		scanf("%d", &flag);
-		if (flag != 1 && flag != 2)
-			printf("\n选择错误\n");
+		printf("\n不能使用相同的棋子\n\n");
+		zi1 = chesstype(player[1]);
 	}
+	int flag = 1, result = 0, n = 0;
+	system("cls");
+	while (1)
+	{
+		char* p;
+		char z;
+		p = (flag == 1) ? player[0] : player[1];
+		z = (flag == 1) ? zi0 : zi1;
+		round(player[0], player[1], zi0, zi1, chess, p, z, 0);
+		flag = -flag;
+		n++;
+		result = judge(chess, zi0, zi1, n);
+		if (result != 0)
+			break;
+	}
+	outcome(result, chess, player[0], player[1], zi0, zi1);
+}
+
+void machine(char chess[X][Y], int dif)  //人机模式
+{
+	int n = 0, flag = 0, result = 0;
+	int* f = &flag;
+	printf("选择先手的一方:\n1.电脑  2.玩家\n\n");
+	choose(f, 1, 2);
 	system("cls");
 	char player[][5] = { "电脑","玩家" };
 	printf("%s为先手\n", player[flag - 1]);
@@ -240,11 +279,44 @@ void Machine(char chess[X][Y], int dif)  //人机模式
 		char z;
 		p = (flag == 1) ? player[0] : player[1];
 		z = (flag == 1) ? zi0 : zi1;
-		printf("%s:%c   %s:%c\n\n", player[0], zi0, player[1], zi1);
-
-
+		if (flag == -1)
+			round(player[0], player[1], zi0, zi1, chess, p, z, 0);
+		else
+			round(player[0], player[1], zi0, zi1, chess, p, z, dif);
+		n++;
+		flag = -flag;
+		result = judge(chess, zi0, zi1, n);
+		if (result != 0)
+			break;
 	}
+	outcome(result, chess, player[0], player[1], zi0, zi1);
+}
 
+void easy(char chess[X][Y], char z)  //easy人机
+{
+	int l[9] = { -1 };
+	int i = 0, j = 0, ret = -1;
+	char* position = &chess[0][0];
+	for (i = 0; i < 9; i++)  //记录空位
+	{
+		if ((*position == ' ') && (i != 4))
+		{
+			l[j] = i;
+			position++;
+			j++;
+		}
+		else
+			position++;
+		if (position == &chess[2][2])
+			break;
+	}
+	ret = 0 + rand() % j;  //随机落子
+	i = l[j] / Y;
+	j = l[j] % X;
+	chess[i][j] = z;
+}
 
+void hard(char chess[X][Y], char z)  //hard人机
+{
 
 }
