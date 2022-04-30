@@ -1,3 +1,4 @@
+//三子棋游戏
 
 #define _CRT_SECURE_NO_WARNINGS 1
 
@@ -11,7 +12,7 @@ void menu1()
 {
 	system("cls");
 	printf("\n************************************\n");
-	printf("\n             井字棋游戏             \n");
+	printf("\n             三子棋游戏             \n");
 	printf("\n               1.Play               ");
 	printf("\n               0.Exit               \n");
 	printf("\n************************************\n\n");

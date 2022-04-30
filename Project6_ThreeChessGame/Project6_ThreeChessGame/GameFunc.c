@@ -1,4 +1,4 @@
-
+//.cÎÄ¼ş
 
 #define _CRT_SECURE_NO_WARNINGS 1
 
@@ -74,14 +74,22 @@ void play(char chess[X][Y], char o)  //Íæ¼ÒÂä×Ó
 char chesstype(char arr[])  //Æå×ÓĞÎ×´
 {
 	int tmp = 0;
+	char o;
 	//getchar:´Óstdin(±ê×¼ÊäÈë£¬¼´¼üÅÌÊäÈë)ÖĞ¶ÁÈ¡Ò»¸ö×Ö·û£¬Êµ¼ÊÉÏÊÇ¶ÁÈ¡ÊäÈë»º³åÇøÖĞµÄÒ»¸ö×Ö·û
 	//getchar·µ»ØÀàĞÍÊÇint(×Ö·ûµÄASCIIÂëÖµ)£¬Èô¶ÁÈ¡Ê±Óöµ½´íÎó»òÎÄ¼ş½áÊø£¬Ôò·µ»ØEOF(EOF == -1)£¬¼´End Of File
-	while ((tmp = getchar()) != '\n') //Çå¿ÕÊäÈë»º³åÇø
+	while (1)
 	{
-		;
+		while ((tmp = getchar()) != '\n') //Çå¿ÕÊäÈë»º³åÇø
+		{
+			;
+		}
+		printf("ÊäÈëÒ»¸ö×Ö·ûÒÔ´ú±í[%s]µÄÆå×Ó:", arr);
+		o = getchar();
+		if ((o == '\n') || (o == '\b') || (o == ' ') || (o == '\r') || (o == '\t') || (o == '\v'))
+			printf("\n·Ç·¨×Ö·û£¬²»¿ÉÓÃ\n\n");
+		else
+			break;
 	}
-	printf("ÊäÈëÒ»¸ö×Ö·ûÒÔ´ú±í[%s]µÄÆå×Ó:",arr);
-	char o = getchar();
 	return o;
 }
 
@@ -104,7 +112,7 @@ void round(char* p1, char* p2, char z1, char z2, char chess[X][Y], char* p, char
 	}
 	case 2:
 	{
-		hard(chess, z);
+		hard(chess, z, z2);
 		break;
 	}
 	default:
@@ -155,11 +163,9 @@ void outcome(int o, char chess[X][Y], char* p1, char* p2, char z1, char z2)  //´
 int judge(char chess[X][Y], char z1, char z2, int n)  //ÅĞ¶¨Ê¤¸º
 {
 	int i, flag = 0;
-	char winner;
+	char winner = '\b';
 	if (n < 5)
 		return 0;
-	if (n == 9)
-		return 3;
 	for (i = 0; i < Y; i++)  //ÅĞ¶ÏĞĞ
 	{
 		if (chess[0][i] == ' ')
@@ -212,12 +218,14 @@ int judge(char chess[X][Y], char z1, char z2, int n)  //ÅĞ¶¨Ê¤¸º
 			}
 		}
 	}
-	if (flag == 0)
-		return 0;
-	else if (winner == z1)
+	if (winner == z1)
 		return 1;
 	else if (winner == z2)
 		return 2;
+	else if (n == 9)
+		return 3;
+	else if (flag == 0)
+		return 0;
 	else
 	{
 		printf("\nJudgeError\n");
@@ -294,29 +302,154 @@ void machine(char chess[X][Y], int dif)  //ÈË»úÄ£Ê½
 
 void easy(char chess[X][Y], char z)  //easyÈË»ú
 {
-	int l[9] = { -1 };
+	int l[9] = { 0 };
 	int i = 0, j = 0, ret = -1;
 	char* position = &chess[0][0];
-	for (i = 0; i < 9; i++)  //¼ÇÂ¼¿ÕÎ»
+	for (i = 0; i < 9; i++)  //i¼ÇÂ¼¿ÕÎ»
 	{
-		if ((*position == ' ') && (i != 4))
+		if ((*position == ' ') && (position != &chess[1][1]))
 		{
 			l[j] = i;
 			position++;
-			j++;
+			j++;  //jÎªsÊı×él[]ÖĞ´¢´æµÄÔªËØ¸öÊı
 		}
 		else
 			position++;
-		if (position == &chess[2][2])
+		if (position > &chess[2][2])
 			break;
 	}
 	ret = 0 + rand() % j;  //Ëæ»úÂä×Ó
-	i = l[j] / Y;
-	j = l[j] % X;
-	chess[i][j] = z;
+	position = &chess[0][0];
+	position += l[ret];
+	*position = z;
 }
 
-void hard(char chess[X][Y], char z)  //hardÈË»ú
+int amax(int a[], int n)
 {
+	int i, m = 0;
+	for (i = 0; i < n; i++)
+		if (a[i] > a[m])
+			m = i;
+	return m;
+}
 
+void hard(char chess[X][Y], char z, char z1)  //hardÈË»ú
+{
+	int i = 0, j = 0, k = 0, flag = 0;
+	char* p = &chess[0][0];
+	for (i = 0; i < 9; i++)
+	{
+		if (*p == ' ')
+			flag++;
+		p++;
+	}
+	if ((flag == 8) || (flag == 9) || (flag == 1))
+	{
+		if (chess[1][1] == ' ')
+		{
+			chess[1][1] = z;
+			return;
+		}
+		else
+		{
+			easy(chess, z);
+			return;
+		}
+	}
+	else
+	{
+		flag = 0;
+		for (i = 0; i < X; i++)  //¼ì²é¶Ô½ÇÏß1
+		{
+			if (chess[i][i] == z1)
+				flag++;
+			if (chess[i][i] == z)
+				flag--;
+		}
+		if ((flag >= 2) || (flag <= -2))
+		{
+			for (j = 0; j < X; j++)
+				if (chess[j][j] == ' ')
+					chess[j][j] = z;
+			return;
+		}
+		flag = 0;
+		for (i = 0; i < X; i++)  //¼ì²é¶Ô½ÇÏß2
+		{
+			if (chess[i][X - i - 1] == z1)
+				flag++;
+			if (chess[i][X - i - 1] == z)
+				flag--;
+		}
+		if ((flag >= 2) || (flag <= -2))
+		{
+			for (j = 0; j < X; j++)
+				if (chess[j][X - j - 1] == ' ')
+					chess[j][X - j - 1] = z;
+			return;
+		}
+		flag = 0;
+		int flag1 = 0;
+		int x[X] = { 0 };
+		for (i = 0; i < X; i++)  //¼ì²éÃ¿Ò»ÁĞ
+		{
+			flag = 0;
+			for (j = 0; j < Y; j++)
+			{
+				if (chess[i][j] == z1)
+					flag++;
+				if (chess[i][j] == z)
+					flag--;
+			}
+			if (flag >= 2)
+			{
+				x[i] = 1;
+				flag1 = 1;
+			}
+			if (flag <= -2)
+			{
+				x[i] = 2;
+				flag1 = 1;
+			}
+		}
+		if (flag1)
+		{
+			for (i = 0; i < Y; i++)
+				if (chess[amax(x, X)][i] == ' ')
+					chess[amax(x, X)][i] = z;
+			return;
+		}
+		flag = 0, flag1 = 0;
+		int y[Y] = { 0 };
+		for (j = 0; j < Y; j++)  //¼ì²éÃ¿Ò»ĞĞ
+		{
+			flag = 0;
+			for (i = 0; i < X; i++)
+			{
+				if (chess[i][j] == z1)
+					flag++;
+				if (chess[i][j] == z)
+					flag--;
+				
+			}
+			if (flag >= 2)
+			{
+				y[j] = 1;
+				flag1 = 1;
+			}
+			if (flag <= -2)
+			{
+				y[j] = 2;
+				flag1 = 1;
+			}
+		}
+		if (flag1)
+		{
+			for (i = 0; i < Y; i++)
+				if (chess[i][amax(y, Y)] == ' ')
+					chess[i][amax(y, Y)] = z;
+			return;
+		}
+		easy(chess, z);
+	}
 }
