@@ -1,6 +1,10 @@
-//.h文件
+//.h文件:写函数声明、引用头文件、定义常量和符号
 
 #pragma once
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
 
 #define X 3
 #define Y 3

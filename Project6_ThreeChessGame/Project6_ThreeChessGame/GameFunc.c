@@ -1,11 +1,8 @@
-//.c文件
+//.c文件:写函数实现，一般与.h文件对应命名
 
 #define _CRT_SECURE_NO_WARNINGS 1
 
 #include "GameFunc.h"
-
-#include<stdio.h>
-#include<stdlib.h>
 
 void choose(int* p,int a,int b)  //选项选择
 {

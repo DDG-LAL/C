@@ -1,10 +1,7 @@
 //三子棋游戏
+//包含main函数的.c文件:写程序的主体逻辑，测试程序时可以在其中选择部分分支进行测试
 
 #define _CRT_SECURE_NO_WARNINGS 1
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
 
 #include"GameFunc.h"
 
