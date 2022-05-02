@@ -15,6 +15,14 @@ void choose(int* p, int a, int b)  //选项选择
 	}
 }
 
+int inboard(int x, int y)  //判断某个坐标是否在范围内
+{
+	if ((x >= 0) && (x < X) && (y >= 0) && (y < Y))
+		return 1;
+	else
+		return 0;
+}
+
 void initial(int mine[X][Y], char board[X][Y])  //初始化
 {
 	int i = 0, j = 0;
@@ -116,10 +124,19 @@ int play(int mine[X][Y], char board[X][Y])  //进行一次操作
 	}
 	x--;
 	y--;
+	int i = 0, j = 0;
 	switch (mine[x][y])
 	{
 	case 0:
 		print0(mine, board, x, y);
+		for (i = 0; j < X; i++)
+		{
+			for (j = 0; j < Y; j++)
+			{
+				if (board[i][j] == ' ')
+					print0(mine, board, i, j);
+			}
+		}
 		break;
 	case 1:
 	case 2:
@@ -157,43 +174,44 @@ int judge(char board[X][Y])  //判断是否胜利
 				return 0;
 		}
 	}
+	for (i = 0; i < X; i++)
+	{
+		for (j = 0; j < Y; j++)
+		{
+			if (board[i][j] == 'X')
+				board[i][j] = '*';
+		}
+	}
 	return 1;
 }
 
 void print0(int mine[X][Y], char board[X][Y], int x, int y)
 {
-	int i = 0, j = 0;
-	for (i = x - 1; i <= x + 1; i++)
+	int i = 0, j = 0, k = 0;
+	for (k = 1; k < X; k++)
 	{
-		for (j = y - 1; j <= y + 1; j++)
+		int flag = 0;
+		for (i = x - k; i <= x + k; i++)
 		{
-			if ((mine[i][j] != -1) && (inboard(i, j)))
+			for (j = y - k; j <= y + k; j++)
 			{
-				if (mine[i][j] == 0)
-					board[i][j] = ' ';
-				else
-					board[i][j] = 48 + mine[i][j];
+				if ((mine[i][j] != -1) && (inboard(i, j)))
+				{
+					if (mine[i][j] == 0)
+						board[i][j] = ' ';
+					else
+					{
+						board[i][j] = 48 + mine[i][j];
+						flag = 1;
+					}
+				}
+
 			}
-				
 		}
+		if (flag)
+			break;
 	}
-	if ((mine[x - 1][y - 1] == 0) && (inboard(x - 1, y - 1) == 1))
-		print0(mine, board, x - 1, y - 1);
-
-	if ((mine[x - 1][y + 1] == 0) && (inboard(x - 1, y + 1) == 1))
-		print0(mine, board, x - 1, y + 1);
-
-	if ((mine[x + 1][y - 1] == 0) && (inboard(x + 1, y - 1) == 1))
-		print0(mine, board, x + 1, y - 1);
-
-	if ((mine[x + 1][y + 1] == 0) && (inboard(x + 1, y + 1) == 1))
-		print0(mine, board, x + 1, y + 1);
 }
 
-int inboard(int x, int y)
-{
-	if ((x >= 0) && (x < X) && (y >= 0) && (y < Y))
-		return 1;
-	else
-		return 0;
-}
+
+

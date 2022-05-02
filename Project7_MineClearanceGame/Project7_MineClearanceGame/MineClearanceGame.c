@@ -27,28 +27,42 @@ void game()
 	{
 		display(board);
 		printf("\n");
-		test(mine);
+
+		//test(mine);  //调试用
+
 		situation = play(mine, board);
-		display(board);
-		system("pause");
 		system("cls");
 	}
 	display(board);
+	int i = 0, j = 0;
 	switch (situation)
 	{
 	case -1:
-		printf("\n\n你输了\n");
+		printf("\n你输了\n\n");
 		break;
 	case -2:
-		printf("\n\nerr\n");
+		printf("\nerr\n\n");
 		break;
 	case 1:
-		printf("\n\n你赢了\n");
+		printf("\n");
+		for (i = 0; i < X; i++)
+		{
+			for (j = 0; j < Y; j++)
+			{
+				if (board[i][j] != '*')
+					board[i][j] = ' ';
+			}
+		}
+		system("pause");
+		system("cls");
+		display(board);
+		printf("\n你赢了\n\n");
 		break;
 	default:
-		printf("\n\nerr\n");
+		printf("\nerr\n\n");
 		break;
 	}
+	system("pause");
 }
 
 int main()
