@@ -129,7 +129,7 @@ int play(int mine[X][Y], char board[X][Y])  //进行一次操作
 	{
 	case 0:
 		print0(mine, board, x, y);
-		for (i = 0; j < X; i++)
+		for (i = 0; i < X; i++)
 		{
 			for (j = 0; j < Y; j++)
 			{
