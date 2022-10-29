@@ -109,7 +109,7 @@ void success()  //成功之后输出"YOU WIN!"字符画
 						 { "|   y     o   o   u   u        w   w      i    n   n n       |\n" },
 						 { "|   y      ooo     uuu         w   w     iii   n    nn    ** |\n" } };  //you win
 	char arr3[5][70];
-	for (i = 0; i < 5; i++)  //strcpy就是string copy，将字符串赋值给字符数组，需要string.h，返回值是被赋值的字符数组的起始地址
+	for (i = 0; i < 5; i++)  //strcpy就是string copy，将字符串（后）赋值给字符数组（前），需要string.h，返回值是被赋值的字符数组的起始地址
 		strcpy(arr3[i], arr1[0]);  
 	int len = strlen(arr1[0]) - 2;  //len=61
 	//字符画从左向右移动的效果
