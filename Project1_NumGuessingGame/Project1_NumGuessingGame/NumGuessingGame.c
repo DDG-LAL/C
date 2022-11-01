@@ -22,14 +22,14 @@ int game()  //猜数字
 {
 	system("cls");  //system()用于执行系统命令，cls是清屏操作，system函数需要stdlib.h
 	//生成1至200的随机数
-	//rand用于生成随机数，需要stdlib.h
-	int ret = rand() % 200 + 1;  //rand返回值是int类型，返回的是0至0x7fff中的随机整数(0x7fff==32767)
+	//rand()用于生成随机数，需要stdlib.h
+	int ret = rand() % 200 + 1;  //rand()返回值是int类型，返回的是0至0x7fff中的随机整数(0x7fff==32767)
 
 	//printf("%d\n", ret);  //测试用
 
 	int guess = 0, flag = 0, n = 0, n_MAX = 10;  //n_MAX是机会次数，理论上用二分法在8次之内能试出答案
 	printf("\n规则:在1至200的整数中猜1个数，有%d次机会\n\n", n_MAX);
-	system("pause");  //pause 是暂停操作，cmd窗口中会显示"按任意键继续"
+	system("pause");  //pause是暂停操作，cmd窗口中会显示"按任意键继续"
 	while (1)
 	{
 		n++;
@@ -117,7 +117,7 @@ void success()  //成功之后输出"YOU WIN!"字符画
 	for (i = 0; i < len; i++)  //i:列数
 	{
 		m = len - 1;
-		for (j = i; j > 0; j--)  //j:确定某一列后，遍历(从该列至第一列)的每一列
+		for (j = i; j > 0; j--)  //j:确定某一列后，遍历(从该列至第一列中的)每一列
 		{
 			for (k = 0; k < 5; k++)  //k:行数
 			{
