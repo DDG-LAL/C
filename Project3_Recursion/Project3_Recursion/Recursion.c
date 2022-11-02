@@ -63,7 +63,7 @@ int fib2(int n)
 			b = sum;
 		}
 	}*/
-	while (n > 2)
+	while (n > 2) //对于第n个数，执行(n-2)次
 	{
 		sum = a + b;
 		a = b;
