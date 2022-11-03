@@ -17,7 +17,7 @@ void choose(int* p,int a,int b)  //选项选择
 	}
 }
 
-void initchess(char chess[X][Y])  //初始化棋子
+void initchess(char chess[X][Y])  //初始化棋盘
 {
 	int i = 0, j = 0;
 	for (i = 0; i < X; i++)
@@ -31,7 +31,7 @@ void initchess(char chess[X][Y])  //初始化棋子
 
 void printboard(char chess[X][Y])  //打印棋盘当前状态
 {
-	int i, j;
+	int i, j, k;
 	for (i = 0; i < Y; i++)  //y坐标确定行
 	{
 		printf("\n %d ", Y - i);
@@ -39,10 +39,15 @@ void printboard(char chess[X][Y])  //打印棋盘当前状态
 		{
 			printf(" %c |", chess[j][Y - i - 1]);
 		}
-		printf("\b ");
+		printf("\b ");  //打印backspace，删掉多余的"|"
 		if (i == Y - 1)
 		{
-			printf("\n    1   2   3\n");
+			printf("\n ");
+			for (k = 0; k < X; k++)
+			{
+				printf("   %d", k + 1);
+			}
+			printf("\n");
 			break;
 		}
 		printf("\n   ——————");
@@ -68,7 +73,7 @@ void play(char chess[X][Y], char o)  //玩家落子
 	}
 }
 
-char chesstype(char arr[])  //棋子形状
+char chesstype(char arr[])  //选择棋子形状
 {
 	int tmp = 0;
 	char o;
@@ -95,21 +100,21 @@ void round(char* p1, char* p2, char z1, char z2, char chess[X][Y], char* p, char
 	printf("%s:%c   %s:%c\n\n", p1, z1, p2, z2);
 	printf("%s的回合:\n", p);
 	printboard(chess);
-	switch (dif)
+	switch (dif)  //难度0设为玩家落子，难度1为easy电脑，难度2为hard电脑
 	{
 	case 0:
 	{
-		play(chess, z);
+		play(chess, z);  //玩家落子
 		break;
 	}
 	case 1:
 	{
-		easy(chess, z);
+		easy(chess, z);  //easy电脑落子
 		break;
 	}
 	case 2:
 	{
-		hard(chess, z, z2);
+		hard(chess, z, z2);  //hard电脑落子
 		break;
 	}
 	default:
@@ -161,17 +166,17 @@ int judge(char chess[X][Y], char z1, char z2, int n)  //判定胜负
 {
 	int i, flag = 0;
 	char winner = '\b';
-	if (n < 5)
+	if (n < 5)  //双方至少总共下5子才有可能分胜负
 		return 0;
 	for (i = 0; i < Y; i++)  //判断行
 	{
-		if (chess[0][i] == ' ')
+		if (chess[0][i] == ' ')  //该行有一个空格，不可能在此处连成三子，跳过
 			continue;
 		else if (chess[0][i] == chess[1][i])
 		{
 			if (chess[0][i] == chess[2][i])
 			{
-				winner = chess[0][i];
+				winner = chess[0][i];  //确定胜方棋子
 				flag = 1;
 				break;
 			}
@@ -181,13 +186,13 @@ int judge(char chess[X][Y], char z1, char z2, int n)  //判定胜负
 	{
 		for (i = 0; i < Y; i++)  //判断列
 		{
-			if (chess[i][0] == ' ')
+			if (chess[i][0] == ' ')  //该列有一个空格，不可能在此处连成三子，跳过
 				continue;
 			else if (chess[i][0] == chess[i][1])
 			{
 				if (chess[i][0] == chess[i][2])
 				{
-					winner = chess[i][0];
+					winner = chess[i][0];  //确定胜方棋子
 					flag = 1;
 					break;
 				}
@@ -196,7 +201,7 @@ int judge(char chess[X][Y], char z1, char z2, int n)  //判定胜负
 	}
 	if (!flag)  //判断对角线
 	{
-		if (chess[1][1] == ' ')
+		if (chess[1][1] == ' ')  //中点位置为空格，不可能有对角线连成三子，跳过
 			;
 		else if (chess[0][0] == chess[1][1])
 		{
@@ -219,9 +224,9 @@ int judge(char chess[X][Y], char z1, char z2, int n)  //判定胜负
 		return 1;
 	else if (winner == z2)
 		return 2;
-	else if (n == 9)
+	else if (n == 9)  //平局
 		return 3;
-	else if (flag == 0)
+	else if (flag == 0)  //未分胜负
 		return 0;
 	else
 	{
@@ -234,7 +239,7 @@ void human(char chess[X][Y])  //双人模式
 {
 	char player[][6] = { "玩家1","玩家2" };
 	printf("玩家1为先手\n");
-	char zi0 = chesstype(player[0]);
+	char zi0 = chesstype(player[0]);  //确定双方棋子
 	char zi1 = chesstype(player[1]);
 	while (zi0 == zi1)
 	{
@@ -247,16 +252,16 @@ void human(char chess[X][Y])  //双人模式
 	{
 		char* p;
 		char z;
-		p = (flag == 1) ? player[0] : player[1];
-		z = (flag == 1) ? zi0 : zi1;
-		round(player[0], player[1], zi0, zi1, chess, p, z, 0);
+		p = (flag == 1) ? player[0] : player[1];  //本轮的玩家
+		z = (flag == 1) ? zi0 : zi1;  //本轮的玩家使用的棋子
+		round(player[0], player[1], zi0, zi1, chess, p, z, 0);  //玩家落子
 		flag = -flag;
 		n++;
-		result = judge(chess, zi0, zi1, n);
+		result = judge(chess, zi0, zi1, n);  //判定胜负
 		if (result != 0)
 			break;
 	}
-	outcome(result, chess, player[0], player[1], zi0, zi1);
+	outcome(result, chess, player[0], player[1], zi0, zi1);  //输出胜负结果
 }
 
 void machine(char chess[X][Y], int dif)  //人机模式
@@ -264,11 +269,11 @@ void machine(char chess[X][Y], int dif)  //人机模式
 	int n = 0, flag = 0, result = 0;
 	int* f = &flag;
 	printf("选择先手的一方:\n1.电脑  2.玩家\n\n");
-	choose(f, 1, 2);
+	choose(f, 1, 2);  //输入选择
 	system("cls");
 	char player[][5] = { "电脑","玩家" };
 	printf("%s为先手\n", player[flag - 1]);
-	char zi0 = chesstype(player[0]);
+	char zi0 = chesstype(player[0]);  //确定双方棋子
 	char zi1 = chesstype(player[1]);
 	while (zi0 == zi1)
 	{
@@ -276,25 +281,25 @@ void machine(char chess[X][Y], int dif)  //人机模式
 		zi1 = chesstype(player[1]);
 	}
 	system("cls");
-	if (flag == 2)
+	if (flag == 2)  //玩家先手时把flag置为-1
 		flag = -1;
 	while (1)
 	{
-		char* p;
-		char z;
+		char* p;  //本轮的一方
+		char z;  //本轮的一方使用的棋子
 		p = (flag == 1) ? player[0] : player[1];
 		z = (flag == 1) ? zi0 : zi1;
 		if (flag == -1)
-			round(player[0], player[1], zi0, zi1, chess, p, z, 0);
+			round(player[0], player[1], zi0, zi1, chess, p, z, 0);  //玩家回合
 		else
-			round(player[0], player[1], zi0, zi1, chess, p, z, dif);
+			round(player[0], player[1], zi0, zi1, chess, p, z, dif);  //电脑回合
 		n++;
 		flag = -flag;
-		result = judge(chess, zi0, zi1, n);
+		result = judge(chess, zi0, zi1, n);  //判定胜负
 		if (result != 0)
 			break;
 	}
-	outcome(result, chess, player[0], player[1], zi0, zi1);
+	outcome(result, chess, player[0], player[1], zi0, zi1);  //输出胜负结果
 }
 
 void easy(char chess[X][Y], char z)  //easy人机
@@ -302,26 +307,24 @@ void easy(char chess[X][Y], char z)  //easy人机
 	int l[9] = { 0 };
 	int i = 0, j = 0, ret = -1;
 	char* position = &chess[0][0];
-	for (i = 0; i < 9; i++)  //i记录空位
+	for (i = 0; i < 9; i++)  //i记录空位的位置
 	{
-		if ((*position == ' ') && (position != &chess[1][1]))
+		if ((*position == ' ') && (position != &chess[1][1]))  //发现空位的条件
 		{
-			l[j] = i;
-			position++;
-			j++;  //j为s数组l[]中储存的元素个数
+			l[j] = i;  //存下当前空位与chess[0][0]位置的距离
+			j++;  //j为s数组l[]中储存的有效元素个数，即空位的个数
 		}
-		else
-			position++;
-		if (position > &chess[2][2])
+		position++;  //指针指向下一个位置
+		if (position > &chess[2][2])  //超出棋盘数组范围
 			break;
 	}
-	ret = 0 + rand() % j;  //随机落子
-	position = &chess[0][0];
+	ret = 0 + rand() % j;  //生成0至j-1中的一个随机数，j为空位数，j-1对应最后一个空位在l[]中的下标
+	position = &chess[0][0];  //重置指针
 	position += l[ret];
 	*position = z;
 }
 
-int amax(int a[], int n)
+int amax(int a[], int n)  //求数组内最大元素的下标
 {
 	int i, m = 0;
 	for (i = 0; i < n; i++)
@@ -330,17 +333,17 @@ int amax(int a[], int n)
 	return m;
 }
 
-void hard(char chess[X][Y], char z, char z1)  //hard人机
+void hard(char chess[X][Y], char z, char z1)  //hard人机(玩家有机会取胜时会防守玩家，电脑有机会取胜时会主动取胜)
 {
 	int i = 0, j = 0, k = 0, flag = 0;
 	char* p = &chess[0][0];
-	for (i = 0; i < 9; i++)
+	for (i = 0; i < 9; i++)  //观察棋盘空位数量
 	{
 		if (*p == ' ')
-			flag++;
+			flag++;  //记录棋盘空位数
 		p++;
 	}
-	if ((flag == 8) || (flag == 9) || (flag == 1))
+	if ((flag == 8) || (flag == 9) || (flag == 1)) //玩家下一步不可能直接获胜的情况
 	{
 		if (chess[1][1] == ' ')
 		{
@@ -356,14 +359,14 @@ void hard(char chess[X][Y], char z, char z1)  //hard人机
 	else
 	{
 		flag = 0;
-		for (i = 0; i < X; i++)  //检查对角线1
+		for (i = 0; i < X; i++)  //检查对角线1（即/）
 		{
 			if (chess[i][i] == z1)
 				flag++;
 			if (chess[i][i] == z)
 				flag--;
 		}
-		if ((flag >= 2) || (flag <= -2))
+		if ((flag == 2) || (flag == -2))  //玩家在此线上已有两子(即2)，或电脑在此线上已有两子(即-2)
 		{
 			for (j = 0; j < X; j++)
 				if (chess[j][j] == ' ')
@@ -371,14 +374,14 @@ void hard(char chess[X][Y], char z, char z1)  //hard人机
 			return;
 		}
 		flag = 0;
-		for (i = 0; i < X; i++)  //检查对角线2
+		for (i = 0; i < X; i++)  //检查对角线2（即\）
 		{
 			if (chess[i][X - i - 1] == z1)
 				flag++;
 			if (chess[i][X - i - 1] == z)
 				flag--;
 		}
-		if ((flag >= 2) || (flag <= -2))
+		if ((flag == 2) || (flag == -2))  //玩家在此线上已有两子(即2)，或电脑在此线上已有两子(即-2)
 		{
 			for (j = 0; j < X; j++)
 				if (chess[j][X - j - 1] == ' ')
@@ -387,7 +390,7 @@ void hard(char chess[X][Y], char z, char z1)  //hard人机
 		}
 		flag = 0;
 		int flag1 = 0;
-		int x[X] = { 0 };
+		int x[X] = { 0 }; //落子权重，元素越大，表示越应该在该元素下标对应的列落子
 		for (i = 0; i < X; i++)  //检查每一列
 		{
 			flag = 0;
@@ -398,12 +401,12 @@ void hard(char chess[X][Y], char z, char z1)  //hard人机
 				if (chess[i][j] == z)
 					flag--;
 			}
-			if (flag >= 2)
+			if (flag >= 2)  //玩家在此线上已有两子
 			{
 				x[i] = 1;
 				flag1 = 1;
 			}
-			if (flag <= -2)
+			if (flag <= -2)  //电脑在此线上已有两子
 			{
 				x[i] = 2;
 				flag1 = 1;
@@ -411,13 +414,13 @@ void hard(char chess[X][Y], char z, char z1)  //hard人机
 		}
 		if (flag1)
 		{
-			for (i = 0; i < Y; i++)
+			for (i = 0; i < Y; i++)  //在权重最大的一列落子
 				if (chess[amax(x, X)][i] == ' ')
 					chess[amax(x, X)][i] = z;
 			return;
 		}
 		flag = 0, flag1 = 0;
-		int y[Y] = { 0 };
+		int y[Y] = { 0 };  //落子权重，元素越大，表示越应该在该元素下标对应的行落子
 		for (j = 0; j < Y; j++)  //检查每一行
 		{
 			flag = 0;
@@ -429,12 +432,12 @@ void hard(char chess[X][Y], char z, char z1)  //hard人机
 					flag--;
 				
 			}
-			if (flag >= 2)
+			if (flag >= 2)  //玩家在此线上已有两子
 			{
 				y[j] = 1;
 				flag1 = 1;
 			}
-			if (flag <= -2)
+			if (flag <= -2)  //电脑在此线上已有两子
 			{
 				y[j] = 2;
 				flag1 = 1;
@@ -442,7 +445,7 @@ void hard(char chess[X][Y], char z, char z1)  //hard人机
 		}
 		if (flag1)
 		{
-			for (i = 0; i < Y; i++)
+			for (i = 0; i < Y; i++)  //在权重最大的一行落子
 				if (chess[i][amax(y, Y)] == ' ')
 					chess[i][amax(y, Y)] = z;
 			return;

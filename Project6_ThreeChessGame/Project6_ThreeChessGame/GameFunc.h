@@ -11,10 +11,10 @@
 
 void choose(int* p, int a, int b);  //选项选择
 
-void initchess(char chess[X][Y]);  //初始化棋子
+void initchess(char chess[X][Y]);  //初始化棋盘
 void printboard(char chess[X][Y]);  //打印棋盘当前状态
 void play(char chess[X][Y], char o);  //玩家落子
-char chesstype();  //棋子形状
+char chesstype(char arr[]);  //选择棋子形状
 void round(char* p1, char* p2, char z1, char z2, char chess[X][Y], char* p, char z, int dif);  //进行一个回合
 
 void outcome(int o, char chess[X][Y], char* p1, char* p2, char z1, char z2);  //打印游戏结果
