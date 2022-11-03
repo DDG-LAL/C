@@ -19,7 +19,7 @@ void menu()
 
 void game()
 {
-	int mine[X][Y] = { 0 };
+	int mine[X][Y] = { 0 };  //雷的分布情况，-1为雷，>=0为数量标记
 	char board[X][Y];
 	int situation = 0;
 	initial(mine, board);
@@ -28,7 +28,7 @@ void game()
 		display(board);
 		printf("\n");
 
-		//test(mine);  //调试用
+		//test(mine);  //显示雷情况，调试用
 
 		situation = play(mine, board);
 		system("cls");
@@ -67,7 +67,7 @@ void game()
 
 int main()
 {
-	srand((unsigned int)time(NULL));
+	srand((unsigned int)time(NULL));  //初始化随机数
 	int choice = 0;
 	do
 	{

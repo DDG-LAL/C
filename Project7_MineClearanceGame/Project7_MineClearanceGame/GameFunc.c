@@ -37,25 +37,25 @@ void initial(int mine[X][Y], char board[X][Y])  //初始化
 	while (n < M)
 	{
 		int x = 0, y = 0;
-		x = rand() % 10;
-		y = rand() % 10;
-		if (mine[x][y] != -1)
+		x = 0 + rand() % 10;  //生成随机坐标
+		y = 0 + rand() % 10;
+		if (mine[x][y] != -1)  //坐标上没有雷
 		{
 			mine[x][y] = -1;
 			for (i = x - 1; i <= x + 1; i++)
 			{
 				for (j = y - 1; j <= y + 1; j++)
 				{
-					if ((mine[i][j] != -1) && (inboard(i, j) == 1))
+					if ((mine[i][j] != -1) && (inboard(i, j) == 1))  //在雷周围一圈的数量标记上全部+1
 						mine[i][j]++;
 				}
 			}
-			n++;
+			n++;  //生成雷成功后计数
 		}
 	}
 }
 
-void test(int board[X][Y])  //显示mine当前状态，调试用
+void test(int mineboard[X][Y])  //显示mine当前状态，调试用
 {
 	int i = 0;
 	printf("    -");
@@ -64,11 +64,11 @@ void test(int board[X][Y])  //显示mine当前状态，调试用
 	printf("\n");
 	for (i = 0; i < Y; i++)
 	{
-		printf("%2d  |", Y - i);
+		printf("%2d  |", Y - i);  //打印纵坐标
 		int j = 0;
 		for (j = 0; j < X; j++)
 		{
-			printf("%2d ", board[j][Y - i - 1]);
+			printf("%2d ", mineboard[j][Y - i - 1]);  //打印该坐标的雷情况
 		}
 		printf("\b|\n");
 	}
@@ -83,7 +83,7 @@ void test(int board[X][Y])  //显示mine当前状态，调试用
 
 }
 
-void display(char board[X][Y])  //显示当前状态
+void display(char board[X][Y])  //显示当前游戏状态
 {
 	int i = 0;
 	printf("    -");
@@ -96,7 +96,7 @@ void display(char board[X][Y])  //显示当前状态
 		int j = 0;
 		for (j = 0; j < X; j++)
 		{
-			printf("%c ", board[j][Y - i - 1]);
+			printf("%c ", board[j][Y - i - 1]);  //打印该坐标的雷区(遮盖或显示的情况)
 		}
 		printf("\b|\n");
 	}
@@ -110,7 +110,7 @@ void display(char board[X][Y])  //显示当前状态
 	printf("\n");
 }
 
-int play(int mine[X][Y], char board[X][Y])  //进行一次操作
+int play(int mine[X][Y], char board[X][Y])  //进行一次操作(选择一个坐标，判断有没有雷)
 {
 	int x, y;
 	while (1)
@@ -127,9 +127,9 @@ int play(int mine[X][Y], char board[X][Y])  //进行一次操作
 	int i = 0, j = 0;
 	switch (mine[x][y])
 	{
-	case 0:
-		print0(mine, board, x, y);
-		for (i = 0; i < X; i++)
+	case 0:  //坐标周围没有雷
+		print0(mine, board, x, y);  
+		for (i = 0; i < X; i++)  //检测坐标周围8格是否也没有雷
 		{
 			for (j = 0; j < Y; j++)
 			{
@@ -146,9 +146,9 @@ int play(int mine[X][Y], char board[X][Y])  //进行一次操作
 	case 6:
 	case 7:
 	case 8:
-		board[x][y] = 48 + mine[x][y];
+		board[x][y] = 48 + mine[x][y];  //'0'的ASCII码值为48，mine[x][y]为当前格子周围的雷数
 		break;
-	case -1:
+	case -1:  //坐标上是雷
 		board[x][y] = '*';
 		return -1;
 	default:
@@ -168,15 +168,15 @@ int judge(char board[X][Y])  //判断是否胜利
 	{
 		for (j = 0; j < Y; j++)
 		{
-			if (board[i][j] == 'X')
+			if (board[i][j] == 'X')  //对未扫的格子进行计数
 				sum++;
-			if (sum > 10)
+			if (sum > M)  //若未扫的格子大于雷的数量，则未获胜
 				return 0;
 		}
 	}
 	for (i = 0; i < X; i++)
 	{
-		for (j = 0; j < Y; j++)
+		for (j = 0; j < Y; j++)  //获胜后显示出所有雷
 		{
 			if (board[i][j] == 'X')
 				board[i][j] = '*';
@@ -185,15 +185,15 @@ int judge(char board[X][Y])  //判断是否胜利
 	return 1;
 }
 
-void print0(int mine[X][Y], char board[X][Y], int x, int y)
+void print0(int mine[X][Y], char board[X][Y], int x, int y)  //当坐标周围没有雷时用特殊的打印
 {
 	int i = 0, j = 0, k = 0;
 	for (k = 1; k < X; k++)
 	{
 		int flag = 0;
-		for (i = x - k; i <= x + k; i++)
+		for (i = x - k; i <= x + k; i++)  //遍历以[x][y]为中心，边长不断增加的方形中的每一列
 		{
-			for (j = y - k; j <= y + k; j++)
+			for (j = y - k; j <= y + k; j++)  //遍历以[x][y]为中心，边长不断增加的方形中的每一行
 			{
 				if ((mine[i][j] != -1) && (inboard(i, j)))
 				{
