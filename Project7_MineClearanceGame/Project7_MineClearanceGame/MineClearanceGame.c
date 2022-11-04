@@ -20,7 +20,7 @@ void menu()
 void game()
 {
 	int mine[X][Y] = { 0 };  //雷的分布情况，-1为雷，>=0为数量标记
-	char board[X][Y];
+	char board[X][Y];  //用于显示的整个扫雷区域
 	int situation = 0;
 	initial(mine, board);
 	while (situation == 0)
