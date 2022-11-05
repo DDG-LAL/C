@@ -128,15 +128,16 @@ int play(int mine[X][Y], char board[X][Y])  //½øĞĞÒ»´Î²Ù×÷(Ñ¡ÔñÒ»¸ö×ø±ê£¬ÅĞ¶ÏÓĞÃ
 	switch (mine[x][y])
 	{
 	case 0:  //×ø±êÖÜÎ§Ã»ÓĞÀ×
-		print0(mine, board, x, y);  
-		for (i = 0; i < X; i++)  //¼ì²â×ø±êÖÜÎ§8¸ñÊÇ·ñÒ²Ã»ÓĞÀ×
-		{
-			for (j = 0; j < Y; j++)
-			{
-				if (board[i][j] == ' ')
-					print0(mine, board, i, j);
-			}
-		}
+		//print0(mine, board, x, y);  
+		//for (i = 0; i < X; i++)  //¼ì²â×ø±êÖÜÎ§8¸ñÊÇ·ñÒ²Ã»ÓĞÀ×
+		//{
+		//	for (j = 0; j < Y; j++)
+		//	{
+		//		if (board[i][j] == ' ')
+		//			print0(mine, board, i, j);
+		//	}
+		//}
+		print0_better(mine, board, x, y);
 		break;
 	case 1:
 	case 2:
@@ -201,7 +202,7 @@ void print0(int mine[X][Y], char board[X][Y], int x, int y)  //µ±×ø±êÖÜÎ§Ã»ÓĞÀ×Ê
 						board[i][j] = ' ';
 					else
 					{
-						board[i][j] = 48 + mine[i][j];
+						board[i][j] = '0' + mine[i][j];
 						flag = 1;
 					}
 				}
@@ -213,5 +214,27 @@ void print0(int mine[X][Y], char board[X][Y], int x, int y)  //µ±×ø±êÖÜÎ§Ã»ÓĞÀ×Ê
 	}
 }
 
-
+//µİ¹éÌõ¼ş£º1.¸Ã×ø±ê¼°ÆäÖÜÎ§8¸ö×ø±ê²»ÊÇÀ×£»2.¸Ã×ø±êÎ´±»ÅÅ²é
+void print0_better(int mine[X][Y], char board[X][Y], int x, int y)  //µ±×ø±êÖÜÎ§Ã»ÓĞÀ×Ê±ÓÃÌØÊâµÄ´òÓ¡£¬¸ÄÁ¼°æ±¾
+{
+	int i = 0, j = 0, k = 0;
+	for (i = -1; i <= 1; i++)
+	{
+		for (j = -1; j <= 1; j++)  //±éÀú¸Ã×ø±êÖÜÎ§µÄ8¸ö×ø±ê
+		{
+			if ((mine[x + i][y + j] != -1) && (inboard(x + i, y + j)))  //¸Ã×ø±ê²»ÊÇÀ×
+			{
+				if (board[x + i][y + j] == 'X')  //¸Ã×ø±êÎ´±»ÅÅ²é
+				{
+					board[x + i][y + j] = '0' + mine[x + i][y + j];
+					if (mine[x + i][y + j] == 0)  //¸Ã×ø±ê¼°ÆäÖÜÎ§µÄ8¸ö×ø±ê¶¼²»ÊÇÀ×
+					{
+						board[x + i][y + j] = ' ';
+						print0_better(mine, board, x + i, y + j);
+					}
+				}
+			}
+		}
+	}
+}
 

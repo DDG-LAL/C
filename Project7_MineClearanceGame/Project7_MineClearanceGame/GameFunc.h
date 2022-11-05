@@ -20,3 +20,4 @@ int judge(char board[X][Y]);  //判断是否胜利
 
 void print0(int mine[X][Y], char board[X][Y], int x, int y);  //当坐标周围没有雷时用特殊的打印
 
+void print0_better(int mine[X][Y], char board[X][Y], int x, int y);  //当坐标周围没有雷时用特殊的打印，改良版本
