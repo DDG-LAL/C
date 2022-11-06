@@ -11,6 +11,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
 #include<stdio.h>
+#include<string.h>
 
 //接收一个整型，按顺序打印它的每一位
 void print_int(int a)
@@ -29,6 +30,38 @@ int strlength(char* a)
 		return 1 + strlength(a + 1);
 	else
 		return 0;
+}
+
+//递归实现将字符串改变为逆序
+void reverse_string1(char* a, int len)
+{
+	char* l = a;  //左指针
+	char* r = a + len - 1;  //右指针
+	char tmp = *l;
+	*l = *r;
+	*r = tmp;
+	if (len > 2)  //当字符串长度大于2，将左指针右移，右指针左移，再次交换
+	{
+		a++;
+		len -= 2;
+		reverse_string1(a, len);
+	}
+}
+
+//不递归实现将字符串改为逆序
+void reverse_string2(char* arr)
+{
+	int len = strlen(arr);
+	char* l = arr;
+	char* r = arr + len - 1;
+	while (r > l)
+	{
+		char tmp = *r;
+		*r = *l;
+		*l = tmp;
+		l++;
+		r--;
+	}
 }
 
 //求n的阶乘
@@ -117,10 +150,15 @@ int jump(int n)
 
 int main()
 {
-	char arr[100] = { "0" };
-	printf("输入一个字符串:");
+	char arr[11] = { "0" };
+	printf("输入一个字符串(10字符以内):");
 	scanf("%s", arr);
 	printf("\n打印字符串长度:%d", strlength(arr));
+
+	reverse_string1(arr, strlen(arr));
+	printf("\n打印逆序字符串:%s", arr);
+	reverse_string2(arr);
+	printf("\n打印再次逆序的字符串:%s", arr);
 
 	int a = 0, i = 0;
 	printf("\n\n输入一个int类型的数:");
