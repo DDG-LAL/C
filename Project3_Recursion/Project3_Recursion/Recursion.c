@@ -32,7 +32,7 @@ int strlength(char* a)
 		return 0;
 }
 
-//递归实现将字符串改变为逆序
+//递归实现将字符串逆置
 void reverse_string1(char* a, int len)
 {
 	char* l = a;  //左指针
@@ -48,7 +48,7 @@ void reverse_string1(char* a, int len)
 	}
 }
 
-//不递归实现将字符串改为逆序
+//不递归实现将字符串逆置
 void reverse_string2(char* arr)
 {
 	int len = strlen(arr);
@@ -156,9 +156,9 @@ int main()
 	printf("\n打印字符串长度:%d", strlength(arr));
 
 	reverse_string1(arr, strlen(arr));
-	printf("\n打印逆序字符串:%s", arr);
+	printf("\n打印逆置字符串:%s", arr);
 	reverse_string2(arr);
-	printf("\n打印再次逆序的字符串:%s", arr);
+	printf("\n打印再次逆置的字符串:%s", arr);
 
 	int a = 0, i = 0;
 	printf("\n\n输入一个int类型的数:");
