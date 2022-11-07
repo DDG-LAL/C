@@ -40,7 +40,7 @@ void reverse_string1(char* a, int len)
 	char tmp = *l;
 	*l = *r;
 	*r = tmp;
-	if (len > 2)  //当字符串长度大于2，将左指针右移，右指针左移，再次交换
+	if (len > 2)  //若当前字符串长度大于2，将左指针右移，右指针左移，再次交换
 	{
 		a++;
 		len -= 2;
@@ -62,6 +62,20 @@ void reverse_string2(char* arr)
 		l++;
 		r--;
 	}
+}
+
+//另一种递归实现将字符串逆置
+void reverse_string3(char* arr)
+{
+	int len = strlen(arr);
+	char tmp = *arr;
+	*arr = *(arr + len - 1);
+	*(arr + len - 1) = '\0';  //暂时将最后一个字符赋值为'\0'
+	if (strlen(arr + 1) >= 2)  //剩下未处理部分大于等于2个字符
+	{
+		reverse_string3(arr + 1);
+	}
+	*(arr + len - 1) = tmp;
 }
 
 //求n的阶乘
@@ -159,6 +173,8 @@ int main()
 	printf("\n打印逆置字符串:%s", arr);
 	reverse_string2(arr);
 	printf("\n打印再次逆置的字符串:%s", arr);
+	reverse_string3(arr);
+	printf("\n打印再再次逆置的字符串:%s", arr);
 
 	int a = 0, i = 0;
 	printf("\n\n输入一个int类型的数:");
