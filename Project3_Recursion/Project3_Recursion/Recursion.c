@@ -75,7 +75,7 @@ void reverse_string3(char* arr)
 	{
 		reverse_string3(arr + 1);
 	}
-	*(arr + len - 1) = tmp;
+	*(arr + len - 1) = tmp;  //中间部分处理完成后，对最后一个字符赋值
 }
 
 //求n的阶乘
