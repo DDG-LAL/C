@@ -58,6 +58,18 @@ char* my_strcpy5(char* des, char* src)
 	return ret;
 }
 
+//类似地，实现库函数strlen的功能并优化代码
+int my_strlen(const char* arr)
+{
+	assert(arr);
+	int count = 0;
+	while (*arr++ != '\0')
+	{
+		count++;
+	}
+	return count;
+}
+
 int main()
 {
 	char arr1[] = "abcdefg";
@@ -84,5 +96,6 @@ int main()
 	char arr10[10] = "xxxxxxxxx";
 	printf("%s\n", my_strcpy5(arr10, arr9));
 
+	printf("%d\n", my_strlen("1234567"));
 	return 0;
 }
