@@ -1,0 +1,5 @@
+﻿  Exercise2_NumberOf1.c
+D:\CODE\C\C\C_exercise\Exercise2_NumberOf1\Exercise2_NumberOf1\Exercise2_NumberOf1.c(10): warning C4716: “Number1”: 必须返回一个值
+D:\CODE\C\C\C_exercise\Exercise2_NumberOf1\Exercise2_NumberOf1\Exercise2_NumberOf1.c(15): warning C4716: “Number2”: 必须返回一个值
+D:\CODE\C\C\C_exercise\Exercise2_NumberOf1\Exercise2_NumberOf1\Exercise2_NumberOf1.c(20): warning C4716: “Number3”: 必须返回一个值
+  Exercise2_NumberOf1.vcxproj -> D:\CODE\C\C\C_exercise\Exercise2_NumberOf1\Debug\Exercise2_NumberOf1.exe
