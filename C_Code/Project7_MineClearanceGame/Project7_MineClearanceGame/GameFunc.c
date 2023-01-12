@@ -23,7 +23,7 @@ int inboard(int x, int y)  //ÅĞ¶ÏÄ³¸ö×ø±êÊÇ·ñÔÚ·¶Î§ÄÚ
 		return 0;
 }
 
-void initial(int mine[X][Y], char board[X][Y])  //³õÊ¼»¯
+void initial_board(char board[X][Y])  //³õÊ¼»¯É¨À×ÇøÓò
 {
 	int i = 0, j = 0;
 	for (i = 0; i < X; i++)
@@ -33,13 +33,19 @@ void initial(int mine[X][Y], char board[X][Y])  //³õÊ¼»¯
 			board[i][j] = 'X';
 		}
 	}
-	int n = 0;
+}
+
+void initial_mine(int mine[X][Y], int x1, int y1)  //³õÊ¼»¯À×µÄ·Ö²¼
+{
+	int n = 0, i = 0, j = 0;
 	while (n < M)
 	{
 		int x = 0, y = 0;
-		x = 0 + rand() % 10;  //Éú³ÉËæ»ú×ø±ê
-		y = 0 + rand() % 10;
-		if (mine[x][y] != -1)  //×ø±êÉÏÃ»ÓĞÀ×
+		x = 0 + rand() % X;  //Éú³ÉËæ»ú×ø±ê
+		y = 0 + rand() % Y;
+		if (x == x1 && y == y1)  //±ÜÃâµÚÒ»¸ö×ø±êÓĞÀ×
+			;
+		else if (mine[x][y] != -1)  //×ø±êÉÏÃ»ÓĞÀ×£¬ÇÒ²»ÊÇµÚÒ»´Î
 		{
 			mine[x][y] = -1;
 			for (i = x - 1; i <= x + 1; i++)
@@ -122,16 +128,18 @@ int play(int mine[X][Y], char board[X][Y])  //½øĞĞÒ»´Î²Ù×÷(Ñ¡ÔñÒ»¸ö×ø±ê£¬ÅĞ¶ÏÓĞÃ
 		else
 			break;
 	}
-	x--;
-	y--;
-	int i = 0, j = 0;
+	return detect(mine, board, --x, --y);
+}
+
+int detect(int mine[X][Y], char board[X][Y], int x, int y)  //¼ì²â±»Ñ¡ÔñµÄ×ø±ê¼°ÆäÖÜÎ§ÓĞÃ»ÓĞÀ×
+{
 	switch (mine[x][y])
 	{
 	case 0:  //×ø±êÖÜÎ§Ã»ÓĞÀ×
 		//print0(mine, board, x, y);  
-		//for (i = 0; i < X; i++)  //¼ì²â×ø±êÖÜÎ§8¸ñÊÇ·ñÒ²Ã»ÓĞÀ×
+		//for (int i = 0; i < X; i++)  //¼ì²â×ø±êÖÜÎ§8¸ñÊÇ·ñÒ²Ã»ÓĞÀ×
 		//{
-		//	for (j = 0; j < Y; j++)
+		//	for (int j = 0; j < Y; j++)
 		//	{
 		//		if (board[i][j] == ' ')
 		//			print0(mine, board, i, j);
