@@ -68,14 +68,16 @@ void reverse_words(char* str)  //½«Ò»¾ä»°µÄµ¥´Êµ¹ÖÃ£¬±êµã²»µ¹ÖÃ£¬ÔÚÔ­×Ö·û´®ÉÏĞŞ¸
 
 int main()
 {
-    char arr1[100] = { 0 };
-    gets(arr1);  //±ÜÃâ¿Õ¸ñ²»±»¶ÁÈ¡
-    reverse_words(arr1);
-    printf("%s\n\n", arr1);
-
-    char arr2[100] = { 0 };
-    scanf("%[^\n]", arr2);  //±ÜÃâ¿Õ¸ñ²»±»¶ÁÈ¡
-    my_reverse_output(arr2);
+    char arr[100] = { 0 };
+    gets(arr);  //±ÜÃâ¿Õ¸ñ²»±»¶ÁÈ¡
+    reverse_words(arr);
+    
+    printf("%s\n\n", arr);
+    fflush(stdin);  //ÇåÀí±ê×¼ÊäÈë»º³åÇø
+    memset(arr, 0, sizeof(arr));  //½«Êı×éarrµÄÄÚÈİÈ«ÖÃÎª0
+    
+    scanf("%[^\n]", arr);  //±ÜÃâ¿Õ¸ñ²»±»¶ÁÈ¡
+    my_reverse_output(arr);
     return 0;
 }
 
