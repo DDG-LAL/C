@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1921e8fe-f7bf-4145-83fb-4a3b1cf53ad2}</ProjectGuid>
+    <ProjectGuid>{ee59bd39-c6d5-46e9-9106-db689c0dc506}</ProjectGuid>
     <RootNamespace>Exercise5SumOfTwoNumbers</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
