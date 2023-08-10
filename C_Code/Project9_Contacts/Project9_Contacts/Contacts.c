@@ -31,7 +31,7 @@ void RunContacts()  //运行通讯录
 			AddContact(&con);
 			break;
 		case DEL:
-
+			DelContact(&con);
 			break;
 		case SEARCH:
 			SearchContact(&con);

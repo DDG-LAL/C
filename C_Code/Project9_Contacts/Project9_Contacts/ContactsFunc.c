@@ -101,31 +101,43 @@ void PrintContact(const Con* p, int l, int r)  //打印部分通讯录
 	system("pause");
 }
 
-int FindContact(const Con* p, int type, char* mes)  //查找联系人，成功则返回下标，否则返回-1
+int FindContact(const Con* p)  //查找联系人，成功则返回下标，否则返回-1
 {
 	assert(p);
 	if (check(p, 0))  //检查通讯录是否为空
 		return -1;
+	int num = -1;
+	char data[NAME_MAX] = { 0 };
+	printf("搜索方式:1.以姓名搜索 2.以手机号搜索\n");
+	int type = choose(1, 2);
+	if (1 == type)
+		printf("\n输入姓名:");
+	else if (2 == type)
+		printf("\n输入手机号:");
+	rewind(stdin);
+	scanf("%s", data);
+
 	if (1 == type)  //以姓名查找
 	{
 		for (int i = 0; i < p->sz; ++i)
 		{
-			if (0 == strcmp(mes, p->peo[i].name))
+			if (0 == strcmp(data, p->peo[i].name))
 				return i;
 		}
-		return -1;
 	}
 	else if (2 == type)  //以手机号查找
 	{
 		for (int i = 0; i < p->sz; ++i)
 		{
-			if (0 == strcmp(mes, p->peo[i].mobile))
+			if (0 == strcmp(data, p->peo[i].mobile))
 				return i;
 		}
-		return -1;
 	}
 	else
 		return -2;
+	printf("\n没有找到该联系人\n\n");
+	system("pause");
+	return -1;
 }
 
 void SearchContact(const Con* p)  //搜索联系人，成功则打印
@@ -133,21 +145,25 @@ void SearchContact(const Con* p)  //搜索联系人，成功则打印
 	assert(p);
 	if (check(p, 0))  //检查通讯录是否为空
 		return;
-	printf("搜索方式:1.以姓名搜索 2.以手机号搜索\n");
-	int type = choose(1, 2), num;
-	char data[NAME_MAX];
-	if (1 == type)
-		printf("\n输入姓名:");
-	else if (2 == type)
-		printf("\n输入手机号:");
-	rewind(stdin);
-	scanf("%s", data);
-	num = FindContact(p, type, data);
+	int num = FindContact(p);
+	printf("\n");
 	if (num >= 0)
 		PrintContact(p, num, num);
-	else
-	{
-		printf("\n没有找到该联系人\n\n");
-		system("pause");
-	}
+	return;
+}
+
+void DelContact(Con* p)  //删除指定联系人
+{
+	assert(p);
+	if (check(p, 0))  //检查通讯录是否为空
+		return;
+	int num = FindContact(p);
+	if (num == -1)
+		return;
+	for (int i = num; i < p->sz; ++i)
+		p->peo[i] = p->peo[i + 1];
+	--p->sz;
+	reset_num(p);
+	printf("\n删除成功\n\n");
+	system("pause");
 }

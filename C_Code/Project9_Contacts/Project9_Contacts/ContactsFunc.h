@@ -41,7 +41,10 @@ typedef struct Contact  //通讯录结构，包含多个联系人，以及记录联系人数量的整型
 int choose(int l, int r);  //选项选择
 void InitContacts(Con* p);  //初始化通讯录
 void AddContact(Con* p);  //添加联系人
-int FindContact(const Con* p, int type, char* mes);  //查找联系人
-
-
 void PrintContact(const Con* p, int l, int r);  //打印通讯录
+
+int FindContact(const Con* p);  //查找联系人
+void SearchContact(const Con* p);  //搜索联系人，成功则打印
+void DelContact(Con* p);  //删除指定联系人
+
+
