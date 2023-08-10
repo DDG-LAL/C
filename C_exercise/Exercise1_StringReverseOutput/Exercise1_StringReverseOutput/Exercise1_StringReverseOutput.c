@@ -73,7 +73,7 @@ int main()
     reverse_words(arr);
     
     printf("%s\n\n", arr);
-    fflush(stdin);  //清理标准输入缓冲区
+    rewind(stdin);  //清理标准输入缓冲区，fflush函数在C11之后(VS2015及之后)已经不支持
     memset(arr, 0, sizeof(arr));  //将数组arr的内容全置为0
     
     scanf("%[^\n]", arr);  //避免空格不被读取

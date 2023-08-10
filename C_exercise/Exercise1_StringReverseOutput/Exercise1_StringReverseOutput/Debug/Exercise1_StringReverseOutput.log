@@ -1,3 +1,2 @@
 ﻿  Exercise1_StringReverseOutput.c
 D:\CODE\C\C\C_exercise\Exercise1_StringReverseOutput\Exercise1_StringReverseOutput\Exercise1_StringReverseOutput.c(72,9): warning C4013: “gets”未定义；假设外部返回 int
-  Exercise1_StringReverseOutput.vcxproj -> D:\CODE\C\C\C_exercise\Exercise1_StringReverseOutput\Debug\Exercise1_StringReverseOutput.exe
