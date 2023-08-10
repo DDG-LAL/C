@@ -1,17 +1,17 @@
-#define _CRT_SECURE_NO_WARNINGS 1
+//通讯录
 
-//需求
-//add del search modify sort print exit
+#define _CRT_SECURE_NO_WARNINGS 1
 
 #include "ContactsFunc.h"
 
 void menu()
 {
+	system("cls");
 	printf("******************************\n");
 	printf("            通讯录            \n\n");
-	printf(" 1.add     2.del     3.search \n");
-	printf(" 4.modify  5.sort    6.print  \n");
-	printf(" 0.exit                       \n");
+	printf(" 1.Add     2.Del     3.Search \n");
+	printf(" 4.Modify  5.Sort    6.Print  \n");
+	printf(" 0.Exit                       \n");
 	printf("******************************\n");
 }
 
@@ -31,20 +31,26 @@ void RunContacts()  //运行通讯录
 			AddContact(&con);
 			break;
 		case DEL:
+
 			break;
 		case SEARCH:
+			SearchContact(&con);
 			break;
 		case MODIFY:
+
 			break;
 		case SORT:
+
 			break;
 		case PRINT:
+			PrintContact(&con, 0, con.sz - 1);
 			break;
 		case EXIT:
 			printf("\n退出\n");
 			break;
 		default:
-			printf("\nerr\n");
+			printf("\nerr_run\n\n");
+			system("pause");
 			break;
 		}
 	} while (choice);

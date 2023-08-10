@@ -5,8 +5,9 @@
 #include<assert.h>
 #include<string.h>
 
-#define CONTACT_MAX 500  //通讯录容量
+#define CONTACT_MAX 100  //通讯录容量
 #define NAME_MAX 20
+#define GEN_MAX 10
 #define MOBILE_MAX 12
 #define ADDR_MAX 20
 
@@ -21,18 +22,12 @@ enum  //枚举各种功能
 	PRINT
 };
 
-typedef enum gender  //枚举性别
-{
-	SECRET,
-	MALE,
-	FEMALE
-}gender;
-
 typedef struct ContactInfo  //单个联系人结构，包含联系人的各种信息类型
 {
+	int num;
 	char name[NAME_MAX];
 	int age;
-	gender gen;
+	char gen[GEN_MAX];
 	char mobile[MOBILE_MAX];
 	char addr[ADDR_MAX];
 }Info;
@@ -46,3 +41,7 @@ typedef struct Contact  //通讯录结构，包含多个联系人，以及记录联系人数量的整型
 int choose(int l, int r);  //选项选择
 void InitContacts(Con* p);  //初始化通讯录
 void AddContact(Con* p);  //添加联系人
+int FindContact(const Con* p, int type, char* mes);  //查找联系人
+
+
+void PrintContact(const Con* p, int l, int r);  //打印通讯录
