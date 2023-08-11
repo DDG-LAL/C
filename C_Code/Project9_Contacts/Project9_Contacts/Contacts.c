@@ -15,11 +15,45 @@ void menu()
 	printf("******************************\n");
 }
 
+void init_test
+(
+	Info* p,
+	int num,
+	char name[NAME_MAX],
+	char mobile[MOBILE_MAX],
+	char gen[GEN_MAX],
+	int age,
+	char addr[ADDR_MAX]
+)
+{
+	p->num = num;
+	strcpy(p->name, name);
+	p->age = age;
+	strcpy(p->gen, gen);
+	strcpy(p->mobile, mobile);
+	strcpy(p->addr, addr);
+}
+
+void test(Con* p)
+{
+	p->sz = 7;
+	init_test(&(p->peo[0]), 1, "asdf", "456", "s", 3, "qwe");
+	init_test(&(p->peo[1]), 2, "bsdf", "6", "dass", 83, "qwde");
+	init_test(&(p->peo[2]), 3, "498*f", "456", "s", 13, "qwe");
+	init_test(&(p->peo[3]), 4, "ASDw", "456", "s", 93, "qwe");
+	init_test(&(p->peo[4]), 5, "Qsdf", "456", "s", 1, "qwe");
+	init_test(&(p->peo[5]), 6, "*/sdf", "456", "s", 50, "qwe");
+	init_test(&(p->peo[6]), 7, "qsdf", "456", "s", 35, "qwe");
+}
+
 void RunContacts()  //运行通讯录
 {
 	int choice = 0;
 	Con con;
 	InitContacts(&con);
+
+	test(&con);
+
 	do
 	{
 		menu();
@@ -37,10 +71,10 @@ void RunContacts()  //运行通讯录
 			SearchContact(&con);
 			break;
 		case MODIFY:
-
+			ModifyContact(&con);
 			break;
 		case SORT:
-
+			SortContact(&con);
 			break;
 		case PRINT:
 			PrintContact(&con, 0, con.sz - 1);

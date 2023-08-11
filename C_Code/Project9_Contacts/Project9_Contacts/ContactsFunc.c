@@ -149,7 +149,6 @@ void SearchContact(const Con* p)  //搜索联系人，成功则打印
 	printf("\n");
 	if (num >= 0)
 		PrintContact(p, num, num);
-	return;
 }
 
 void DelContact(Con* p)  //删除指定联系人
@@ -158,8 +157,13 @@ void DelContact(Con* p)  //删除指定联系人
 	if (check(p, 0))  //检查通讯录是否为空
 		return;
 	int num = FindContact(p);
-	if (num == -1)
+	if (num < 0)
 		return;
+	else
+	{
+		printf("\n将要删除的联系人如下:\n\n");
+		PrintContact(p, num, num);
+	}
 	for (int i = num; i < p->sz; ++i)
 		p->peo[i] = p->peo[i + 1];
 	--p->sz;
@@ -167,3 +171,113 @@ void DelContact(Con* p)  //删除指定联系人
 	printf("\n删除成功\n\n");
 	system("pause");
 }
+
+void ModifyContact(Con* p)  //修改指定联系人
+{
+	assert(p);
+	if (check(p, 0))  //检查通讯录是否为空
+		return;
+	int tmp = p->sz;
+	int num = FindContact(p);
+	if (num >= 0)
+	{
+		printf("\n将要修改的联系人如下:\n\n");
+		PrintContact(p, num, num);
+		p->sz = num;
+		printf("\n");
+		AddContact(p);
+		printf("\n修改成功\n\n");
+		system("pause");
+	}
+	p->sz = tmp;
+}
+
+int namecmp(const char* str1, const char* str2)  //比较两个字符串，若str1>str2则返回大于0的整数
+{
+	assert(str1 && str2);
+	const char* a = str1;
+	const char* b = str2;
+	while (1)
+	{
+		if (*a == *b)
+		{
+			if (*a == '\0')
+				return 0;
+		}
+		else if (*a >= 'A' && *a <= 'Z' && *b >= 'a' && *b <= 'z')
+		{
+			if (0 == (*a - 'A') - (*b - 'a'))
+				return 1;
+			else
+				return (int)((*a - 'A') - (*b - 'a'));
+		}
+		else if (*a >= 'a' && *a <= 'z' && *b >= 'A' && *b <= 'Z')
+		{
+			if (0 == (*a - 'a') - (*b - 'A'))
+				return -1;
+			else
+				return (int)((*a - 'a') - (*b - 'A'));
+		}
+		else
+			return (int)(*a - *b);
+		++a;
+		++b;
+	}
+}
+
+void SortByName(Con* p)
+{
+	assert(p);
+	if (check(p, 0))  //检查通讯录是否为空
+		return;
+	for (int i = 0; i < p->sz; ++i)
+	{
+		for (int j = 0; j < p->sz - i - 1; ++j)
+		{
+			if (namecmp(p->peo[j].name, p->peo[j + 1].name) > 0)
+			{
+				Info tmp;
+				tmp = p->peo[j];
+				p->peo[j] = p->peo[j + 1];
+				p->peo[j + 1] = tmp;
+			}
+		}
+	}
+}
+
+void SortByAge(Con* p)
+{
+	assert(p);
+	if (check(p, 0))  //检查通讯录是否为空
+		return;
+	for (int i = 0; i < p->sz; ++i)
+	{
+		for (int j = 0; j < p->sz - i - 1; ++j)
+		{
+			if (p->peo[j].age - p->peo[j + 1].age > 0)
+			{
+				Info tmp;
+				tmp = p->peo[j];
+				p->peo[j] = p->peo[j + 1];
+				p->peo[j + 1] = tmp;
+			}
+		}
+	}
+}
+
+
+void SortContact(Con* p)  //排序联系人
+{
+	assert(p);
+	if (check(p, 0))  //检查通讯录是否为空
+		return;
+	printf("排序方式:1.按姓名首字母排序 2.按年龄排序\n");
+	if (1 == choose(1, 2))
+		SortByName(p);
+	else
+		SortByAge(p);
+	reset_num(p);
+	printf("\n排序成功\n\n");
+	system("pause");
+}
+
