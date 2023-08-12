@@ -53,9 +53,9 @@ void InitContacts(Con* p)  //初始化通讯录
 void AddContact(Con* p)  //添加联系人
 {
 	assert(p);
-	p->peo[p->sz].num = p->sz + 1;
 	if (check(p, 1))  //检查通讯录是否已满
 		return;
+	p->peo[p->sz].num = p->sz + 1;
 	printf("输入姓名:");
 	rewind(stdin);
 	scanf("%s", p->peo[p->sz].name);
@@ -192,6 +192,14 @@ void ModifyContact(Con* p)  //修改指定联系人
 	p->sz = tmp;
 }
 
+int is_letter(char a)
+{
+	if ((a >= 'A' && a <= 'Z') || (a >= 'a' && a <= 'z'))
+		return 1;
+	else
+		return 0;
+}
+
 int namecmp(const char* str1, const char* str2)  //比较两个字符串，若str1>str2则返回大于0的整数
 {
 	assert(str1 && str2);
@@ -207,17 +215,21 @@ int namecmp(const char* str1, const char* str2)  //比较两个字符串，若str1>str2则
 		else if (*a >= 'A' && *a <= 'Z' && *b >= 'a' && *b <= 'z')
 		{
 			if (0 == (*a - 'A') - (*b - 'a'))
-				return 1;
+				return -1;
 			else
 				return (int)((*a - 'A') - (*b - 'a'));
 		}
 		else if (*a >= 'a' && *a <= 'z' && *b >= 'A' && *b <= 'Z')
 		{
 			if (0 == (*a - 'a') - (*b - 'A'))
-				return -1;
+				return 1;
 			else
 				return (int)((*a - 'a') - (*b - 'A'));
 		}
+		else if (is_letter(*a) && !is_letter(*b))
+			return 0;
+		else if (!is_letter(*a) && is_letter(*b))
+			return 1;
 		else
 			return (int)(*a - *b);
 		++a;
@@ -281,3 +293,21 @@ void SortContact(Con* p)  //排序联系人
 	system("pause");
 }
 
+void ClearContact(Con* p)  //清空通讯录
+{
+	assert(p);
+	if (check(p, 0))  //检查通讯录是否为空
+		return;
+	printf("即将清空通讯录，是否确定？\n1.确定  2.取消\n");
+	if (1 == choose(1, 2))
+	{
+		InitContacts(p);
+		printf("\n清空完成\n\n");
+		system("pause");
+	}
+	else
+	{
+		printf("\n清空操作已取消\n\n");
+		system("pause");
+	}
+}

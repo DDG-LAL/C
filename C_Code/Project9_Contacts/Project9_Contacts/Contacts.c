@@ -11,11 +11,11 @@ void menu()
 	printf("            通讯录            \n\n");
 	printf(" 1.Add     2.Del     3.Search \n");
 	printf(" 4.Modify  5.Sort    6.Print  \n");
-	printf(" 0.Exit                       \n");
+	printf(" 7.Clear   0.Exit             \n");
 	printf("******************************\n");
 }
 
-void init_test
+void init_test  //初始化测试
 (
 	Info* p,
 	int num,
@@ -34,16 +34,19 @@ void init_test
 	strcpy(p->addr, addr);
 }
 
-void test(Con* p)
+void test(Con* p)  //测试用
 {
-	p->sz = 7;
-	init_test(&(p->peo[0]), 1, "asdf", "456", "s", 3, "qwe");
+	p->sz = 10;
+	init_test(&(p->peo[0]), 1, "Qdbsdf", "456", "s", 3, "qwe");
 	init_test(&(p->peo[1]), 2, "bsdf", "6", "dass", 83, "qwde");
 	init_test(&(p->peo[2]), 3, "498*f", "456", "s", 13, "qwe");
-	init_test(&(p->peo[3]), 4, "ASDw", "456", "s", 93, "qwe");
-	init_test(&(p->peo[4]), 5, "Qsdf", "456", "s", 1, "qwe");
+	init_test(&(p->peo[3]), 4, "QSDw", "456", "s", 93, "qwe");
+	init_test(&(p->peo[4]), 5, "Asdf", "456", "s", 1, "qwe");
 	init_test(&(p->peo[5]), 6, "*/sdf", "456", "s", 50, "qwe");
-	init_test(&(p->peo[6]), 7, "qsdf", "456", "s", 35, "qwe");
+	init_test(&(p->peo[6]), 7, "Bscdf", "456", "s", 35, "qwe");
+	init_test(&(p->peo[7]), 8, "佛奥", "456", "s", 5, "qwe");
+	init_test(&(p->peo[8]), 9, "按啊树", "456", "s", 65, "qwe");
+	init_test(&(p->peo[9]), 10, "495", "456", "s", 685, "qwe");
 }
 
 void RunContacts()  //运行通讯录
@@ -52,12 +55,12 @@ void RunContacts()  //运行通讯录
 	Con con;
 	InitContacts(&con);
 
-	test(&con);
+	//test(&con);  //测试用
 
 	do
 	{
 		menu();
-		choice = choose(0, 6);
+		choice = choose(0, 7);
 		system("cls");
 		switch (choice)
 		{
@@ -78,6 +81,9 @@ void RunContacts()  //运行通讯录
 			break;
 		case PRINT:
 			PrintContact(&con, 0, con.sz - 1);
+			break;
+		case CLEAR:
+			ClearContact(&con);
 			break;
 		case EXIT:
 			printf("\n退出\n");

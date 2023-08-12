@@ -5,7 +5,7 @@
 #include<assert.h>
 #include<string.h>
 
-#define CONTACT_MAX 100  //通讯录容量
+#define CONTACT_MAX 10  //通讯录容量
 #define NAME_MAX 20
 #define GEN_MAX 10
 #define MOBILE_MAX 12
@@ -19,7 +19,8 @@ enum  //枚举各种功能
 	SEARCH,
 	MODIFY,
 	SORT,
-	PRINT
+	PRINT,
+	CLEAR
 };
 
 typedef struct ContactInfo  //单个联系人结构，包含联系人的各种信息类型
@@ -48,3 +49,4 @@ void SearchContact(const Con* p);  //搜索联系人，成功则打印
 void DelContact(Con* p);  //删除指定联系人
 void ModifyContact(Con* p);  //修改指定联系人
 void SortContact(Con* p);  //排序联系人
+void ClearContact(Con* p);  //清空通讯录
