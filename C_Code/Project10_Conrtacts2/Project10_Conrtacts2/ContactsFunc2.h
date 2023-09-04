@@ -1,11 +1,18 @@
 #pragma once
+#pragma once
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
 #include<string.h>
 
-#define CONTACT_MAX 10  //通讯录容量
+//静态
+//#define CONTACT_MAX 10  //通讯录容量
+
+//动态
+#define DEFAULT_CAP 2  //通讯录默认容量
+#define DEFAULT_ADD 3  //通讯录扩容容量
+
 #define NAME_MAX 20
 #define GEN_MAX 10
 #define MOBILE_MAX 12
@@ -33,10 +40,19 @@ typedef struct ContactInfo  //单个联系人结构，包含联系人的各种信息类型
 	char addr[ADDR_MAX];
 }Info;
 
+//静态
+//typedef struct Contact  //通讯录结构，包含多个联系人，以及记录联系人数量的整型
+//{
+//	Info peo[CONTACT_MAX];
+//	int sz;
+//}Con;
+
+//动态
 typedef struct Contacts  //通讯录结构，包含多个联系人，以及记录联系人数量的整型
 {
-	Info peo[CONTACT_MAX];
-	int sz;
+	Info* peo;
+	int sz;  //当前已保存的联系人数量
+	int cap;  //当前容量
 }Con;
 
 int choose(int l, int r);  //选项选择
@@ -50,3 +66,6 @@ void DelContact(Con* p);  //删除指定联系人
 void ModifyContact(Con* p);  //修改指定联系人
 void SortContacts(Con* p);  //排序联系人
 void ClearContacts(Con* p);  //清空通讯录
+
+//动态
+void DeleteContacts(Con* p);  //删除通讯录

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0fbe5585-d11e-4ee3-931e-215aa0fec9ce}</ProjectGuid>
-    <RootNamespace>Project9Contacts1</RootNamespace>
+    <ProjectGuid>{799d3c04-cca9-4616-9c95-06236ff74cab}</ProjectGuid>
+    <RootNamespace>Project10Conrtacts2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Contacts1.c" />
-    <ClCompile Include="ContactsFunc1.c" />
+    <ClCompile Include="Contacts2.c" />
+    <ClCompile Include="ContactsFunc2.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ContactsFunc1.h" />
+    <ClInclude Include="ContactsFunc2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
-#include "ContactsFunc1.h"
+#include "ContactsFunc2.h"
 
 int choose(int l, int r)  //选项选择
 {
@@ -17,23 +17,60 @@ int choose(int l, int r)  //选项选择
 	}
 }
 
-int check(const Con* p, int flag)  //检查通讯录状态
+//静态
+//int check(const Con* p, int flag)  //检查通讯录状态
+//{
+//	assert(p);
+//	if (0 == p->sz && 0 == flag)
+//	{
+//		printf("通讯录为空\n\n");
+//		system("pause");
+//		return 1;
+//	}
+//	else if (CONTACT_MAX == p->sz && 1 == flag)
+//	{
+//		printf("通讯录已满\n\n");
+//		system("pause");
+//		return 1;
+//	}
+//	else
+//		return 0;
+//}
+
+//动态
+int is_empty(const Con* p)  //检查通讯录是否为空
 {
 	assert(p);
-	if (0 == p->sz && 0 == flag)
+	if (0 == p->sz)
 	{
-		printf("通讯录为空\n\n");
+		printf("\n通讯录为空\n\n");
 		system("pause");
 		return 1;
 	}
-	else if (CONTACT_MAX == p->sz && 1 == flag)
+	return 0;
+}
+
+//动态
+void is_full(Con* p)  //检查通讯录是否已满，若已满则扩容
+{
+	assert(p);
+	if (p->sz == p->cap)
 	{
-		printf("通讯录已满\n\n");
-		system("pause");
-		return 1;
+		Info* tmp = (Info*)realloc(p->peo, (p->cap + DEFAULT_ADD) * sizeof(Info));
+		if (tmp == NULL)
+		{
+			perror("is_full::realloc");
+			return;
+		}
+		else
+		{
+			p->peo = tmp;
+			tmp = NULL;
+			p->cap += DEFAULT_ADD;
+
+			//printf("\n已扩容，当前容量为%d\n\n", p->cap);  //测试用
+		}
 	}
-	else
-		return 0;
 }
 
 void reset_num(Con* p)  //重置序号
@@ -43,18 +80,40 @@ void reset_num(Con* p)  //重置序号
 		p->peo[i].num = i + 1;
 }
 
+//静态
+//void InitContacts(Con* p)  //初始化通讯录
+//{
+//	assert(p);
+//	p->sz = 0;
+//	memset(p->peo, 0, sizeof(p->peo));
+//}
+
+//动态
 void InitContacts(Con* p)  //初始化通讯录
 {
 	assert(p);
 	p->sz = 0;
-	memset(p->peo, 0, sizeof(p->peo));
+	p->cap = DEFAULT_CAP;
+	p->peo = (Info*)malloc(DEFAULT_CAP * sizeof(Info));
+	if (p->peo == NULL)
+	{
+		perror("InitContacts::malloc");
+		return;
+	}
+	memset(p->peo, 0, DEFAULT_CAP * sizeof(Info));
 }
 
 void AddContact(Con* p)  //添加联系人
 {
 	assert(p);
-	if (check(p, 1))  //检查通讯录是否已满
-		return;
+	
+	//静态
+	//if (check(p, 1))  //检查通讯录是否已满
+	//	return;
+
+	//动态
+	is_full(p);
+
 	p->peo[p->sz].num = p->sz + 1;
 	printf("输入姓名:");
 	rewind(stdin);
@@ -77,8 +136,15 @@ void AddContact(Con* p)  //添加联系人
 void PrintContacts(const Con* p, int l, int r)  //打印部分通讯录
 {
 	assert(p);
-	if (check(p, 0))  //检查通讯录是否为空
+
+	//静态
+	//if (check(p, 0))  //检查通讯录是否为空
+	//	return;
+
+	//动态
+	if (is_empty(p))
 		return;
+
 	printf  //打印表头
 	(
 		"%-6s%-15s%-15s%-10s%-10s%-10s\n",
@@ -104,8 +170,15 @@ void PrintContacts(const Con* p, int l, int r)  //打印部分通讯录
 int FindContact(const Con* p)  //查找联系人，成功则返回下标，否则返回-1
 {
 	assert(p);
-	if (check(p, 0))  //检查通讯录是否为空
+	
+	//静态
+	//if (check(p, 0))  //检查通讯录是否为空
+	//	return -1;
+
+	//动态
+	if (is_empty(p))
 		return -1;
+
 	int num = -1;
 	char data[NAME_MAX] = { 0 };
 	printf("搜索方式:1.以姓名搜索 2.以手机号搜索\n");
@@ -143,8 +216,15 @@ int FindContact(const Con* p)  //查找联系人，成功则返回下标，否则返回-1
 void SearchContact(const Con* p)  //搜索联系人，成功则打印
 {
 	assert(p);
-	if (check(p, 0))  //检查通讯录是否为空
+
+	//静态
+	//if (check(p, 0))  //检查通讯录是否为空
+	//	return;
+
+	//动态
+	if (is_empty(p))
 		return;
+
 	int num = FindContact(p);
 	printf("\n");
 	if (num >= 0)
@@ -154,8 +234,15 @@ void SearchContact(const Con* p)  //搜索联系人，成功则打印
 void DelContact(Con* p)  //删除指定联系人
 {
 	assert(p);
-	if (check(p, 0))  //检查通讯录是否为空
+
+	//静态
+	//if (check(p, 0))  //检查通讯录是否为空
+	//	return;
+
+	//动态
+	if (is_empty(p))
 		return;
+
 	int num = FindContact(p);
 	if (num < 0)
 		return;
@@ -175,8 +262,15 @@ void DelContact(Con* p)  //删除指定联系人
 void ModifyContact(Con* p)  //修改指定联系人
 {
 	assert(p);
-	if (check(p, 0))  //检查通讯录是否为空
+
+	//静态
+	//if (check(p, 0))  //检查通讯录是否为空
+	//	return;
+
+	//动态
+	if (is_empty(p))
 		return;
+
 	int tmp = p->sz;
 	int num = FindContact(p);
 	if (num >= 0)
@@ -240,8 +334,15 @@ int namecmp(const char* str1, const char* str2)  //比较两个字符串，若str1>str2则
 void SortByName(Con* p)
 {
 	assert(p);
-	if (check(p, 0))  //检查通讯录是否为空
+
+	//静态
+	//if (check(p, 0))  //检查通讯录是否为空
+	//	return;
+
+	//动态
+	if (is_empty(p))
 		return;
+
 	for (int i = 0; i < p->sz; ++i)
 	{
 		for (int j = 0; j < p->sz - i - 1; ++j)
@@ -260,8 +361,15 @@ void SortByName(Con* p)
 void SortByAge(Con* p)
 {
 	assert(p);
-	if (check(p, 0))  //检查通讯录是否为空
+
+	//静态
+	//if (check(p, 0))  //检查通讯录是否为空
+	//	return;
+
+	//动态
+	if (is_empty(p))
 		return;
+
 	for (int i = 0; i < p->sz; ++i)
 	{
 		for (int j = 0; j < p->sz - i - 1; ++j)
@@ -281,8 +389,15 @@ void SortByAge(Con* p)
 void SortContacts(Con* p)  //排序联系人
 {
 	assert(p);
-	if (check(p, 0))  //检查通讯录是否为空
+
+	//静态
+	//if (check(p, 0))  //检查通讯录是否为空
+	//	return;
+
+	//动态
+	if (is_empty(p))
 		return;
+
 	printf("排序方式:1.按姓名首字母排序 2.按年龄排序\n");
 	if (1 == choose(1, 2))
 		SortByName(p);
@@ -296,11 +411,21 @@ void SortContacts(Con* p)  //排序联系人
 void ClearContacts(Con* p)  //清空通讯录
 {
 	assert(p);
-	if (check(p, 0))  //检查通讯录是否为空
+
+	//静态
+	//if (check(p, 0))  //检查通讯录是否为空
+	//	return;
+
+	//动态
+	if (is_empty(p))
 		return;
+
 	printf("即将清空通讯录，是否确定？\n1.确定  2.取消\n");
 	if (1 == choose(1, 2))
 	{
+		//动态
+		free(p->peo);
+		
 		InitContacts(p);
 		printf("\n清空完成\n\n");
 		system("pause");
@@ -310,4 +435,13 @@ void ClearContacts(Con* p)  //清空通讯录
 		printf("\n清空操作已取消\n\n");
 		system("pause");
 	}
+}
+
+//动态
+void DeleteContacts(Con* p)  //删除通讯录
+{
+	free(p->peo);
+	p->peo = NULL;
+
+	//printf("\n动态内存已释放\n");  //测试用
 }

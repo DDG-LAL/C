@@ -1,4 +1,4 @@
-//通讯录
+//通讯录1
 
 #define _CRT_SECURE_NO_WARNINGS 1
 
@@ -77,13 +77,13 @@ void RunContacts()  //运行通讯录
 			ModifyContact(&con);
 			break;
 		case SORT:
-			SortContact(&con);
+			SortContacts(&con);
 			break;
 		case PRINT:
-			PrintContact(&con, 0, con.sz - 1);
+			PrintContacts(&con, 0, con.sz - 1);
 			break;
 		case CLEAR:
-			ClearContact(&con);
+			ClearContacts(&con);
 			break;
 		case EXIT:
 			printf("\n退出\n");

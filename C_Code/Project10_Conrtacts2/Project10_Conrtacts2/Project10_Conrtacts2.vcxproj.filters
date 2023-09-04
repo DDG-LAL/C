@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Contacts1.c">
+    <ClCompile Include="Contacts2.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ContactsFunc1.c">
+    <ClCompile Include="ContactsFunc2.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ContactsFunc1.h">
+    <ClInclude Include="ContactsFunc2.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
