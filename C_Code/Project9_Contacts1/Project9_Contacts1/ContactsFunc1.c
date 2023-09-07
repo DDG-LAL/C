@@ -72,6 +72,8 @@ void AddContact(Con* p)  //添加联系人
 	rewind(stdin);
 	scanf("%s", p->peo[p->sz].addr);
 	++p->sz;
+	printf("\n添加成功\n\n");
+	system("pause");
 }
 
 void PrintContacts(const Con* p, int l, int r)  //打印部分通讯录
