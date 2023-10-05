@@ -72,4 +72,4 @@ void DeleteContacts(Con* p);  //删除通讯录
 
 //通过文件实现数据存储
 void InitDat(Con* p);  //从文件读取数据
-void SaveDat(Con* p);  //将数据保存到文件
+void SaveDat(const Con* p);  //将数据保存到文件
