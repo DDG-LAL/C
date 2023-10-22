@@ -1,5 +1,4 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-
 //【模拟实现atoi】
 //将一个字符串转化成一个整型的数
 #include<stdio.h>

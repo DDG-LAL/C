@@ -1,0 +1,4 @@
+﻿  Exercise10_SpaceInString.c
+D:\CODE\C\C\C_exercise\Exercise10_SpaceInString\Exercise10_SpaceInString\Exercise10_SpaceInString.c(66,9): warning C4476: "printf": 格式说明符中的类型字段字符“q”未知
+D:\CODE\C\C\C_exercise\Exercise10_SpaceInString\Exercise10_SpaceInString\Exercise10_SpaceInString.c(66,9): warning C4476: "printf": 格式说明符中的类型字段字符“r”未知
+  Exercise10_SpaceInString.vcxproj -> D:\CODE\C\C\C_exercise\Exercise10_SpaceInString\Debug\Exercise10_SpaceInString.exe
