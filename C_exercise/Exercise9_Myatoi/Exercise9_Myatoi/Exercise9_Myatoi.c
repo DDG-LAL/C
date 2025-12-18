@@ -53,7 +53,7 @@ int my_atoi(const char* s)
 
 int main()
 {
-	char a[100] = "       -1278l93";
+	char a[100] = "       -1278k93";
 	int n = my_atoi(a);
 	if (status == OK)
 		printf("%d\n", n);
