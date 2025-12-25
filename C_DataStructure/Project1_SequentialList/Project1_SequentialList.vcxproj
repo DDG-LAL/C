@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{38cef66e-77f7-4cc9-af53-d62f05270ae0}</ProjectGuid>
-    <RootNamespace>Project1ArrayList</RootNamespace>
+    <ProjectGuid>{21b09024-7239-4d95-8e2f-ec0a9ef9103e}</ProjectGuid>
+    <RootNamespace>Project1SequentialList</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,10 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ArrayList.c" />
+    <ClInclude Include="SequentialListFunc.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArrayList.h" />
+    <ClCompile Include="SequentialList.c" />
+    <ClCompile Include="SequentialListFunc.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
