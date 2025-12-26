@@ -32,7 +32,7 @@ void SLprint(SL* psl) //打印
 	assert(psl);
 
 	for (int i = 0; i < psl->size; ++i)
-		printf("%d ", psl->a[i]);
+		printf("%d ", psl->a[i]); //无法适配SLdatatype的类型
 	printf("\n");
 }
 

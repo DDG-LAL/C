@@ -1,4 +1,6 @@
 ﻿  LinkedList.c
   LinkedListFunc.c
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedListFunc.c(13,18): warning C4133: “=”: 从“Node *”到“Node *”的类型不兼容
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedListFunc.c(33,20): warning C4133: “=”: 从“Node *”到“Node *”的类型不兼容
   正在生成代码...
   Project2_LinkedList.vcxproj -> D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Debug\Project2_LinkedList.exe

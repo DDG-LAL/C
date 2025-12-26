@@ -5,8 +5,13 @@
 #include<assert.h>
 
 typedef int LLdatatype;
-typedef struct Node
+typedef struct SingleLinkedListNode
 {
-	LLdatatype a;
-	Node* next;
+	LLdatatype data;
+	struct Node* next;
 }Node;
+
+
+void LLprint(Node* phead);
+
+void LLpushfront(Node** phead, LLdatatype x);
