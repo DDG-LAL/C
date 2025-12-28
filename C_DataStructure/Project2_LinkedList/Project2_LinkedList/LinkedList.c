@@ -2,18 +2,50 @@
 
 #include"LinkedListFunc.h"
 
+void testpush(Node** ps)
+{
+	LLpushfront(ps, 1);
+	LLpushfront(ps, 2);
+
+	LLpushback(ps, 3);
+	LLpushback(ps, 4);
+
+	LLprint(*ps);
+}
+
+
 int main()
 {
 	Node* ps = NULL;
 	/*ps->data = 0;
 	ps->next = NULL;*/
-	LLpushfront(&ps, 1);
-	LLpushfront(&ps, 2);
-	LLpushfront(&ps, 3);
-	LLpushback(ps, 4);
-	LLpushback(ps, 5);
-	LLpushback(ps, 6);
 
+	testpush(&ps);
+
+	
+	LLpopback(&ps);
 	LLprint(ps);
+	LLpopback(&ps);
+	LLprint(ps);
+	LLpopback(&ps);
+	LLprint(ps);
+	LLpopback(&ps);
+	LLprint(ps);
+
+	testpush(&ps);
+
+	LLpopfront(&ps);
+	LLprint(ps);
+	LLpopfront(&ps);
+	LLprint(ps);
+	LLpopfront(&ps);
+	LLprint(ps);
+	LLpopfront(&ps);
+	LLprint(ps);
+
+	testpush(&ps);
+	testpush(&ps);
+
+
 	return 0;
 }

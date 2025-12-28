@@ -8,11 +8,14 @@ typedef int LLdatatype;
 typedef struct SingleLinkedListNode
 {
 	LLdatatype data;
-	struct Node* next;
+	struct SingleLinkedListNode* next;
 }Node;
 
 
 void LLprint(Node* phead); //¥Ú”°
 
-void LLpushfront(Node** phead, LLdatatype x); //Õ∑≤Â
-void LLpushback(Node** phead, LLdatatype x); //Œ≤≤Â
+void LLpushfront(Node** pphead, LLdatatype x); //Õ∑≤Â
+void LLpushback(Node** pphead, LLdatatype x); //Œ≤≤Â
+
+void LLpopfront(Node** pphead); //Õ∑…æ
+void LLpopback(Node** pphead); //Œ≤…æ
