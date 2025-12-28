@@ -12,6 +12,7 @@ typedef struct SingleLinkedListNode
 }Node;
 
 
-void LLprint(Node* phead);
+void LLprint(Node* phead); //¥Ú”°
 
-void LLpushfront(Node** phead, LLdatatype x);
+void LLpushfront(Node** phead, LLdatatype x); //Õ∑≤Â
+void LLpushback(Node** phead, LLdatatype x); //Œ≤≤Â

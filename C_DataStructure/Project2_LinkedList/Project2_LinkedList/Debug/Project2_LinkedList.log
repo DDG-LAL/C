@@ -1,6 +1,15 @@
 ﻿  LinkedList.c
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedList.c(13,15): warning C4047: “函数”:“Node **”与“Node *”的间接级别不同
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedList.c(13,13): warning C4024: “LLpushback”: 形参和实参 1 的类型不同
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedList.c(14,15): warning C4047: “函数”:“Node **”与“Node *”的间接级别不同
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedList.c(14,13): warning C4024: “LLpushback”: 形参和实参 1 的类型不同
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedList.c(15,15): warning C4047: “函数”:“Node **”与“Node *”的间接级别不同
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedList.c(15,13): warning C4024: “LLpushback”: 形参和实参 1 的类型不同
   LinkedListFunc.c
 D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedListFunc.c(13,18): warning C4133: “=”: 从“Node *”到“Node *”的类型不兼容
-D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedListFunc.c(33,20): warning C4133: “=”: 从“Node *”到“Node *”的类型不兼容
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedListFunc.c(53,20): warning C4133: “=”: 从“Node *”到“Node *”的类型不兼容
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedListFunc.c(57,23): warning C4028: 形参 1 与声明不同
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedListFunc.c(64,24): warning C4133: “=”: 从“Node *”到“Node *”的类型不兼容
+D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Project2_LinkedList\LinkedListFunc.c(67,20): warning C4133: “=”: 从“Node *”到“Node *”的类型不兼容
   正在生成代码...
   Project2_LinkedList.vcxproj -> D:\CODE\C\C\C_DataStructure\Project2_LinkedList\Debug\Project2_LinkedList.exe

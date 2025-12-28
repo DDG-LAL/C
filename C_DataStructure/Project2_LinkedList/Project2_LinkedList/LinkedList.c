@@ -10,7 +10,9 @@ int main()
 	LLpushfront(&ps, 1);
 	LLpushfront(&ps, 2);
 	LLpushfront(&ps, 3);
-	LLpushfront(&ps, 4);
+	LLpushback(ps, 4);
+	LLpushback(ps, 5);
+	LLpushback(ps, 6);
 
 	LLprint(ps);
 	return 0;
