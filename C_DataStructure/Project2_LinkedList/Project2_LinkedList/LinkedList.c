@@ -13,7 +13,6 @@ void testpush(Node** ps)
 	LLprint(*ps);
 }
 
-
 int main()
 {
 	Node* ps = NULL;
@@ -22,7 +21,6 @@ int main()
 
 	testpush(&ps);
 
-	
 	LLpopback(&ps);
 	LLprint(ps);
 	LLpopback(&ps);
@@ -46,6 +44,32 @@ int main()
 	testpush(&ps);
 	testpush(&ps);
 
+	LLinsertBefore(&ps, LLsearch(ps, 3), 11);
+	LLprint(ps);
+
+	LLerase(&ps, LLsearch(ps, 4));
+	LLerase(&ps, LLsearch(ps, 4));
+	LLprint(ps);
+	LLerase(&ps, LLsearch(ps, 3));
+	LLprint(ps);
+
+	LLinsertBefore(&ps, LLsearch(ps, 2), 121);
+	LLinsertBefore(&ps, NULL, 131);
+	LLprint(ps);
+	LLerase(&ps, ps);
+	LLerase(&ps, LLsearch(ps, 131));
+	LLprint(ps);
+
+	LLinsertAfter(ps->next->next->next, 99);
+	LLprint(ps);
+	LLeraseAfter(ps);
+	LLeraseAfter(ps);
+	LLeraseAfter(ps->next->next);
+	LLprint(ps);
+
+	//LLdestroy2(&ps);
+	LLdestroy(ps);
+	ps = NULL;
 
 	return 0;
 }
