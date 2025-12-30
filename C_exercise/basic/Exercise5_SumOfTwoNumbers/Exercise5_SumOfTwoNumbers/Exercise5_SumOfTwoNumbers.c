@@ -7,6 +7,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<assert.h>
 //#include"uthash.h"
 
 //法1：双层循环直接遍历
@@ -19,6 +20,7 @@ int* twoSum1(int* nums, int numsSize, int target, int* returnSize)
             if (nums[i] + nums[j] == target)  //发现两个数字的和等于目标值
             {
                 int* ret = (int*)malloc(2 * sizeof(int));  //定义一个储存下标值的指针
+                assert(ret);
                 ret[0] = i;  //将下标值存储到指针中
                 ret[1] = j;
                 *returnSize = 2;  //返回长度2
