@@ -2,9 +2,9 @@
 
 #include"SinglyLinkedListFunc.h"
 
-void LLprint(const Node* phead)
+void SLLprint(const SLLnode* phead)
 {
-	const Node* cur = phead;
+	const SLLnode* cur = phead;
 	while (cur)
 	{
 		printf("%d -> ", cur->data);
@@ -13,9 +13,9 @@ void LLprint(const Node* phead)
 	printf("NULL\n");
 }
 
-Node* BuyNode(LLdatatype x)
+SLLnode* BuyNode(SLLdatatype x)
 {
-	Node* tmp = (Node*)malloc(sizeof(Node));
+	SLLnode* tmp = (SLLnode*)malloc(sizeof(SLLnode));
 	if (tmp == NULL)
 	{
 		perror("malloc");
@@ -26,11 +26,11 @@ Node* BuyNode(LLdatatype x)
 	return tmp;
 }
 
-//void LLpushfront(Node* phead, LLdatatype x) //错误示范：使用一级指针
+//void SLLpushfront(SLLnode* phead, SLLdatatype x) //错误示范：使用一级指针
 //{
 //	assert(phead);
 //
-//	Node* tmp = (Node*)malloc(sizeof(Node));
+//	SLLnode* tmp = (SLLnode*)malloc(sizeof(SLLnode));
 //	if (tmp == NULL)
 //	{
 //		perror("malloc");
@@ -42,20 +42,20 @@ Node* BuyNode(LLdatatype x)
 //				 //把tmp赋值给了一个拷贝，没用
 //}
 
-void LLpushfront(Node** pphead, LLdatatype x) //头插
+void SLLpushfront(SLLnode** pphead, SLLdatatype x) //头插
 {
 	assert(pphead);
 
-	Node* tmp = BuyNode(x);
+	SLLnode* tmp = BuyNode(x);
 	tmp->next = *pphead;
 	*pphead = tmp;
 }
 
-void LLpushback(Node** pphead, LLdatatype x) //尾插
+void SLLpushback(SLLnode** pphead, SLLdatatype x) //尾插
 {
 	assert(pphead);
 
-	Node* tmp = BuyNode(x);
+	SLLnode* tmp = BuyNode(x);
 	//如果是空链表，链表头指针为空，需要改变链表头指针
 	//需要改变的是结构体指针的值，因此使用结构体指针的指针，即二级指针
 	if (*pphead == NULL) *pphead = tmp;
@@ -65,7 +65,7 @@ void LLpushback(Node** pphead, LLdatatype x) //尾插
 	//通过二级指针访问一级指针
 	else
 	{
-		Node* tail = *pphead;
+		SLLnode* tail = *pphead;
 		while (tail->next != NULL)
 		{
 			tail = tail->next;
@@ -75,18 +75,18 @@ void LLpushback(Node** pphead, LLdatatype x) //尾插
 	//需要改变什么变量，就要使用该变量类型的指针
 }
 
-void LLpopfront(Node** pphead) //头删
+void SLLpopfront(SLLnode** pphead) //头删
 {
 	assert(pphead);
 	assert(*pphead);
 
-	Node* tmp = *pphead;
+	SLLnode* tmp = *pphead;
 	*pphead = (*pphead)->next;
 	free(tmp);
 	tmp = NULL;
 }
 
-void LLpopback(Node** pphead) //尾删
+void SLLpopback(SLLnode** pphead) //尾删
 {
 	assert(pphead);
 	assert(*pphead);
@@ -99,7 +99,7 @@ void LLpopback(Node** pphead) //尾删
 	}
 	else
 	{
-		Node* tail = *pphead;
+		SLLnode* tail = *pphead;
 		while (tail->next->next != NULL)
 		{
 			tail = tail->next;
@@ -109,61 +109,61 @@ void LLpopback(Node** pphead) //尾删
 	}
 }
 
-Node* LLsearch(const Node* phead, LLdatatype x) //查找
+SLLnode* SLLsearch(const SLLnode* phead, SLLdatatype x) //查找
 {
 	while (phead != NULL)
 	{
 		if (phead->data == x)
-			return (Node*)phead;
+			return (SLLnode*)phead;
 		else
 			phead = phead->next;
 	}
 	return NULL;
 }
 
-void LLinsertBefore(Node** pphead, Node* pos, LLdatatype x) //指定位置pos前插入
+void SLLinsertBefore(SLLnode** pphead, SLLnode* pos, SLLdatatype x) //指定位置pos前插入
 {
 	assert(pphead);
 
 	if (pos == *pphead)
-		LLpushfront(pphead, x); //二级指针用于处理头插
+		SLLpushfront(pphead, x); //二级指针用于处理头插
 	else if (pos == NULL)
-		LLpushback(pphead, x); //二级指针用于处理尾插
+		SLLpushback(pphead, x); //二级指针用于处理尾插
 	else
 	{
-		Node* pre = *pphead;
+		SLLnode* pre = *pphead;
 		while (pre->next != pos)
 		{
 			pre = pre->next;
 		}
 
-		Node* tmp = BuyNode(x);
+		SLLnode* tmp = BuyNode(x);
 		tmp->next = pos;
 		pre->next = tmp;
 	}
 }
 
-void LLinsertAfter(Node* pos, LLdatatype x) //指定位置pos后插入
+void SLLinsertAfter(SLLnode* pos, SLLdatatype x) //指定位置pos后插入
 {
 	assert(pos);
 
-	Node* tmp = BuyNode(x);
+	SLLnode* tmp = BuyNode(x);
 	tmp->next = pos->next;
 	pos->next = tmp;
 }
 
-void LLerase(Node** pphead, Node* pos) //指定位置删除
+void SLLerase(SLLnode** pphead, SLLnode* pos) //指定位置删除
 {
 	assert(pphead);
 	assert(*pphead);
 
 	if (pos == *pphead)
-		LLpopfront(pphead); //二级指针用于处理头删
+		SLLpopfront(pphead); //二级指针用于处理头删
 	else if (pos == NULL)
-		LLpopback(pphead); //二级指针用于处理尾删
+		SLLpopback(pphead); //二级指针用于处理尾删
 	else
 	{
-		Node* pre = *pphead;
+		SLLnode* pre = *pphead;
 		while (pre->next != pos)
 		{
 			pre = pre->next;
@@ -174,22 +174,22 @@ void LLerase(Node** pphead, Node* pos) //指定位置删除
 	}
 }
 
-void LLeraseAfter(Node* pos) //指定位置的后一个位置删除
+void SLLeraseAfter(SLLnode* pos) //指定位置的后一个位置删除
 {
 	assert(pos);
 	assert(pos->next);
 
-	Node* del = pos->next;
+	SLLnode* del = pos->next;
 	pos->next = del->next;
 	free(del);
 	del = NULL;
 }
 
-void LLdestroy(Node* phead) //销毁
+void SLLdestroy(SLLnode* phead) //销毁
 {
 	while (phead != NULL)
 	{
-		Node* tmp = phead->next;
+		SLLnode* tmp = phead->next;
 		free(phead);
 		phead = tmp;
 	}
@@ -199,14 +199,14 @@ void LLdestroy(Node* phead) //销毁
 	printf("\ndestroyed\n");
 }
 
-void LLdestroy2(Node** pphead) //销毁，二级指针版本
+void SLLdestroy2(SLLnode** pphead) //销毁，二级指针版本
 {
 	assert(pphead);
 
-	Node* cur = *pphead;
+	SLLnode* cur = *pphead;
 	while (cur != NULL)
 	{
-		Node* tmp = cur->next;
+		SLLnode* tmp = cur->next;
 		free(cur);
 		cur = tmp;
 	}

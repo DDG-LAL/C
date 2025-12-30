@@ -2,73 +2,73 @@
 
 #include"SinglyLinkedListFunc.h"
 
-void testpush(Node** ps)
+void testpush(SLLnode** ps)
 {
-	LLpushfront(ps, 1);
-	LLpushfront(ps, 2);
+	SLLpushfront(ps, 1);
+	SLLpushfront(ps, 2);
 
-	LLpushback(ps, 3);
-	LLpushback(ps, 4);
+	SLLpushback(ps, 3);
+	SLLpushback(ps, 4);
 
-	LLprint(*ps);
+	SLLprint(*ps);
 }
 
 int main()
 {
-	Node* ps = NULL;
+	SLLnode* ps = NULL;
 	/*ps->data = 0;
 	ps->next = NULL;*/
 
 	testpush(&ps);
 
-	LLpopback(&ps);
-	LLprint(ps);
-	LLpopback(&ps);
-	LLprint(ps);
-	LLpopback(&ps);
-	LLprint(ps);
-	LLpopback(&ps);
-	LLprint(ps);
+	SLLpopback(&ps);
+	SLLprint(ps);
+	SLLpopback(&ps);
+	SLLprint(ps);
+	SLLpopback(&ps);
+	SLLprint(ps);
+	SLLpopback(&ps);
+	SLLprint(ps);
 
 	testpush(&ps);
 
-	LLpopfront(&ps);
-	LLprint(ps);
-	LLpopfront(&ps);
-	LLprint(ps);
-	LLpopfront(&ps);
-	LLprint(ps);
-	LLpopfront(&ps);
-	LLprint(ps);
+	SLLpopfront(&ps);
+	SLLprint(ps);
+	SLLpopfront(&ps);
+	SLLprint(ps);
+	SLLpopfront(&ps);
+	SLLprint(ps);
+	SLLpopfront(&ps);
+	SLLprint(ps);
 
 	testpush(&ps);
 	testpush(&ps);
 
-	LLinsertBefore(&ps, LLsearch(ps, 3), 11);
-	LLprint(ps);
+	SLLinsertBefore(&ps, SLLsearch(ps, 3), 11);
+	SLLprint(ps);
 
-	LLerase(&ps, LLsearch(ps, 4));
-	LLerase(&ps, LLsearch(ps, 4));
-	LLprint(ps);
-	LLerase(&ps, LLsearch(ps, 3));
-	LLprint(ps);
+	SLLerase(&ps, SLLsearch(ps, 4));
+	SLLerase(&ps, SLLsearch(ps, 4));
+	SLLprint(ps);
+	SLLerase(&ps, SLLsearch(ps, 3));
+	SLLprint(ps);
 
-	LLinsertBefore(&ps, LLsearch(ps, 2), 121);
-	LLinsertBefore(&ps, NULL, 131);
-	LLprint(ps);
-	LLerase(&ps, ps);
-	LLerase(&ps, LLsearch(ps, 131));
-	LLprint(ps);
+	SLLinsertBefore(&ps, SLLsearch(ps, 2), 121);
+	SLLinsertBefore(&ps, NULL, 131);
+	SLLprint(ps);
+	SLLerase(&ps, ps);
+	SLLerase(&ps, SLLsearch(ps, 131));
+	SLLprint(ps);
 
-	LLinsertAfter(ps->next->next->next, 99);
-	LLprint(ps);
-	LLeraseAfter(ps);
-	LLeraseAfter(ps);
-	LLeraseAfter(ps->next->next);
-	LLprint(ps);
+	SLLinsertAfter(ps->next->next->next, 99);
+	SLLprint(ps);
+	SLLeraseAfter(ps);
+	SLLeraseAfter(ps);
+	SLLeraseAfter(ps->next->next);
+	SLLprint(ps);
 
-	//LLdestroy2(&ps);
-	LLdestroy(ps);
+	//SLLdestroy2(&ps);
+	SLLdestroy(ps);
 	ps = NULL;
 
 	return 0;
