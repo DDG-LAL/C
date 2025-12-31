@@ -1,13 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-//【链表的中间结点】
-//给出单链表的头指针head，要求找出并返回链表的中间结点。
-//若有两个中间结点，则返回第二个中间结点。
+//【链表倒数第k个结点】
+//输入一个链表以及一个整数k，输出该链表中倒数第k个结点
 //示例：
-//输入：head = [1, 2, 3, 4, 5]
-//输出：[3, 4, 5]
+//输入：1, { 1,2,3,4,5 }
+//输出：{ 5 }
 
-#include<stdlib.h>
 #include<stdio.h>
+#include<stdlib.h>
 #include<assert.h>
 
 struct ListNode
@@ -16,19 +15,21 @@ struct ListNode
 	struct ListNode* next;
 };
 
-struct ListNode* middleNode(struct ListNode* head)
+struct ListNode* FindKthToTail(struct ListNode* pListHead, int k) //快慢指针
 {
-	//快慢指针
-	//fast一次走两步，slow一次走一步
-	//fast到达链表尾时，slow到达链表中间
-	struct ListNode* fast = head, * slow = head; 
-
-	while (fast && fast->next) //结点数为奇数时fast到达尾节点，结点数为偶数时fast到达NULL
-	{
-		fast = fast->next->next;
-		slow = slow->next;
+	struct ListNode* p1 = pListHead, * p2 = pListHead; 
+	while (k)						 //p2先走k次，然后p1和p2同步向链表尾部走			   
+	{								 //当p2到达链表尾的空指针，则p1到达倒数第k个结点
+		if (!p2) return NULL; //若p2在到达链表尾的时候还未走到k步，说明k>链表长度，返回空指针
+		p2 = p2->next;
+		k--;
 	}
-	return slow;
+	while (p2)
+	{
+		p1 = p1->next;
+		p2 = p2->next;
+	}
+	return p1;
 }
 
 int main()
@@ -62,21 +63,12 @@ int main()
 	p6->next = p7;
 	p7->next = NULL;
 
-
-	struct ListNode* tmp = middleNode(p1);
+	struct ListNode* tmp = FindKthToTail(p1, 5);
 	while (tmp)
 	{
 		printf("%d->", tmp->val);
 		tmp = tmp->next;
 	}
 	printf("NULL\n");
-	tmp = middleNode(p2);
-	while (tmp)
-	{
-		printf("%d->", tmp->val);
-		tmp = tmp->next;
-	}
-	printf("NULL\n");
-
 	return 0;
 }
