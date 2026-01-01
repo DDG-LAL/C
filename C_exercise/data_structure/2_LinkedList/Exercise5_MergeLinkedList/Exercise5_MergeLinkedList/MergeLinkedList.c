@@ -16,14 +16,18 @@ struct ListNode
 	struct ListNode* next;
 };
 
-struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2)
+struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) //取较小值在新的位置尾插
 {
+	/*if (!list1)      //处理其中一个链表为空的情况
+		return list2;
+	if (!list2)
+		return list1;*/
 	struct ListNode* head = NULL, * cur = NULL, * p1 = list1, * p2 = list2;
 	while (p1 && p2)
 	{
 		if (p1->val < p2->val)
 		{
-			if (!head)
+			if (!head) //若新的头结点为空，则需要初始化
 				cur = head = p1;
 			else
 			{
@@ -34,7 +38,7 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2)
 		}
 		else
 		{
-			if (!head)
+			if (!head) //若新的头结点为空，则需要初始化
 				cur = head = p2;
 			else
 			{
@@ -47,12 +51,10 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2)
 	if (p1)
 		p2 = p1;
 	if (p2)
-	{
-		if (!head)
+		if (!head) //其中一个是空链表的情况，直接返回另一个链表的头指针
 			head = p2;
 		else
 			cur->next = p2;
-	}
 	return head;
 }
 
@@ -76,13 +78,14 @@ int main()
 	p2->val = 3;
 	p3->val = 5;
 	p4->val = 7;
-	p5->val = 2;
-	p6->val = 6;
-	p7->val = 9;
 	p1->next = p2;
 	p2->next = p3;
 	p3->next = p4;
 	p4->next = NULL;
+
+	p5->val = 2;
+	p6->val = 8;
+	p7->val = 9;
 	p5->next = p6;
 	p6->next = p7;
 	p7->next = NULL;
