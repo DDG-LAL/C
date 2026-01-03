@@ -15,7 +15,8 @@ struct ListNode
 	struct ListNode* next;
 };
 
-struct ListNode* reverseList(struct ListNode* head)
+//法1：三指针直接反转，cur和next用于反转前两个结点的指向，end用于迭代以及停止判断
+struct ListNode* reverseList1(struct ListNode* head)
 {
 	if (!head || !head->next)
 		return head;
@@ -31,6 +32,24 @@ struct ListNode* reverseList(struct ListNode* head)
 	next->next = cur;
 	return next;
 }
+
+//法2：从头到尾遍历一次，头插
+struct ListNode* reverseList2(struct ListNode* head)
+{
+	if (!head)
+		return head;
+	struct ListNode* cur = head, * next = head->next, * rhead = NULL;
+	while (cur)
+	{
+		cur->next = rhead;
+		rhead = cur;
+		cur = next;
+		if (next)
+			next = next->next;
+	}
+	return rhead;
+}
+
 
 int main()
 {
@@ -50,11 +69,11 @@ int main()
 	assert(p7);
 	p1->val = 1;
 	p2->val = 2;
-	p3->val = 6;
-	p4->val = 3;
-	p5->val = 4;
-	p6->val = 5;
-	p7->val = 6;
+	p3->val = 3;
+	p4->val = 4;
+	p5->val = 5;
+	p6->val = 7;
+	p7->val = 9;
 	p1->next = p2;
 	p2->next = p3;
 	p3->next = p4;
@@ -63,7 +82,15 @@ int main()
 	p6->next = p7;
 	p7->next = NULL;
 
-	struct ListNode* tmp = reverseList(p1);
+	struct ListNode* tmp = reverseList1(p1);
+	while (tmp)
+	{
+		printf("%d->", tmp->val);
+		tmp = tmp->next;
+	}
+	printf("NULL\n");
+
+	tmp = reverseList2(p7);
 	while (tmp)
 	{
 		printf("%d->", tmp->val);

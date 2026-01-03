@@ -1,0 +1,3 @@
+﻿  ListPartition.c
+D:\CODE\C\C\C_exercise\data_structure\2_LinkedList\Exercise6_ListPartition\Exercise6_ListPartition\ListPartition.c(23): warning C4716: “partition”: 必须返回一个值
+  Exercise6_ListPartition.vcxproj -> D:\CODE\C\C\C_exercise\data_structure\2_LinkedList\Exercise6_ListPartition\Debug\Exercise6_ListPartition.exe

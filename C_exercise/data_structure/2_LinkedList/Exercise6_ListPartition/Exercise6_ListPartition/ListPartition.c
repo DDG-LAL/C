@@ -1,35 +1,25 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-//【链表倒数第k个结点】
-//输入一个链表以及一个整数k，输出该链表中倒数第k个结点
-//示例：
-//输入：1, { 1,2,3,4,5 }
-//输出：{ 5 }
+//【链表分割】
+//给出一链表的头指针ListNode* pHead，以及一个定值x
+//将所有小于x的结点排在其余结点之前，且不能改变原来的数据顺序
+//返回排列后的链表的头指针
 
+#include<assert.h>
 #include<stdio.h>
 #include<stdlib.h>
-#include<assert.h>
 
-struct ListNode
+typedef struct ListNode
 {
 	int val;
 	struct ListNode* next;
-};
+}ListNode;
 
-struct ListNode* FindKthToTail(struct ListNode* pListHead, int k) //快慢指针
+ListNode* partition(ListNode* pHead, int x)
 {
-	struct ListNode* slow = pListHead, * fast = pListHead;
-	while (k--)						   //fast先走k次，然后slow和fast同步向链表尾部走			   
-	{								   //当fast到达链表尾的空指针，则slow到达倒数第k个结点
-		if (!fast)
-			return NULL; //若fast在到达链表尾的时候还未走到k步，说明k>链表长度，返回空指针
-		fast = fast->next;
-	}
-	while (fast)
-	{
-		slow = slow->next;
-		fast = fast->next;
-	}
-	return slow;
+	ListNode* big = (ListNode*)malloc(sizeof(ListNode));
+	ListNode* small = (ListNode*)malloc(sizeof(ListNode));
+	ListNode* cur = pHead;
+
 }
 
 int main()
@@ -48,13 +38,13 @@ int main()
 	assert(p6);
 	struct ListNode* p7 = (struct ListNode*)malloc(sizeof(struct ListNode));
 	assert(p7);
-	p1->val = 1;
-	p2->val = 2;
-	p3->val = 3;
-	p4->val = 4;
-	p5->val = 5;
-	p6->val = 6;
-	p7->val = 7;
+	p1->val = 7;
+	p2->val = 3;
+	p3->val = 5;
+	p4->val = 1;
+	p5->val = 2;
+	p6->val = 8;
+	p7->val = 9;
 	p1->next = p2;
 	p2->next = p3;
 	p3->next = p4;
@@ -63,7 +53,7 @@ int main()
 	p6->next = p7;
 	p7->next = NULL;
 
-	struct ListNode* tmp = FindKthToTail(p1, 5);
+	struct ListNode* tmp = partition(p1, 4);
 	while (tmp)
 	{
 		printf("%d->", tmp->val);
