@@ -16,12 +16,8 @@ struct ListNode
 	struct ListNode* next;
 };
 
-struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) //取较小值在新的位置尾插
+struct ListNode* mergeTwoLists1(struct ListNode* list1, struct ListNode* list2) //取较小值在新的位置尾插
 {
-	/*if (!list1)      //处理其中一个链表为空的情况
-		return list2;
-	if (!list2)
-		return list1;*/
 	struct ListNode* head = NULL, * cur = NULL, * p1 = list1, * p2 = list2;
 	while (p1 && p2)
 	{
@@ -58,6 +54,41 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) /
 	return head;
 }
 
+struct ListNode* mergeTwoLists2(struct ListNode* list1, struct ListNode* list2) //取较小值在新的位置尾插
+{
+	if (!list1)      //处理其中一个链表为空的情况
+		return list2;
+	if (!list2)
+		return list1;
+	struct ListNode* head = (struct ListNode*)malloc(sizeof(struct ListNode)); //哨兵位头结点
+	assert(head);
+	struct ListNode* cur = head, * p1 = list1, * p2 = list2;
+	while (p1 && p2)
+	{
+		if (p1->val < p2->val)
+		{
+			cur->next = p1;
+			cur = cur->next;
+			p1 = p1->next;
+		}
+		else
+		{
+			cur->next = p2;
+			cur = cur->next;
+			p2 = p2->next;
+		}
+	}
+	if (p1)
+		cur->next = p1;
+	if (p2)
+		cur->next = p2;
+	struct ListNode* del = head;
+	head = head->next;
+	free(del);
+	return head;
+}
+
+
 int main()
 {
 	struct ListNode* p1 = (struct ListNode*)malloc(sizeof(struct ListNode));
@@ -90,7 +121,7 @@ int main()
 	p6->next = p7;
 	p7->next = NULL;
 
-	struct ListNode* tmp = mergeTwoLists(p1, p5);
+	struct ListNode* tmp = mergeTwoLists2(p1, p5);
 	while (tmp)
 	{
 		printf("%d->", tmp->val);

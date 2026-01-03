@@ -44,6 +44,7 @@ ListNode* partition(ListNode* pHead, int x)
 	ListNode* del = small;
 	small = small->next;
 	free(del);
+	free(big);
 	return small;
 }
 
