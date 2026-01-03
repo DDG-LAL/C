@@ -17,9 +17,34 @@ typedef struct ListNode
 ListNode* partition(ListNode* pHead, int x)
 {
 	ListNode* big = (ListNode*)malloc(sizeof(ListNode));
+	assert(big);
+	big->next = NULL;
 	ListNode* small = (ListNode*)malloc(sizeof(ListNode));
-	ListNode* cur = pHead;
+	assert(small);
+	small->next = NULL;
+	ListNode* cur = pHead, * btail = big, * stail = small;
 
+	while (cur)
+	{
+		ListNode* tmp = cur->next;
+		cur->next = NULL;
+		if (cur->val < x)
+		{
+			stail->next = cur;
+			stail = stail->next;
+		}
+		else
+		{
+			btail->next = cur;
+			btail = btail->next;
+		}
+		cur = tmp;
+	}
+	stail->next = big->next;
+	ListNode* del = small;
+	small = small->next;
+	free(del);
+	return small;
 }
 
 int main()
