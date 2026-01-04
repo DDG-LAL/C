@@ -16,10 +16,10 @@ typedef struct ListNode
 
 ListNode* partition(ListNode* pHead, int x)
 {
-	ListNode* big = (ListNode*)malloc(sizeof(ListNode));
+	ListNode* big = (ListNode*)malloc(sizeof(ListNode)); //哨兵位头结点
 	assert(big);
 	big->next = NULL;
-	ListNode* small = (ListNode*)malloc(sizeof(ListNode));
+	ListNode* small = (ListNode*)malloc(sizeof(ListNode)); //哨兵位头结点
 	assert(small);
 	small->next = NULL;
 	ListNode* cur = pHead, * btail = big, * stail = small;
@@ -27,23 +27,23 @@ ListNode* partition(ListNode* pHead, int x)
 	while (cur)
 	{
 		ListNode* tmp = cur->next;
-		cur->next = NULL;
+		cur->next = NULL; //避免出现带环链表
 		if (cur->val < x)
 		{
-			stail->next = cur;
+			stail->next = cur; //小于x的结点尾插small链表
 			stail = stail->next;
 		}
 		else
 		{
-			btail->next = cur;
+			btail->next = cur; //不小于x的结点尾插big链表
 			btail = btail->next;
 		}
 		cur = tmp;
 	}
-	stail->next = big->next;
+	stail->next = big->next; //连接两个链表
 	ListNode* del = small;
 	small = small->next;
-	free(del);
+	free(del); //释放哨兵位头结点的空间
 	free(big);
 	return small;
 }

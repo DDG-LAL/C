@@ -82,6 +82,7 @@ int game()  //猜数字
 			else
 			{
 				printf("\n不在1至200范围内\n");
+				Sleep(1200);
 				continue;
 			}
 		}

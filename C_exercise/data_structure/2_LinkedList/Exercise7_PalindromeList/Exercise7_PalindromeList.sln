@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.35826.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Exercise7_PalindromeList", "Exercise7_PalindromeList\Exercise7_PalindromeList.vcxproj", "{CA823944-21F7-4141-9AE6-358502681D30}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA823944-21F7-4141-9AE6-358502681D30}.Debug|x64.ActiveCfg = Debug|x64
+		{CA823944-21F7-4141-9AE6-358502681D30}.Debug|x64.Build.0 = Debug|x64
+		{CA823944-21F7-4141-9AE6-358502681D30}.Debug|x86.ActiveCfg = Debug|Win32
+		{CA823944-21F7-4141-9AE6-358502681D30}.Debug|x86.Build.0 = Debug|Win32
+		{CA823944-21F7-4141-9AE6-358502681D30}.Release|x64.ActiveCfg = Release|x64
+		{CA823944-21F7-4141-9AE6-358502681D30}.Release|x64.Build.0 = Release|x64
+		{CA823944-21F7-4141-9AE6-358502681D30}.Release|x86.ActiveCfg = Release|Win32
+		{CA823944-21F7-4141-9AE6-358502681D30}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67F143B8-5D84-4721-A016-122AC48D33F3}
+	EndGlobalSection
+EndGlobal
