@@ -14,7 +14,21 @@ typedef struct ListNode
 
 struct ListNode* getIntersectionNode(struct ListNode* headA, struct ListNode* headB)
 {
-
+	if (!headA || !headB)
+		return NULL;
+	struct ListNode* tailA = headA, * tailB = headB;
+	while (tailB->next)
+		tailB = tailB->next;
+	tailB->next = headA;
+	struct ListNode* fast = headB, * slow = headB;
+	while (fast && fast->next)
+	{
+		if (fast == slow)
+			return fast;
+		fast = fast->next->next;
+		slow = slow->next;
+	}
+	return NULL;
 }
 
 int main()
