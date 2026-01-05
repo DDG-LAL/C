@@ -13,12 +13,12 @@ void SLLprint(const SLLnode* phead)
 	printf("NULL\n");
 }
 
-SLLnode* BuyNode(SLLdatatype x)
+SLLnode* BuySLLNode(SLLdatatype x) //创建结点
 {
 	SLLnode* tmp = (SLLnode*)malloc(sizeof(SLLnode));
 	if (tmp == NULL)
 	{
-		perror("malloc");
+		perror("malloc\n");
 		return NULL;
 	}
 	tmp->data = x;
@@ -46,7 +46,7 @@ void SLLpushfront(SLLnode** pphead, SLLdatatype x) //头插
 {
 	assert(pphead);
 
-	SLLnode* tmp = BuyNode(x);
+	SLLnode* tmp = BuySLLNode(x);
 	tmp->next = *pphead;
 	*pphead = tmp;
 }
@@ -55,7 +55,7 @@ void SLLpushback(SLLnode** pphead, SLLdatatype x) //尾插
 {
 	assert(pphead);
 
-	SLLnode* tmp = BuyNode(x);
+	SLLnode* tmp = BuySLLNode(x);
 	//如果是空链表，链表头指针为空，需要改变链表头指针
 	//需要改变的是结构体指针的值，因此使用结构体指针的指针，即二级指针
 	if (*pphead == NULL) *pphead = tmp;
@@ -137,7 +137,7 @@ void SLLinsertBefore(SLLnode** pphead, SLLnode* pos, SLLdatatype x) //指定位置po
 			pre = pre->next;
 		}
 
-		SLLnode* tmp = BuyNode(x);
+		SLLnode* tmp = BuySLLNode(x);
 		tmp->next = pos;
 		pre->next = tmp;
 	}
@@ -147,7 +147,7 @@ void SLLinsertAfter(SLLnode* pos, SLLdatatype x) //指定位置pos后插入
 {
 	assert(pos);
 
-	SLLnode* tmp = BuyNode(x);
+	SLLnode* tmp = BuySLLNode(x);
 	tmp->next = pos->next;
 	pos->next = tmp;
 }

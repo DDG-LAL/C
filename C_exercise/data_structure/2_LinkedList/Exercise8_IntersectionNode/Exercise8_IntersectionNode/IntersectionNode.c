@@ -20,66 +20,65 @@ struct ListNode* getIntersectionNode1(struct ListNode* headA, struct ListNode* h
 		return NULL;
 	struct ListNode* tailA = headA, * tailB = headB;
 	while (tailB->next)
-		tailB = tailB->next;
+		tailB = tailB->next; //找尾
 	while (tailA->next)
-		tailA = tailA->next;
-	if (tailA != tailB)
+		tailA = tailA->next; //找尾
+	if (tailA != tailB) //若尾节点不同，说明没有交点
 		return NULL;
-	tailB->next = headA;
+	tailB->next = headA; //已经确定有交点，制造一个环，则入环点即为交点
 	struct ListNode* fast = headB, * slow = headB;
-	while (fast && fast->next)
-	{
+	while (fast && fast->next) //Floyd判圈算法，使用快慢指针
+	{						   //快指针先进环，慢指针后进环，步长之差为1
 		fast = fast->next->next;
 		slow = slow->next;
-		if (fast == slow)
+		if (fast == slow) //若两指针相遇则存在环
 			break;
 	}
-	fast = headB;
-	while (fast != slow)
-	{
-		fast = fast->next;
-		slow = slow->next;
+	fast = headB; //Floyd判圈算法确定入环点，设起始点至入环点距离L，入环点至相遇点距离a，相遇点至入环点距离b
+	while (fast != slow)   //快慢指针阶段：到相遇时候为止，快指针路程为S1 = L+n(a+b)+a，慢指针路程为S2 = L+a
+	{					   //因快指针速度为2，慢指针速度为1，得S1=2*S2，L+n(a+b)+a = 2*L+2*a，L = n(a+b)-a
+		fast = fast->next; //而n(a+b)-a = (n-1)(a+b)+b，因此从相遇点开始走出距离L = n(a+b)-a时，正好走到入环点
+		slow = slow->next; //综上，令fast从head开始，slow从相遇点开始，两个指针同步走，相遇时正好会在入环点
 	}
 	tailB->next = NULL;
 	return fast;
 }
 
-struct ListNode* getIntersectionNode2(struct ListNode* headA, struct ListNode* headB)
+struct ListNode* getIntersectionNode2(struct ListNode* headA, struct ListNode* headB) //长链表先走差距步，然后两个链表指针同步走
 {
 	if (!headA || !headB)
 		return NULL;
 	struct ListNode* tailA = headA, * tailB = headB;
-	int countA = 1, countB = 1, dist = 0;
+	int countA = 1, countB = 1, gap = 0;
 	while (tailA->next)
 	{
-		tailA = tailA->next;
-		countA++;
+		tailA = tailA->next; //找尾
+		countA++; //记录长度
 	}
 	while (tailB->next)
 	{
-		tailB = tailB->next;
-		countB++;
+		tailB = tailB->next; //找尾
+		countB++; //记录长度
 	}
-	if (tailA != tailB)
+	if (tailA != tailB) //若尾节点不同，则没有交点
 		return NULL;
-	if (countB > countA)
+	if (countB > countA) //强行使A为长链表，使B为短链表
 	{
 		struct ListNode* tmp = headA;
 		headA = headB;
 		headB = tmp;
 	}
-	dist = abs(countA - countB);
-	while (dist--)
-		headA = headA->next;
+	gap = abs(countA - countB); //计算差距步
+	while (gap--)
+		headA = headA->next; //长链表指针先走差距步
 	while (headA != headB)
 	{
 		assert(headA && headB); //避免C28182警告
 		headA = headA->next;
-		headB = headB->next;
+		headB = headB->next; //两个链表指针同步走
 	}
 	return headA;
 }
-
 
 int main()
 {

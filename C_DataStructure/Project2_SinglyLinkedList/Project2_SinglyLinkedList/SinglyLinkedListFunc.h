@@ -13,6 +13,8 @@ typedef struct SinglyLinkedListNode
 
 
 void SLLprint(const SLLnode* phead); //打印
+SLLnode* BuySLLNode(SLLdatatype x); //创建结点
+
 
 void SLLpushfront(SLLnode** pphead, SLLdatatype x); //头插
 void SLLpushback(SLLnode** pphead, SLLdatatype x); //尾插
