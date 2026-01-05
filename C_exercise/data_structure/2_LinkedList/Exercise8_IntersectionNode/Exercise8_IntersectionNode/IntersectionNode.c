@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-//【】
-//
+//【相交链表】
+//给出两个不带环单链表的头节点headA和headB，要求找出并返回两个单链表相交的起始节点
+//若两个链表不存在相交节点，则返回NULL
+//函数返回结果后，要求链表必须保持其原始结构
 
 #include<assert.h>
 #include<stdio.h>
@@ -12,24 +14,72 @@ typedef struct ListNode
 	struct ListNode* next;
 }ListNode;
 
-struct ListNode* getIntersectionNode(struct ListNode* headA, struct ListNode* headB)
+struct ListNode* getIntersectionNode1(struct ListNode* headA, struct ListNode* headB)
 {
 	if (!headA || !headB)
 		return NULL;
 	struct ListNode* tailA = headA, * tailB = headB;
 	while (tailB->next)
 		tailB = tailB->next;
+	while (tailA->next)
+		tailA = tailA->next;
+	if (tailA != tailB)
+		return NULL;
 	tailB->next = headA;
 	struct ListNode* fast = headB, * slow = headB;
 	while (fast && fast->next)
 	{
-		if (fast == slow)
-			return fast;
 		fast = fast->next->next;
 		slow = slow->next;
+		if (fast == slow)
+			break;
 	}
-	return NULL;
+	fast = headB;
+	while (fast != slow)
+	{
+		fast = fast->next;
+		slow = slow->next;
+	}
+	tailB->next = NULL;
+	return fast;
 }
+
+struct ListNode* getIntersectionNode2(struct ListNode* headA, struct ListNode* headB)
+{
+	if (!headA || !headB)
+		return NULL;
+	struct ListNode* tailA = headA, * tailB = headB;
+	int countA = 1, countB = 1, dist = 0;
+	while (tailA->next)
+	{
+		tailA = tailA->next;
+		countA++;
+	}
+	while (tailB->next)
+	{
+		tailB = tailB->next;
+		countB++;
+	}
+	if (tailA != tailB)
+		return NULL;
+	if (countB > countA)
+	{
+		struct ListNode* tmp = headA;
+		headA = headB;
+		headB = tmp;
+	}
+	dist = abs(countA - countB);
+	while (dist--)
+		headA = headA->next;
+	while (headA != headB)
+	{
+		assert(headA && headB); //避免C28182警告
+		headA = headA->next;
+		headB = headB->next;
+	}
+	return headA;
+}
+
 
 int main()
 {
@@ -78,7 +128,28 @@ int main()
 	p10->next = NULL;
 
 	struct ListNode* tmp;
-	tmp = getIntersectionNode(p1, p2);
+	tmp = getIntersectionNode1(p1, p2);
+	while (tmp)
+	{
+		printf("%d->", tmp->val);
+		tmp = tmp->next;
+	}
+	printf("NULL\n");
+	tmp = getIntersectionNode1(p10, p2);
+	while (tmp)
+	{
+		printf("%d->", tmp->val);
+		tmp = tmp->next;
+	}
+	printf("NULL\n");
+	tmp = getIntersectionNode2(p1, p2);
+	while (tmp)
+	{
+		printf("%d->", tmp->val);
+		tmp = tmp->next;
+	}
+	printf("NULL\n");
+	tmp = getIntersectionNode2(p10, p2);
 	while (tmp)
 	{
 		printf("%d->", tmp->val);
