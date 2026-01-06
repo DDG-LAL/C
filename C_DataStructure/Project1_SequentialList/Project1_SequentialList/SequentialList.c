@@ -20,7 +20,7 @@ int main()
 
 	SLpopback(&s);
 	SLpopback(&s);
-	SLprint(&s); 
+	SLprint(&s);
 
 	SLpopfront(&s);
 	SLpopfront(&s);
@@ -39,8 +39,7 @@ int main()
 	SLmodify(&s, 1, 1);
 	SLprint(&s);
 
-
-
 	SLdestroy(&s);
+
 	return 0;
 }

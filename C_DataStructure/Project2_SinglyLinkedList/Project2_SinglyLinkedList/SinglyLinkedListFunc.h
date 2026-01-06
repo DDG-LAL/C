@@ -5,6 +5,8 @@
 #include<assert.h>
 
 typedef int SLLdatatype;
+
+//无头单向非循环链表结点
 typedef struct SinglyLinkedListNode
 {
 	SLLdatatype data;

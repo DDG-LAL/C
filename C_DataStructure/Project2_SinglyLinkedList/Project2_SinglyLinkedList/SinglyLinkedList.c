@@ -67,9 +67,13 @@ int main()
 	SLLeraseAfter(ps->next->next);
 	SLLprint(ps);
 
-	//SLLdestroy2(&ps);
 	SLLdestroy(ps);
 	ps = NULL;
+
+	SLLnode* tmp = NULL;
+	testpush(&tmp);
+	SLLdestroy2(&tmp);
+
 
 	return 0;
 }

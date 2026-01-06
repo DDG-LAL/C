@@ -9,7 +9,7 @@
 //typedef int SLdatatype;
 //typedef struct Static_SeqList 
 //{
-//	SLdatatype a[N];
+//	SLdatatype data[N];
 //	int size;
 //}SeqList1;
 
@@ -18,7 +18,7 @@
 typedef int SLdatatype;
 typedef struct SeqList
 {
-	SLdatatype* a;
+	SLdatatype* data;
 	int size; //有效数据数量
 	int cap; //可用空间容量
 }SL;

@@ -196,7 +196,7 @@ void SLLdestroy(SLLnode* phead) //销毁
 
 	//需要在函数外部置空链表头指针
 
-	printf("\ndestroyed\n");
+	printf("\ndestroyed\n\n");
 }
 
 void SLLdestroy2(SLLnode** pphead) //销毁，二级指针版本
@@ -213,5 +213,5 @@ void SLLdestroy2(SLLnode** pphead) //销毁，二级指针版本
 
 	*pphead = NULL; //在函数内部置空了链表头指针
 
-	printf("\ndestroyed\n");
+	printf("\ndestroyed\n\n");
 }
