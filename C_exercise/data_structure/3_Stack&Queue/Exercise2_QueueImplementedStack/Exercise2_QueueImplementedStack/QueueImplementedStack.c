@@ -14,9 +14,7 @@
 
 int main()
 {
-	MyStack s;
-	MyStack* ps = &s;
-	myStackCreate(ps);
+	MyStack* ps = myStackCreate();
 	myStackPush(ps, 1);
 	myStackPush(ps, 2);
 	myStackPush(ps, 3);
@@ -28,7 +26,7 @@ int main()
 		printf("%d ", myStackTop(ps));
 		myStackPop(ps);
 	}
-	printf("\n");
+	printf("\n\n");
 	myStackFree(ps);
 	return 0;
 }
