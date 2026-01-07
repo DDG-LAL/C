@@ -60,4 +60,6 @@ void STdestroy(ST* pst) //Ïú»Ù
 	free(pst->data);
 	pst->data = NULL;
 	pst->cap = pst->top = 0;
+
+	printf("\ndestroyed\n");
 }
