@@ -12,7 +12,6 @@
 //Êä³ö£ºfalse
 
 #include"StackFunc.h"
-#include<string.h>
 
 bool isValid(char* s)
 {
@@ -29,19 +28,28 @@ bool isValid(char* s)
 		if (*s == ')' || *s == ']' || *s == '}')
 		{
 			if (STempty(ps))
+			{
+				STdestroy(ps);
 				return false;
-			if (((STtop(ps) == '(') && (*s == ')')) ||
-				((STtop(ps) == '[') && (*s == ']')) ||
-				((STtop(ps) == '{') && (*s == '}')))
+			}
+			char top = STtop(ps);
+			if (((top == '(') && (*s == ')')) ||
+				((top == '[') && (*s == ']')) ||
+				((top == '{') && (*s == '}')))
 			{
 				STpop(ps);
 				s++;
 			}
 			else
+			{
+				STdestroy(ps);
 				return false;
+			}
 		}
 	}
-	return STempty(ps);
+	bool isempty = STempty(ps);
+	STdestroy(ps);
+	return isempty;
 }
 
 void test(char* s)
