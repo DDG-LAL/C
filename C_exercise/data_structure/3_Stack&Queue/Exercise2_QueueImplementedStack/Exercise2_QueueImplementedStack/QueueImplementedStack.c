@@ -28,5 +28,6 @@ int main()
 	}
 	printf("\n\n");
 	myStackFree(ps);
+	ps = NULL;
 	return 0;
 }
