@@ -13,7 +13,7 @@ void SLLprint(const SLLnode* phead)
 	printf("NULL\n");
 }
 
-SLLnode* BuySLLNode(SLLdatatype x) //创建结点
+SLLnode* BuySLLNode(SLLdatatype x) //创建节点
 {
 	SLLnode* tmp = (SLLnode*)malloc(sizeof(SLLnode));
 	if (tmp == NULL)

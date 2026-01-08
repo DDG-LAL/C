@@ -53,14 +53,14 @@ void Qpop(Queue* pq) //出队列
 	//if (Qempty(pq))
 	//	pq->ptail = NULL;
 
-	if (!pq->phead->next)//分类处理，不易出错，一个结点和多个结点的情况分别处理
+	if (!pq->phead->next)//分类处理，不易出错，一个节点和多个节点的情况分别处理
 	{
 		free(pq->phead);
-		pq->phead = pq->ptail = NULL; //一个结点需要把ptail置空
+		pq->phead = pq->ptail = NULL; //一个节点需要把ptail置空
 	}
 	else
 	{
-		Qnode* newhead = pq->phead->next; //多个结点直接头删
+		Qnode* newhead = pq->phead->next; //多个节点直接头删
 		free(pq->phead);
 		pq->phead = newhead;
 	}

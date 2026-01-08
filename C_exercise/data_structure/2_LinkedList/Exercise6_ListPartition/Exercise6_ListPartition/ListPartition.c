@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 //【链表分割】
 //给出一链表的头指针ListNode* pHead，以及一个定值x
-//将所有小于x的结点排在其余结点之前，且不能改变原来的数据顺序
+//将所有小于x的节点排在其余节点之前，且不能改变原来的数据顺序
 //返回排列后的链表的头指针
 
 #include<assert.h>
@@ -16,10 +16,10 @@ typedef struct ListNode
 
 ListNode* partition(ListNode* pHead, int x)
 {
-	ListNode* big = (ListNode*)malloc(sizeof(ListNode)); //哨兵位头结点
+	ListNode* big = (ListNode*)malloc(sizeof(ListNode)); //哨兵位头节点
 	assert(big);
 	big->next = NULL;
-	ListNode* small = (ListNode*)malloc(sizeof(ListNode)); //哨兵位头结点
+	ListNode* small = (ListNode*)malloc(sizeof(ListNode)); //哨兵位头节点
 	assert(small);
 	small->next = NULL;
 	ListNode* cur = pHead, * btail = big, * stail = small;
@@ -30,12 +30,12 @@ ListNode* partition(ListNode* pHead, int x)
 		cur->next = NULL; //避免出现带环链表
 		if (cur->val < x)
 		{
-			stail->next = cur; //小于x的结点尾插small链表
+			stail->next = cur; //小于x的节点尾插small链表
 			stail = stail->next;
 		}
 		else
 		{
-			btail->next = cur; //不小于x的结点尾插big链表
+			btail->next = cur; //不小于x的节点尾插big链表
 			btail = btail->next;
 		}
 		cur = tmp;
@@ -43,7 +43,7 @@ ListNode* partition(ListNode* pHead, int x)
 	stail->next = big->next; //连接两个链表
 	ListNode* del = small;
 	small = small->next;
-	free(del); //释放哨兵位头结点的空间
+	free(del); //释放哨兵位头节点的空间
 	free(big);
 	return small;
 }

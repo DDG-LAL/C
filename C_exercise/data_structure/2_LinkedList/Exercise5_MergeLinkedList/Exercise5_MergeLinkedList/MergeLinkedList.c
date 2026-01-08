@@ -23,7 +23,7 @@ struct ListNode* mergeTwoLists1(struct ListNode* list1, struct ListNode* list2) 
 	{
 		if (p1->val < p2->val)
 		{
-			if (!head) //若新的头结点为空，则需要初始化
+			if (!head) //若新的头节点为空，则需要初始化
 				cur = head = p1;
 			else
 			{
@@ -34,7 +34,7 @@ struct ListNode* mergeTwoLists1(struct ListNode* list1, struct ListNode* list2) 
 		}
 		else
 		{
-			if (!head) //若新的头结点为空，则需要初始化
+			if (!head) //若新的头节点为空，则需要初始化
 				cur = head = p2;
 			else
 			{
@@ -60,7 +60,7 @@ struct ListNode* mergeTwoLists2(struct ListNode* list1, struct ListNode* list2) 
 		return list2;
 	if (!list2)
 		return list1;
-	struct ListNode* head = (struct ListNode*)malloc(sizeof(struct ListNode)); //哨兵位头结点
+	struct ListNode* head = (struct ListNode*)malloc(sizeof(struct ListNode)); //哨兵位头节点
 	assert(head);
 	struct ListNode* cur = head, * p1 = list1, * p2 = list2;
 	while (p1 && p2)

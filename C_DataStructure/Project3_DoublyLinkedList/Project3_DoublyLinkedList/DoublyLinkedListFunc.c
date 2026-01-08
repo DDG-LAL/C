@@ -2,7 +2,7 @@
 
 #include"DoublyLinkedListFunc.h"
 
-DLLnode* BuyDLLNode(DLLdatatype data) //创建结点
+DLLnode* BuyDLLNode(DLLdatatype data) //创建节点
 {
 	DLLnode* tmp = (DLLnode*)malloc(sizeof(DLLnode));
 	if (!tmp)

@@ -15,7 +15,7 @@ struct ListNode
 	struct ListNode* next;
 };
 
-//法1：三指针直接反转，cur和next用于反转前两个结点的指向，end用于迭代以及停止判断
+//法1：三指针直接反转，cur和next用于反转前两个节点的指向，end用于迭代以及停止判断
 struct ListNode* reverseList1(struct ListNode* head)
 {
 	if (!head || !head->next)
@@ -49,7 +49,6 @@ struct ListNode* reverseList2(struct ListNode* head)
 	}
 	return rhead;
 }
-
 
 int main()
 {

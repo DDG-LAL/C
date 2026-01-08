@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-//【链表的中间结点】
-//给出单链表的头指针head，要求找出并返回链表的中间结点。
-//若有两个中间结点，则返回第二个中间结点。
+//【链表的中间节点】
+//给出单链表的头指针head，要求找出并返回链表的中间节点。
+//若有两个中间节点，则返回第二个中间节点。
 //示例：
 //输入：head = [1, 2, 3, 4, 5]
 //输出：[3, 4, 5]
@@ -21,9 +21,9 @@ struct ListNode* middleNode(struct ListNode* head)
 	//快慢指针
 	//fast一次走两步，slow一次走一步
 	//fast到达链表尾时，slow到达链表中间
-	struct ListNode* fast = head, * slow = head; 
+	struct ListNode* fast = head, * slow = head;
 
-	while (fast && fast->next) //结点数为奇数时fast到达尾节点，结点数为偶数时fast到达NULL
+	while (fast && fast->next) //节点数为奇数时fast到达尾节点，节点数为偶数时fast到达NULL
 	{
 		fast = fast->next->next;
 		slow = slow->next;
@@ -61,7 +61,6 @@ int main()
 	p5->next = p6;
 	p6->next = p7;
 	p7->next = NULL;
-
 
 	struct ListNode* tmp = middleNode(p1);
 	while (tmp)

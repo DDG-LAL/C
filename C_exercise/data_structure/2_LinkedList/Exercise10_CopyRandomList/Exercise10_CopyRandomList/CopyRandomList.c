@@ -18,7 +18,7 @@ struct Node
 	struct Node* random;
 };
 
-struct Node* BuyNode(int x) //¥¥Ω®–¬Ω·µ„
+struct Node* BuyNode(int x) //¥¥Ω®–¬Ω⁄µ„
 {
 	struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
 	if (!newnode)
@@ -32,14 +32,14 @@ struct Node* BuyNode(int x) //¥¥Ω®–¬Ω·µ„
 	return newnode;
 }
 
-struct Node* copyRandomList(struct Node* head) //‘⁄‘≠¡¥±Ìµƒ√ø∏ˆΩ·µ„∫Û≤Â»Î“ª∏ˆ∏¥÷∆Ω·µ„
-{											   //¿˚”√∏¥÷∆Ω·µ„”Î‘≠¡¥±ÌΩ·µ„µƒŒª÷√πÿœµ»∑∂®∏¥÷∆Ω·µ„µƒrandom
-	if (!head)								   //»∑∂®randomµƒ÷µ∫Û∑÷¿Î≥ˆ–¬Ω·µ„∫Õæ…Ω·µ„£¨–Œ≥…–¬æ…¡Ω∏ˆœ‡Õ¨¡¥±Ì£¨∑µªÿ–¬¡¥±Ì
+struct Node* copyRandomList(struct Node* head) //‘⁄‘≠¡¥±Ìµƒ√ø∏ˆΩ⁄µ„∫Û≤Â»Î“ª∏ˆ∏¥÷∆Ω⁄µ„
+{											   //¿˚”√∏¥÷∆Ω⁄µ„”Î‘≠¡¥±ÌΩ⁄µ„µƒŒª÷√πÿœµ»∑∂®∏¥÷∆Ω⁄µ„µƒrandom
+	if (!head)								   //»∑∂®randomµƒ÷µ∫Û∑÷¿Î≥ˆ–¬Ω⁄µ„∫Õæ…Ω⁄µ„£¨–Œ≥…–¬æ…¡Ω∏ˆœ‡Õ¨¡¥±Ì£¨∑µªÿ–¬¡¥±Ì
 		return NULL;
 	struct Node* cur = head, * next = head->next;
-	while (cur) //‘⁄‘≠¡¥±Ìµƒ√ø∏ˆΩ·µ„∫Û≤Â»Î“ª∏ˆ∏¥÷∆Ω·µ„
+	while (cur) //‘⁄‘≠¡¥±Ìµƒ√ø∏ˆΩ⁄µ„∫Û≤Â»Î“ª∏ˆ∏¥÷∆Ω⁄µ„
 	{
-		struct Node* newnode = BuyNode(cur->val); //∏¥÷∆Ω·µ„µƒval÷µ”Î‘≠¡¥±Ìœ‡Õ¨
+		struct Node* newnode = BuyNode(cur->val); //∏¥÷∆Ω⁄µ„µƒval÷µ”Î‘≠¡¥±Ìœ‡Õ¨
 		newnode->next = next;
 		cur->next = newnode;
 		cur = next;
@@ -48,9 +48,9 @@ struct Node* copyRandomList(struct Node* head) //‘⁄‘≠¡¥±Ìµƒ√ø∏ˆΩ·µ„∫Û≤Â»Î“ª∏ˆ∏¥÷
 	}
 	cur = head;
 	next = head->next;
-	while (cur) //¿˚”√∏¥÷∆Ω·µ„”Î‘≠¡¥±ÌΩ·µ„µƒŒª÷√πÿœµ»∑∂®∏¥÷∆Ω·µ„µƒrandom
+	while (cur) //¿˚”√∏¥÷∆Ω⁄µ„”Î‘≠¡¥±ÌΩ⁄µ„µƒŒª÷√πÿœµ»∑∂®∏¥÷∆Ω⁄µ„µƒrandom
 	{
-		next->random = cur->random ? cur->random->next : NULL; //»Ù‘≠Ω·µ„random÷µ≤ªŒ™NULL£¨‘Ú–¬Ω·µ„random÷µŒ™‘≠Ω·µ„µƒrandom÷∏œÚµƒΩ·µ„µƒnext
+		next->random = cur->random ? cur->random->next : NULL; //»Ù‘≠Ω⁄µ„random÷µ≤ªŒ™NULL£¨‘Ú–¬Ω⁄µ„random÷µŒ™‘≠Ω⁄µ„µƒrandom÷∏œÚµƒΩ⁄µ„µƒnext
 		cur = cur->next->next;
 		if (next->next) //±‹√‚‘ΩΩÁ
 		{
@@ -58,7 +58,7 @@ struct Node* copyRandomList(struct Node* head) //‘⁄‘≠¡¥±Ìµƒ√ø∏ˆΩ·µ„∫Û≤Â»Î“ª∏ˆ∏¥÷
 			next = next->next->next;
 		}
 	}
-	struct Node* newhead = head->next; //±£¥Ê–¬¡¥±ÌÕ∑Ω·µ„
+	struct Node* newhead = head->next; //±£¥Ê–¬¡¥±ÌÕ∑Ω⁄µ„
 	struct Node* pre = head;
 	cur = head->next;
 	assert(head->next); //±‹√‚C28182æØ∏Ê
@@ -67,7 +67,7 @@ struct Node* copyRandomList(struct Node* head) //‘⁄‘≠¡¥±Ìµƒ√ø∏ˆΩ·µ„∫Û≤Â»Î“ª∏ˆ∏¥÷
 	while (cur->next) //–¬¡¥±Ì∫Õæ…¡¥±Ì∑÷¿Î
 	{
 		pre->next = next;
-		cur->next = next ? next->next : NULL; //»Ùnext≤ªŒ™NULL£¨‘Ú–¬Ω·µ„µƒnext÷∏’Î÷∏œÚnext->next
+		cur->next = next ? next->next : NULL; //»Ùnext≤ªŒ™NULL£¨‘Ú–¬Ω⁄µ„µƒnext÷∏’Î÷∏œÚnext->next
 		pre = next;
 		if (next) //±‹√‚‘ΩΩÁ
 		{

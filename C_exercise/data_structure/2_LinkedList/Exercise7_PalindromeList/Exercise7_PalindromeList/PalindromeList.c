@@ -13,7 +13,7 @@ typedef struct ListNode
 	struct ListNode* next;
 }ListNode;
 
-ListNode* midnode(ListNode* phead) //找到中间结点
+ListNode* midnode(ListNode* phead) //找到中间节点
 {
 	ListNode* fast, * slow;
 	fast = slow = phead;
@@ -39,7 +39,7 @@ ListNode* reverse(ListNode* phead) //逆置
 	return cur;
 }
 
-bool chkPalindrome(ListNode* phead) //找到中间结点，然后将链表后半段逆置，再进行比对
+bool chkPalindrome(ListNode* phead) //找到中间节点，然后将链表后半段逆置，再进行比对
 {
 	if (!phead)
 		return false;

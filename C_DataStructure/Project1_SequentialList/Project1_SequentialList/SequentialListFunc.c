@@ -2,7 +2,6 @@
 
 #include"SequentialListFunc.h"
 
-
 void SLinit(SL* psl) //≥ı ºªØ
 {
 	assert(psl);

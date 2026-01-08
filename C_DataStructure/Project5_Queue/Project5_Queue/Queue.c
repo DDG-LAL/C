@@ -2,8 +2,6 @@
 
 #include"QueueFunc.h"
 
-
-
 int main()
 {
 	Queue q;

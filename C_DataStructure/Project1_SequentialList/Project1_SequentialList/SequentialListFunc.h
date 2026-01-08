@@ -13,7 +13,6 @@
 //	int size;
 //}SeqList1;
 
-
 //动态顺序表
 typedef int SLdatatype;
 typedef struct SeqList
@@ -23,11 +22,9 @@ typedef struct SeqList
 	int cap; //可用空间容量
 }SL;
 
-
 void SLinit(SL* psl); //初始化
 void SLdestroy(SL* psl); //删除
 void SLprint(SL* psl); //打印
-
 
 void SLpushback(SL* psl, SLdatatype x); //尾插
 void SLpushfront(SL* psl, SLdatatype x); //头插

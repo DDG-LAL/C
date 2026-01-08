@@ -7,7 +7,7 @@
 
 typedef int Qdatatype;
 
-typedef struct QueueNode //队列结点
+typedef struct QueueNode //队列节点
 {
 	struct QueueNode* next;
 	Qdatatype data;

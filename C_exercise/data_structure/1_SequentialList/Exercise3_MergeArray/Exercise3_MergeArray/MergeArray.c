@@ -15,14 +15,14 @@ void merge(int* nums1, int m, int* nums2, int n) //Á½¸öÊı×éÍ¬Ê±´ÓÎ²²¿ÏòÇ°±éÀúÒ»´
 	int end1 = m - 1, end2 = n - 1, end3 = m + n - 1;
 	while (end1 >= 0 && end2 >= 0)
 	{
-		if (nums1[end1] > nums2[end2]) 
+		if (nums1[end1] > nums2[end2])
 			nums1[end3--] = nums1[end1--];
 		else
 			nums1[end3--] = nums2[end2--];
 	}
 	//Èônums1Î´±éÀúÍê£¬ÔòÎŞĞè¼ÌĞø´¦Àí
 	//Èônums2Î´±éÀúÍê£¬ĞèÒª°Ñnums2ÖĞÊ£ÏÂÔªËØ´«Èënums1
-	while (end2 >= 0) 
+	while (end2 >= 0)
 		nums1[end3--] = nums2[end2--];
 }
 

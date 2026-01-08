@@ -6,17 +6,15 @@
 
 typedef int SLLdatatype;
 
-//无头单向非循环链表结点
+//无头单向非循环链表节点
 typedef struct SinglyLinkedListNode
 {
 	SLLdatatype data;
 	struct SinglyLinkedListNode* next;
 }SLLnode;
 
-
 void SLLprint(const SLLnode* phead); //打印
-SLLnode* BuySLLNode(SLLdatatype x); //创建结点
-
+SLLnode* BuySLLNode(SLLdatatype x); //创建节点
 
 void SLLpushfront(SLLnode** pphead, SLLdatatype x); //头插
 void SLLpushback(SLLnode** pphead, SLLdatatype x); //尾插

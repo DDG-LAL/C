@@ -2,7 +2,6 @@
 
 #include"SequentialListFunc.h"
 
-
 int main()
 {
 	SL s;

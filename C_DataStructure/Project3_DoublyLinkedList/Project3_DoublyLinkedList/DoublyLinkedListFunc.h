@@ -6,6 +6,8 @@
 #include<stdbool.h>
 
 typedef int DLLdatatype;
+
+//带头双向循环链表节点
 typedef struct DoublyLinkedListNode
 {
 	DLLdatatype data;
@@ -13,7 +15,7 @@ typedef struct DoublyLinkedListNode
 	struct DoublyLinkedListNode* next;
 }DLLnode;
 
-DLLnode* BuyDLLNode(DLLdatatype data); //创建结点
+DLLnode* BuyDLLNode(DLLdatatype data); //创建节点
 DLLnode* DLLcreate(); //初始化
 
 bool DLLempty(DLLnode* phead); //判断链表是否为空

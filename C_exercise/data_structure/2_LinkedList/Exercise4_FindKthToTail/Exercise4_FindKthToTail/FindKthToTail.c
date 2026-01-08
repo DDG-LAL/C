@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-//【链表倒数第k个结点】
-//输入一个链表以及一个整数k，输出该链表中倒数第k个结点
+//【链表倒数第k个节点】
+//输入一个链表以及一个整数k，输出该链表中倒数第k个节点
 //示例：
 //输入：1, { 1,2,3,4,5 }
 //输出：{ 5 }
@@ -19,7 +19,7 @@ struct ListNode* FindKthToTail(struct ListNode* pListHead, int k) //快慢指针
 {
 	struct ListNode* slow = pListHead, * fast = pListHead;
 	while (k--)						   //fast先走k次，然后slow和fast同步向链表尾部走			   
-	{								   //当fast到达链表尾的空指针，则slow到达倒数第k个结点
+	{								   //当fast到达链表尾的空指针，则slow到达倒数第k个节点
 		if (!fast)
 			return NULL; //若fast在到达链表尾的时候还未走到k步，说明k>链表长度，返回空指针
 		fast = fast->next;

@@ -18,7 +18,7 @@ typedef struct ListNode
 }ListNode;
 
 //Floyd判圈算法判断链表是否带环
-bool hasCycle(struct ListNode* head) //速度为2的快指针和速度为1的慢指针同时从链表头结点开始向后遍历
+bool hasCycle(struct ListNode* head) //速度为2的快指针和速度为1的慢指针同时从链表头节点开始向后遍历
 {									 //若存在环，则快指针先进环，慢指针后进环，快指针会在环内从后方追上慢指针
 	if (!head)						 //因此若两指针能相遇则说明有环，若任一指针走到空指针则说明没有环
 		return false;				 //因为速度差为1，所以不存在快指针在环内跳过慢指针导致不相遇的情况
