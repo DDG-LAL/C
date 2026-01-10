@@ -4,15 +4,9 @@
 
 void testpush(HP* php)
 {
-	HPpush(php, 0);
-	HPpush(php, 1);
-	HPpush(php, 6);
-	HPpush(php, 7);
-	HPpush(php, 3);
-	HPpush(php, 2);
-	HPpush(php, 9);
-	HPpush(php, 2);
-	HPpush(php, 1);
+	int a[] = { 0,1,6,7,3,2,9,2,1,8,5,6 };
+	for (int i = 0; i < sizeof(a) / sizeof(a[0]); ++i)
+		HPpush(php, a[i]);
 }
 
 int main()
@@ -21,5 +15,6 @@ int main()
 	HP* php = &hp;
 	HPinit(php);
 	testpush(php);
+
 	return 0;
 }
