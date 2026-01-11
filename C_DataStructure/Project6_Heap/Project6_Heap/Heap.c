@@ -15,6 +15,8 @@ int main()
 	HP* php = &hp;
 	HPinit(php);
 	testpush(php);
-
+	HPpop(php);
+	HPpop(php);
+	HPpop(php);
 	return 0;
 }
