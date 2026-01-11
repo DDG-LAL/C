@@ -15,8 +15,11 @@ int main()
 	HP* php = &hp;
 	HPinit(php);
 	testpush(php);
-	HPpop(php);
-	HPpop(php);
-	HPpop(php);
+	while (!HPempty(php))
+	{
+		printf("%d ", HPtop(php));
+		HPpop(php);
+	}
+	printf("\n\n");
 	return 0;
 }

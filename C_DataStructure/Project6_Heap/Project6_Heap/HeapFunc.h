@@ -25,6 +25,6 @@ int HPsize(HP* php); //获取堆内数据个数
 
 void Siftdown(HPdatatype* data, int parent, int size); //向下调整算法
 void HPpop(HP* php); //删除堆顶数据
-void HPtop(HP* php); //获取堆顶数据
+HPdatatype HPtop(HP* php); //获取堆顶数据
 
 void HPdestroy(HP* php); //销毁
