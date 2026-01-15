@@ -118,5 +118,4 @@ void HPdestroy(HP* php) //Ïú»Ù
 	free(php->data);
 	php->data = NULL;
 	php->size = php->cap = 0;
-	free(php);
 }
