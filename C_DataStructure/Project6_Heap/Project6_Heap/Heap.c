@@ -38,19 +38,20 @@ void HeapSort1(HPdatatype* a, int size) //将数组数据逐个插入一个新的堆来完成建堆
 
 void HeapSort2(HPdatatype* a, int size) //直接把原数组调整成堆，排升序，调成大堆
 {										//完成建堆后通过向下调整算法来排序
+
 	//for (int i = 1; i < size; ++i) //向上调整建堆
 	//	Siftup(a, i);
 
-	for (int i = (size - 1) / 2; i >= 0; --i) //向下调整建堆
+	for (int i = (size - 2) / 2; i >= 0; --i) //向下调整建堆
 		Siftdown(a, i, size);
 
 	int end = size - 1;
 	while (end)
 	{
 		Swap(&a[0], &a[end]); //首位数据交换，则堆顶最大数据放置在了数组末尾
-		end--;
-		Siftdown(a, 0, end); //忽略末尾数据，则剩下的数据除了堆顶之外都符合堆
-	}						 //对剩下的数据向下调整
+		Siftdown(a, 0, end);  //忽略末尾数据，则剩下的数据除了堆顶之外都符合堆
+		end--;				  //对剩下的数据向下调整
+	}						 
 }
 
 int main()
@@ -62,7 +63,7 @@ int main()
 		printf("%d ", a[i]);
 	printf("\n\n");
 
-	int b[] = { 0,1,6,7,3,2,9,2,1,8,5,6 };
+	int b[] = { 11,3,6 };
 	HeapSort2(b, sizeof(b) / sizeof(b[0]));
 	for (int i = 0; i < sizeof(b) / sizeof(b[0]); ++i)
 		printf("%d ", b[i]);
