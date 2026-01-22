@@ -27,7 +27,7 @@ void Siftup(HPdatatype* data, int child) //向上调整算法
 	int parent = (child - 1) / 2;
 	while (child > 0)
 	{
-		if (data[parent] < data[child]) //大堆，若父节点小于子节点则交换
+		if (data[parent] > data[child]) //小堆，若父节点大于子节点则交换
 		{
 			Swap(&data[parent], &data[child]);
 			child = parent;
@@ -36,7 +36,7 @@ void Siftup(HPdatatype* data, int child) //向上调整算法
 		else
 			break;
 	}
-}
+} //向上调整算法的时间复杂度O(logN)
 
 void HPpush(HP* php, HPdatatype x) //插入数据，插入后需要调堆
 {
@@ -82,9 +82,9 @@ void Siftdown(HPdatatype* data, int parent, int size) //向下调整算法
 	int child = parent * 2 + 1;
 	while (child < size)
 	{
-		if (child + 1 < size && data[child] < data[child + 1]) //选出较大子节点
+		if (child + 1 < size && data[child] > data[child + 1]) //小堆，选出较小子节点
 			child++;
-		if (data[parent] < data[child]) //大堆，选出较大子节点后，若父节点小于子节点则交换
+		if (data[parent] > data[child]) //小堆，选出较小子节点后，若父节点大于子节点则交换
 		{
 			Swap(&data[parent], &data[child]);
 			parent = child;
@@ -93,7 +93,7 @@ void Siftdown(HPdatatype* data, int parent, int size) //向下调整算法
 		else
 			break;
 	}
-}
+} //向下调整算法的时间复杂度O(logN)
 
 void HPpop(HP* php) //删除堆顶数据，首位数据交换，再删除尾数据，再调堆
 {
