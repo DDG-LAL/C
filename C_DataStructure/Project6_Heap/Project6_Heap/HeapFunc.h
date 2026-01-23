@@ -29,3 +29,11 @@ void HPpop(HP* php); //删除堆顶数据
 HPdatatype HPtop(HP* php); //获取堆顶数据
 
 void HPdestroy(HP* php); //销毁
+
+
+void HeapSort1(HPdatatype* a, int size); //将数组数据逐个插入一个新的堆来完成建堆，然后通过pop排序
+void HeapSort2(HPdatatype* a, int size); //堆排序
+
+void CreateTopkData(); //创建数据，用于TopK问题
+
+void PrintTopK(int k); //TopK问题，求最大的k个数，建小堆

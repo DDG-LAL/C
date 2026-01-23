@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Heap.c" />
     <ClCompile Include="HeapFunc.c" />
+    <ClCompile Include="HeapTest.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HeapFunc.h" />

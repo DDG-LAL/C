@@ -21,6 +21,9 @@
     <ClCompile Include="HeapFunc.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="HeapTest.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HeapFunc.h">

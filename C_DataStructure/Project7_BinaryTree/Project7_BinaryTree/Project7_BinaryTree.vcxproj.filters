@@ -18,5 +18,13 @@
     <ClCompile Include="BinaryTree.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BinaryTreeFunc.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BinaryTreeFunc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
