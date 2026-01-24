@@ -100,3 +100,20 @@ int BTlevelksize(BTnode* root, int k) //递归求第k层节点数
 		return 1;
 	return BTlevelksize(root->lchild, k - 1) + BTlevelksize(root->rchild, k - 1);
 }
+
+BTnode* BTfind(BTnode* root, BTdatatype x) //递归查找某个值
+{
+	if (!root)
+		return NULL;
+	if (root->data == x)
+		return root;
+	BTnode* left = BTfind(root->lchild, x);
+	BTnode* right = BTfind(root->rchild, x);
+	if (!left && !right)
+		return NULL;
+	if (!left)
+		return right;
+	if (!right)
+		return left;
+	return left;
+}

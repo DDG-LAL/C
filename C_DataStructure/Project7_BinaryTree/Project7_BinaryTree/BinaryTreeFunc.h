@@ -29,3 +29,5 @@ int BTleafsize2(BTnode* root); //递归求叶子节点数，三目写法
 int BTtreeheight(BTnode* root); //递归求树高度
 
 int BTlevelksize(BTnode* root, int k); //递归求第k层节点数
+
+BTnode* BTfind(BTnode* root, BTdatatype x); //递归查找某个值
