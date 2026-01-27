@@ -50,6 +50,11 @@ struct TreeNode* CreateBinaryTree()
 	return node1;
 }
 
+void printbool(bool b)
+{
+	printf("%s\n\n", b ? "true" : "false");
+}
+
 bool isUnivalTree2(struct TreeNode* root) //满足条件的角度，很繁琐
 {
 	if (!root) //空节点，返回true
@@ -103,10 +108,10 @@ bool isUnivalTree(struct TreeNode* root) //违反条件的角度，简洁高效
 int main()
 {
 	struct TreeNode* root = CreateBinaryTree();
-	printf("%s\n\n", isUnivalTree(root) ? "true" : "false");
-	printf("%s\n\n", isUnivalTree2(root) ? "true" : "false");
+	printbool(isUnivalTree(root)); //true
+	printbool(isUnivalTree2(root)); //true
 	root->right->left->left->left->val = 1;
-	printf("%s\n\n", isUnivalTree(root) ? "true" : "false");
-	printf("%s\n\n", isUnivalTree2(root) ? "true" : "false");
+	printbool(isUnivalTree(root)); //false
+	printbool(isUnivalTree2(root)); //false
 	return 0;
 }

@@ -50,6 +50,11 @@ struct TreeNode* CreateBinaryTree()
 	return node1;
 }
 
+void printbool(bool b)
+{
+	printf("%s\n\n", b ? "true" : "false");
+}
+
 bool isSameTree(struct TreeNode* p, struct TreeNode* q) //判断相同二叉树
 {
 	if (!p && !q) //均为空节点，返回true
@@ -65,9 +70,9 @@ int main()
 {
 	struct TreeNode* root1 = CreateBinaryTree();
 	struct TreeNode* root2 = CreateBinaryTree();
-	printf("%s\n\n", isSameTree(root1, root2) ? "true" : "false");
+	printbool(isSameTree(root1, root2)); //true
 	root2->left->left = NULL;
-	printf("%s\n\n", isSameTree(root1, root2) ? "true" : "false");
+	printbool(isSameTree(root1, root2)); //false
 
 	return 0;
 }
