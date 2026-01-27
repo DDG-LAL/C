@@ -14,17 +14,6 @@ struct TreeNode
 	struct TreeNode* right;
 };
 
-bool isSameTree(struct TreeNode* p, struct TreeNode* q)
-{
-	if (!p && !q)
-		return true;
-	if (!p || !q)
-		return false;
-	if (p->val != q->val)
-		return false;
-	return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
-}
-
 struct TreeNode* BuyNode(int x) //创建节点
 {
 	struct TreeNode* newnode = (struct TreeNode*)malloc(sizeof(struct TreeNode));
@@ -59,6 +48,17 @@ struct TreeNode* CreateBinaryTree()
 	node5->right = node8;
 	node7->left = node9;
 	return node1;
+}
+
+bool isSameTree(struct TreeNode* p, struct TreeNode* q) //判断相同二叉树
+{
+	if (!p && !q) //均为空节点，返回true
+		return true;
+	if (!p || !q) //其中一个为空节点，另一个不为空节点，返回false
+		return false;
+	if (p->val != q->val) //均不为空节点，但val值不相等，返回false
+		return false;
+	return isSameTree(p->left, q->left) && isSameTree(p->right, q->right); //前3个if没有返回则说明两个节点均存在且相等，此时分别检查左右子节点
 }
 
 int main()
