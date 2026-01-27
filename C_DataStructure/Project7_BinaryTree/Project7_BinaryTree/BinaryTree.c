@@ -57,7 +57,11 @@ int main()
 
 	for (int i = 1; i <= h; ++i)
 		printf("%d ", BTlevelksize(root, i));
-	printf("\n");
+	printf("\n\n");
+
+	BTnode* tmp = BTfind(root, 9);
+	tmp->data = 111;
+	PreOrder(root);
 
 	printf("\n");
 	return 0;

@@ -108,12 +108,10 @@ BTnode* BTfind(BTnode* root, BTdatatype x) //µÝ¹é²éÕÒÄ³¸öÖµ
 	if (root->data == x)
 		return root;
 	BTnode* left = BTfind(root->lchild, x);
-	BTnode* right = BTfind(root->rchild, x);
-	if (!left && !right)
-		return NULL;
-	if (!left)
-		return right;
-	if (!right)
+	if (left)
 		return left;
-	return left;
+	BTnode* right = BTfind(root->rchild, x);
+	if (right)
+		return right;
+	return NULL;
 }
