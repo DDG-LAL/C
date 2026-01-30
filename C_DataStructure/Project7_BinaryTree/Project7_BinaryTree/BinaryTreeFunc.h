@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
+#include"QueueFunc.h"
 
 typedef int BTdatatype;
 
@@ -31,3 +32,5 @@ int BTtreeheight(BTnode* root); //递归求树高度
 int BTlevelksize(BTnode* root, int k); //递归求第k层节点数
 
 BTnode* BTfind(BTnode* root, BTdatatype x); //递归查找某个值
+
+void LevelOrder(BTnode* root); //层序遍历(需要队列)

@@ -115,3 +115,23 @@ BTnode* BTfind(BTnode* root, BTdatatype x) //递归查找某个值
 		return right;
 	return NULL;
 }
+
+void LevelOrder(BTnode* root) //层序遍历
+{							  //因为队列先进先出，所以从根节点开始，在队头的一定是最靠上层且靠左的节点
+	Queue q;				  //取队头节点进行处理，然后处理其子节点，确保子节点在队列中的位置一定按顺序排在本层节点之后
+	Queue* pq = &q;
+	Qinit(pq);
+	if (root)
+		Qpush(pq, root);
+	while (!Qempty(pq))
+	{
+		BTnode* front = Qfront(pq); //每次循环取队头节点进行处理
+		printf("%d ", front->data);
+		Qpop(pq);
+		if (front->lchild) //若队头节点有子节点，则入队
+			Qpush(pq, front->lchild);
+		if (front->rchild)
+			Qpush(pq, front->rchild);
+	}
+	Qdestroy(pq);
+}

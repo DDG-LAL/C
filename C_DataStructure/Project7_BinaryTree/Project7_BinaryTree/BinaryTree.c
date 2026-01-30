@@ -62,6 +62,9 @@ int main()
 	BTnode* tmp = BTfind(root, 9);
 	tmp->data = 111;
 	PreOrder(root);
+	printf("\n\n");
+
+	LevelOrder(root);
 
 	printf("\n");
 	return 0;
