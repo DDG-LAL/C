@@ -26,6 +26,15 @@ struct TreeNode* BuyNode(int x) //创建节点
 	return newnode;
 }
 
+void BTdestroy(struct TreeNode* root) //销毁二叉树
+{
+	if (!root)
+		return;
+	BTdestroy(root->left);
+	BTdestroy(root->right);
+	free(root);
+}
+
 struct TreeNode* CreateBinaryTree()
 {
 	struct TreeNode* node1 = BuyNode(1);
@@ -127,5 +136,7 @@ int main()
 		printf("%d ", arr3[i]);
 	printf("\n\n");
 
+	BTdestroy(root);
+	root = NULL;
 	return 0;
 }

@@ -34,3 +34,7 @@ int BTlevelksize(BTnode* root, int k); //递归求第k层节点数
 BTnode* BTfind(BTnode* root, BTdatatype x); //递归查找某个值
 
 void LevelOrder(BTnode* root); //层序遍历(需要队列)
+
+bool BTcomplete(BTnode* root); //判断是否为完全二叉树
+
+void BTdestroy(BTnode* root); //销毁二叉树

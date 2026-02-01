@@ -27,6 +27,15 @@ struct TreeNode* BuyNode(int x) //创建节点
 	return newnode;
 }
 
+void BTdestroy(struct TreeNode* root) //销毁二叉树
+{
+	if (!root)
+		return;
+	BTdestroy(root->left);
+	BTdestroy(root->right);
+	free(root);
+}
+
 struct TreeNode* CreateBinaryTree()
 {
 	struct TreeNode* node1 = BuyNode(1);
@@ -74,5 +83,9 @@ int main()
 	root2->left->left = NULL;
 	printbool(isSameTree(root1, root2)); //false
 
+	BTdestroy(root1);
+	root1 = NULL;
+	BTdestroy(root2);
+	root2 = NULL;
 	return 0;
 }

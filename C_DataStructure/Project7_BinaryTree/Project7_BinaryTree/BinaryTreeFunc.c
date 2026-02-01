@@ -135,3 +135,45 @@ void LevelOrder(BTnode* root) //层序遍历
 	}
 	Qdestroy(pq);
 }
+
+
+
+
+
+bool BTcomplete(BTnode* root) //判断是否为完全二叉树，利用层序遍历，若某一层中间出现空则不是完全二叉树
+{
+	Queue q;
+	Queue* pq = &q;
+	Qinit(pq);
+	bool flag = true;
+	if (root)
+		Qpush(pq, root);
+	while (!Qempty(pq))
+	{
+		BTnode* front = Qfront(pq);
+		if (front && !flag)
+		{
+			Qdestroy(pq);
+			return false;
+		}
+		if (!front)
+			flag = false;
+		Qpop(pq);
+		if (front)
+		{
+			Qpush(pq, front->lchild);
+			Qpush(pq, front->rchild);
+		}
+	}
+	Qdestroy(pq);
+	return true;
+}
+
+void BTdestroy(BTnode* root) //销毁二叉树
+{
+	if (!root)
+		return;
+	BTdestroy(root->lchild);
+	BTdestroy(root->rchild);
+	free(root);
+}

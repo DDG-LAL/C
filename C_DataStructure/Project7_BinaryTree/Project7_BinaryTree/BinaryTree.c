@@ -25,6 +25,25 @@ BTnode* CreateBinaryTree()
 	return node1;
 }
 
+BTnode* CreateCompleteBinaryTree()
+{
+	BTnode* node1 = BuyNode(1);
+	BTnode* node2 = BuyNode(2);
+	BTnode* node3 = BuyNode(3);
+	BTnode* node4 = BuyNode(4);
+	BTnode* node5 = BuyNode(5);
+	BTnode* node6 = BuyNode(6);
+	BTnode* node7 = BuyNode(7);
+
+	node1->lchild = node2;
+	node1->rchild = node3;
+	node2->lchild = node4;
+	node2->rchild = node5;
+	node3->lchild = node6;
+	node3->rchild = node7;
+	return node1;
+}
+
 int main()
 {
 	BTnode* root = CreateBinaryTree();
@@ -65,7 +84,27 @@ int main()
 	printf("\n\n");
 
 	LevelOrder(root);
+	printf("\n\n");
 
-	printf("\n");
+	BTnode* croot = CreateCompleteBinaryTree();
+	BTnode* sroot = BuyNode(0);
+
+	printf("%s\n\n", BTcomplete(croot) ? "true" : "false"); //true
+
+	printf("%s\n\n", BTcomplete(root) ? "true" : "false"); //false
+	croot->lchild->lchild->lchild = BuyNode(11);
+	printf("%s\n\n", BTcomplete(croot) ? "true" : "false"); //true
+	croot->lchild->lchild->rchild = BuyNode(12);
+	printf("%s\n\n", BTcomplete(croot) ? "true" : "false"); //true
+	croot->lchild->lchild->rchild->rchild = BuyNode(13); 
+	printf("%s\n\n", BTcomplete(croot) ? "true" : "false"); //false
+
+	printf("%s\n\n", BTcomplete(sroot) ? "true" : "false"); //true
+	sroot->rchild = BuyNode(14);
+	printf("%s\n\n", BTcomplete(sroot) ? "true" : "false"); //false
+
+	printf("\n\n");
+	BTdestroy(root);
+	root = NULL;
 	return 0;
 }
