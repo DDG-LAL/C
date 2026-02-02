@@ -87,24 +87,54 @@ int main()
 	printf("\n\n");
 
 	BTnode* croot = CreateCompleteBinaryTree();
-	BTnode* sroot = BuyNode(0);
+	BTnode* sroot1 = BuyNode(0);
+	BTnode* sroot2 = BuyNode(0);
 
-	printf("%s\n\n", BTcomplete(croot) ? "true" : "false"); //true
+	printf("%s\n", BTcomplete1(croot) ? "true" : "false"); //true
+	printf("%s\n\n", BTcomplete2(croot) ? "true" : "false"); //true
 
-	printf("%s\n\n", BTcomplete(root) ? "true" : "false"); //false
+	printf("%s\n", BTcomplete1(root) ? "true" : "false"); //false
+	printf("%s\n\n", BTcomplete2(root) ? "true" : "false"); //false
 	croot->lchild->lchild->lchild = BuyNode(11);
-	printf("%s\n\n", BTcomplete(croot) ? "true" : "false"); //true
+	printf("%s\n", BTcomplete1(croot) ? "true" : "false"); //true
+	printf("%s\n\n", BTcomplete2(croot) ? "true" : "false"); //true
 	croot->lchild->lchild->rchild = BuyNode(12);
-	printf("%s\n\n", BTcomplete(croot) ? "true" : "false"); //true
-	croot->lchild->lchild->rchild->rchild = BuyNode(13); 
-	printf("%s\n\n", BTcomplete(croot) ? "true" : "false"); //false
+	printf("%s\n", BTcomplete1(croot) ? "true" : "false"); //true
+	printf("%s\n\n", BTcomplete2(croot) ? "true" : "false"); //true
+	croot->lchild->lchild->rchild->rchild = BuyNode(13);
+	printf("%s\n", BTcomplete1(croot) ? "true" : "false"); //false
+	printf("%s\n\n", BTcomplete2(croot) ? "true" : "false"); //false
 
-	printf("%s\n\n", BTcomplete(sroot) ? "true" : "false"); //true
-	sroot->rchild = BuyNode(14);
-	printf("%s\n\n", BTcomplete(sroot) ? "true" : "false"); //false
+	printf("%s\n", BTcomplete1(sroot1) ? "true" : "false"); //true
+	printf("%s\n\n", BTcomplete2(sroot1) ? "true" : "false"); //true
+	sroot1->rchild = BuyNode(14);
+	printf("%s\n", BTcomplete1(sroot1) ? "true" : "false"); //false
+	printf("%s\n\n", BTcomplete2(sroot1) ? "true" : "false"); //false
+	sroot1->lchild = BuyNode(15);
+	printf("%s\n", BTcomplete1(sroot1) ? "true" : "false"); //true
+	printf("%s\n\n", BTcomplete2(sroot1) ? "true" : "false"); //true
+	sroot2->lchild = BuyNode(16);
+	printf("%s\n", BTcomplete1(sroot2) ? "true" : "false"); //true
+	printf("%s\n\n", BTcomplete2(sroot2) ? "true" : "false"); //true
+	sroot2->lchild->lchild = BuyNode(17);
+	printf("%s\n", BTcomplete1(sroot2) ? "true" : "false"); //false
+	printf("%s\n\n", BTcomplete2(sroot2) ? "true" : "false"); //false
+	sroot2->rchild = BuyNode(18);
+	sroot2->rchild->rchild = BuyNode(19);
+	printf("%s\n", BTcomplete1(sroot2) ? "true" : "false"); //false
+	printf("%s\n\n", BTcomplete2(sroot2) ? "true" : "false"); //false
+	sroot2->lchild->lchild->lchild = BuyNode(20);
+	sroot2->rchild->rchild->rchild = BuyNode(21);
+	printf("%s\n", BTcomplete1(sroot2) ? "true" : "false"); //false
+	printf("%s\n\n", BTcomplete2(sroot2) ? "true" : "false"); //false
 
-	printf("\n\n");
 	BTdestroy(root);
 	root = NULL;
+	BTdestroy(croot);
+	croot = NULL;
+	BTdestroy(sroot1);
+	sroot1 = NULL;
+	BTdestroy(sroot2);
+	sroot2 = NULL;
 	return 0;
 }

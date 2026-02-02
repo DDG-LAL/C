@@ -126,8 +126,8 @@ void LevelOrder(BTnode* root) //层序遍历
 	while (!Qempty(pq))
 	{
 		BTnode* front = Qfront(pq); //每次循环取队头节点进行处理
-		printf("%d ", front->data);
 		Qpop(pq);
+		printf("%d ", front->data);
 		if (front->lchild) //若队头节点有子节点，则入队
 			Qpush(pq, front->lchild);
 		if (front->rchild)
@@ -136,14 +136,10 @@ void LevelOrder(BTnode* root) //层序遍历
 	Qdestroy(pq);
 }
 
-
-
-
-
-bool BTcomplete(BTnode* root) //判断是否为完全二叉树，利用层序遍历，若某一层中间出现空则不是完全二叉树
-{
-	Queue q;
-	Queue* pq = &q;
+bool BTcomplete1(BTnode* root) //判断是否为完全二叉树，利用层序遍历
+{							   //若遍历过程中出现空节点，则标记
+	Queue q;				   //标记后，若在遍历结束前出现非空节点，则false
+	Queue* pq = &q;			   //		 若直到遍历结束都没有出现非空节点，则true
 	Qinit(pq);
 	bool flag = true;
 	if (root)
@@ -151,18 +147,48 @@ bool BTcomplete(BTnode* root) //判断是否为完全二叉树，利用层序遍历，若某一层中间
 	while (!Qempty(pq))
 	{
 		BTnode* front = Qfront(pq);
-		if (front && !flag)
+		Qpop(pq);
+		if (front && !flag) //之前出现过空节点，且当前节点非空
 		{
 			Qdestroy(pq);
 			return false;
 		}
-		if (!front)
+		if (!front) //第一次出现空节点，标记
 			flag = false;
-		Qpop(pq);
-		if (front)
+		if (front) //当前节点的子节点入队
 		{
 			Qpush(pq, front->lchild);
 			Qpush(pq, front->rchild);
+		}
+	}
+	Qdestroy(pq);
+	return true;
+}
+
+bool BTcomplete2(BTnode* root) //判断是否为完全二叉树，利用层序遍历
+{							   //若遍历过程中出现空节点，则停止遍历，观察后续节点
+	Queue q;				   //若后续均为空节点，则true，若后续出现非空节点，则false
+	Queue* pq = &q;
+	Qinit(pq);
+	if (root)
+		Qpush(pq, root);
+	while (!Qempty(pq))
+	{
+		BTnode* front = Qfront(pq);
+		Qpop(pq);
+		if (!front) //第一次遇到空节点，跳出，此时若是完全二叉树，后续节点均为空
+			break;
+		Qpush(pq, front->lchild);
+		Qpush(pq, front->rchild);
+	}
+	while (!Qempty(pq))
+	{
+		BTnode* front = Qfront(pq);
+		Qpop(pq);
+		if (front) //后续节点中出现非空
+		{
+			Qdestroy(pq);
+			return false;
 		}
 	}
 	Qdestroy(pq);
