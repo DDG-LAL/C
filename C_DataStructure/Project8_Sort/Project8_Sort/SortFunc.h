@@ -18,5 +18,5 @@ void HeapSort(int* a, int n); //堆排序
 
 void BubbleSort(int* a, int n); //冒泡排序
 
-void Partsort(); //单次排序
-void QuickSort(int* a, int n); //快速排序
+int Partsort(int* a, int left, int right); //单次排序
+void QuickSort(int* a, int begin, int end); //快速排序

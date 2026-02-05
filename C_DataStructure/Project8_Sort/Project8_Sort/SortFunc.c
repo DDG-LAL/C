@@ -142,12 +142,26 @@ void BubbleSort(int* a, int n) //冒泡排序
 	}
 }
 
-void Partsort() //单次排序
+int Partsort(int* a, int left, int right) //单次排序
 {
-
+	int key = left;
+	while (left < right)
+	{
+		while (left < right && a[right] <= a[key]) //注意先判断后访问
+			right--;
+		while (left < right && a[left] >= a[key])
+			left++;
+		Swap(&a[left], &a[right]);
+	}
+	Swap(&a[key], &a[left]); //由于right先动，必然会相遇在比a[key]大的位置
+	return left;
 }
 
-void QuickSort(int* a, int n) //快速排序
+void QuickSort(int* a, int begin, int end) //快速排序
 {
-
+	if (begin >= end) //1.区间只有一个值 2.区间不存在
+		return;
+	int key = Partsort(a, begin, end);
+	QuickSort(a, begin, key - 1);
+	QuickSort(a, key + 1, end);
 }

@@ -39,6 +39,11 @@ void testfunc()
 	printf("BubbleSort\n");
 	BubbleSort(a, size);
 	printarr(a, size);
+
+	memcpy(a, reset, sizeof(int) * size);
+	printf("QuickSort\n");
+	QuickSort(a, 0, size - 1);
+	printarr(a, size);
 }
 
 void testtime()
@@ -87,11 +92,16 @@ void testtime()
 	BubbleSort(a5, N);
 	int end5 = clock();
 
-	printf("InsertSort: %dms\n", end1 - start1);
-	printf(" ShellSort: %dms\n", end2 - start2);
-	printf("SelectSort: %dms\n", end3 - start3);
-	printf("  HeapSort: %dms\n", end4 - start4);
-	printf("BubbleSort: %dms\n", end5 - start5);
+	int start6 = clock();
+	QuickSort(a6, 0, N - 1);
+	int end6 = clock();
+
+	printf("InsertSort: %-7dms\n", end1 - start1);
+	printf(" ShellSort: %-7dms\n", end2 - start2);
+	printf("SelectSort: %-7dms\n", end3 - start3);
+	printf("  HeapSort: %-7dms\n", end4 - start4);
+	printf("BubbleSort: %-7dms\n", end5 - start5);
+	printf(" QuickSort: %-7dms\n", end6 - start6);
 
 	free(a1);
 	free(a2);
