@@ -16,32 +16,32 @@ void testfunc()
 	int reset[] = { 2,3,1,4,5,0,7,6,8,9,50,30 };
 	printarr(a, size);
 
-	printf("InsertSort\n");
+	printf("InsertSort: ");
 	InsertSort(a, size);
 	printarr(a, size);
 
 	memcpy(a, reset, sizeof(int) * size);
-	printf("ShellSort\n");
+	printf(" ShellSort: ");
 	ShellSort(a, size);
 	printarr(a, size);
 
 	memcpy(a, reset, sizeof(int) * size);
-	printf("SelectSort\n");
+	printf("SelectSort: ");
 	SelectSort(a, size);
 	printarr(a, size);
 
 	memcpy(a, reset, sizeof(int) * size);
-	printf("HeapSort\n");
+	printf("  HeapSort: ");
 	HeapSort(a, size);
 	printarr(a, size);
 
 	memcpy(a, reset, sizeof(int) * size);
-	printf("BubbleSort\n");
+	printf("BubbleSort: ");
 	BubbleSort(a, size);
 	printarr(a, size);
 
 	memcpy(a, reset, sizeof(int) * size);
-	printf("QuickSort\n");
+	printf(" QuickSort: ");
 	QuickSort(a, 0, size - 1);
 	printarr(a, size);
 }
@@ -116,7 +116,7 @@ int main()
 	srand((size_t)time(NULL));
 
 	testfunc();
-	testtime();
+	//testtime();
 
 	return 0;
 }

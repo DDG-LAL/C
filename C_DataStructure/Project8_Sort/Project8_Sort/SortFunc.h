@@ -18,5 +18,8 @@ void HeapSort(int* a, int n); //堆排序
 
 void BubbleSort(int* a, int n); //冒泡排序
 
-int Partsort(int* a, int left, int right); //单次排序
+int Partsort1(int* a, int left, int right); //单次排序(Hoare法)
+int Partsort2(int* a, int left, int right); //单次排序(挖坑法)
+int Partsort3(int* a, int left, int right); //单次排序(前后指针法)
+int Partsort4(int* a, int left, int right); //单次排序(前后指针法)
 void QuickSort(int* a, int begin, int end); //快速排序
