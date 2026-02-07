@@ -16,33 +16,43 @@ void testfunc()
 	int reset[] = { 2,3,1,4,5,0,7,6,8,9,50,30 };
 	printarr(a, size);
 
-	printf("InsertSort: ");
+	printf(" InsertSort: ");
 	InsertSort(a, size);
 	printarr(a, size);
 
 	memcpy(a, reset, sizeof(int) * size);
-	printf(" ShellSort: ");
+	printf("  ShellSort: ");
 	ShellSort(a, size);
 	printarr(a, size);
 
 	memcpy(a, reset, sizeof(int) * size);
-	printf("SelectSort: ");
+	printf(" SelectSort: ");
 	SelectSort(a, size);
 	printarr(a, size);
 
 	memcpy(a, reset, sizeof(int) * size);
-	printf("  HeapSort: ");
+	printf("   HeapSort: ");
 	HeapSort(a, size);
 	printarr(a, size);
 
 	memcpy(a, reset, sizeof(int) * size);
-	printf("BubbleSort: ");
+	printf(" BubbleSort: ");
 	BubbleSort(a, size);
 	printarr(a, size);
 
 	memcpy(a, reset, sizeof(int) * size);
-	printf(" QuickSort: ");
+	printf("  QuickSort: ");
 	QuickSort(a, 0, size - 1);
+	printarr(a, size);
+
+	memcpy(a, reset, sizeof(int) * size);
+	printf("NRQuickSort: ");
+	QuickSort_NonRecursive(a, 0, size - 1);
+	printarr(a, size);
+
+	memcpy(a, reset, sizeof(int) * size);
+	printf("  MergeSort: ");
+	MergeSort(a, size);
 	printarr(a, size);
 }
 
@@ -64,6 +74,8 @@ void testtime()
 	if (!a6) return;
 	int* a7 = (int*)malloc(sizeof(int) * N);
 	if (!a7) return;
+	int* a8 = (int*)malloc(sizeof(int) * N);
+	if (!a8) return;
 	for (int i = 0; i < N; ++i)
 	{
 		a1[i] = rand() + 1000 * rand();
@@ -73,6 +85,7 @@ void testtime()
 		a5[i] = a1[i];
 		a6[i] = a1[i];
 		a7[i] = a1[i];
+		a8[i] = a1[i];
 	}
 
 	int start1 = clock();
@@ -97,22 +110,32 @@ void testtime()
 
 	int start6 = clock();
 	QuickSort(a6, 0, N - 1);
-	int end6 = clock(); 
+	int end6 = clock();
 	int start7 = clock();
 	QuickSort(a6, 0, N - 1);
 	int end7 = clock();
 
+	int start8 = clock();
+	QuickSort_NonRecursive(a7, 0, N - 1);
+	int end8 = clock();
+	int start9 = clock();
+	QuickSort_NonRecursive(a7, 0, N - 1);
+	int end9 = clock();
 
+	int start10 = clock();
+	QuickSort(a8, 0, N);
+	int end10 = clock();
 
-	printf("InsertSort: %-7dms\n", end1 - start1);
-	printf(" ShellSort: %-7dms\n", end2 - start2);
-	printf("SelectSort: %-7dms\n", end3 - start3);
-	printf("  HeapSort: %-7dms\n", end4 - start4);
-	printf("BubbleSort: %-7dms\n", end5 - start5);
-	printf(" QuickSort: %-7dms\n", end6 - start6);
-	printf(" QuickSort: %-7dms\n", end7 - start7);
-
-
+	printf(" InsertSort: %-7dms\n", end1 - start1);
+	printf("  ShellSort: %-7dms\n", end2 - start2);
+	printf(" SelectSort: %-7dms\n", end3 - start3);
+	printf("   HeapSort: %-7dms\n", end4 - start4);
+	printf(" BubbleSort: %-7dms\n", end5 - start5);
+	printf("  QuickSort: %-7dms\n", end6 - start6);
+	printf("  QuickSort: %-7dms\n", end7 - start7);
+	printf("NRQuickSort: %-7dms\n", end8 - start8);
+	printf("NRQuickSort: %-7dms\n", end9 - start9);
+	printf("  MergeSort: %-7dms\n", end10 - start10);
 
 	free(a1);
 	free(a2);
@@ -121,6 +144,7 @@ void testtime()
 	free(a5);
 	free(a6);
 	free(a7);
+	free(a8);
 }
 
 int main()

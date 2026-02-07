@@ -25,3 +25,7 @@ int Partsort2(int* a, int left, int right); //单次排序(挖坑法)
 int Partsort3(int* a, int left, int right); //单次排序(前后指针法)
 int Partsort4(int* a, int left, int right); //单次排序(前后指针法)
 void QuickSort(int* a, int begin, int end); //快速排序
+void QuickSort_NonRecursive(int* a, int begin, int end); //快速排序(非递归，利用栈)
+
+void MergeSort(int* a, int n); //归并排序
+void MergeSort_NonRecursive(int* a, int n); //归并排序(非递归)

@@ -240,12 +240,71 @@ void QuickSort(int* a, int begin, int end) //快速排序
 {
 	if (begin >= end) //返回条件: 1.区间只有一个值 2.区间不存在
 		return;
-	int key = Partsort1(a, begin, end);
+	int key = Partsort1(a, begin, end); //前序
 	QuickSort(a, begin, key - 1);
 	QuickSort(a, key + 1, end);
 } //时间复杂度O(N*logN)
 
-void QuickSort_NonRecursive(int* a, int begin, int end) //非递归实现快排(利用栈)
+void QuickSort_NonRecursive(int* a, int begin, int end) //快速排序(非递归，利用栈)
+{
+	ST st;
+	ST* pst = &st;
+	STinit(pst);
+	STpush(pst, begin); //左边界入栈
+	STpush(pst, end);   //右边界入栈
+	while (!STempty(pst))
+	{
+		int right = STtop(pst);
+		STpop(pst);
+		int left = STtop(pst);
+		STpop(pst);
+		int key = Partsort1(a, left, right); //确定一个key
+		if (key + 1 < right)
+		{
+			STpush(pst, key + 1);
+			STpush(pst, right);
+		}
+		if (left < key - 1)
+		{
+			STpush(pst, left);
+			STpush(pst, key - 1);
+		}
+	}
+	STdestroy(pst);
+}
+
+void _MergeSort(int* a, int left, int right, int* tmp) //归并排序子函数
+{
+	if (left == right)
+		return;
+	int mid = left + (right - left) / 2; //遇到奇数时mid会向下取整
+	_MergeSort(a, left, mid, tmp); 
+	_MergeSort(a, mid + 1, right, tmp); //后序
+	int left1 = left, right1 = mid;
+	int left2 = mid + 1, right2 = right;
+	int tmpi = left;
+	while (left1 <= right1 && left2 <= right2)
+	{
+		if (a[left1] > a[left2])
+			tmp[tmpi++] = a[left1++];
+		else
+			tmp[tmpi++] = a[left2++];
+	}
+	while (left1 <= right1)
+		tmp[tmpi++] = a[left1++];
+	while (left2 <= right2)
+		tmp[tmpi++] = a[left2++];
+	memcpy(a + left, tmp + left, sizeof(int) * (right - left + 1));
+}
+
+void MergeSort(int* a, int n) //归并排序
+{
+	int* tmp = (int*)malloc(sizeof(int) * n);
+	_MergeSort(a, 0, n - 1, tmp);
+	free(tmp);
+} //时间复杂度O(N*logN)
+
+void MergeSort_NonRecursive(int* a, int n) //归并排序(非递归)
 {
 
 }
