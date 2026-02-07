@@ -6,6 +6,7 @@
 #include<stdbool.h>
 #include<time.h>
 #include<string.h>
+#include"StackFunc.h"
 
 void InsertSort(int* a, int n); //直接插入排序
 
@@ -18,6 +19,7 @@ void HeapSort(int* a, int n); //堆排序
 
 void BubbleSort(int* a, int n); //冒泡排序
 
+int GetMidIndex(int* a, int left, int right); //三数取中，对key优化
 int Partsort1(int* a, int left, int right); //单次排序(Hoare法)
 int Partsort2(int* a, int left, int right); //单次排序(挖坑法)
 int Partsort3(int* a, int left, int right); //单次排序(前后指针法)

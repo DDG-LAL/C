@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="Sort.c" />
     <ClCompile Include="SortFunc.c" />
+    <ClCompile Include="StackFunc.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SortFunc.h" />
+    <ClInclude Include="StackFunc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

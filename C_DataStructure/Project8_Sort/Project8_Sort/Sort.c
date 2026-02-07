@@ -62,14 +62,17 @@ void testtime()
 	if (!a5) return;
 	int* a6 = (int*)malloc(sizeof(int) * N);
 	if (!a6) return;
+	int* a7 = (int*)malloc(sizeof(int) * N);
+	if (!a7) return;
 	for (int i = 0; i < N; ++i)
 	{
-		a1[i] = rand();
+		a1[i] = rand() + 1000 * rand();
 		a2[i] = a1[i];
 		a3[i] = a1[i];
 		a4[i] = a1[i];
 		a5[i] = a1[i];
 		a6[i] = a1[i];
+		a7[i] = a1[i];
 	}
 
 	int start1 = clock();
@@ -94,7 +97,12 @@ void testtime()
 
 	int start6 = clock();
 	QuickSort(a6, 0, N - 1);
-	int end6 = clock();
+	int end6 = clock(); 
+	int start7 = clock();
+	QuickSort(a6, 0, N - 1);
+	int end7 = clock();
+
+
 
 	printf("InsertSort: %-7dms\n", end1 - start1);
 	printf(" ShellSort: %-7dms\n", end2 - start2);
@@ -102,6 +110,9 @@ void testtime()
 	printf("  HeapSort: %-7dms\n", end4 - start4);
 	printf("BubbleSort: %-7dms\n", end5 - start5);
 	printf(" QuickSort: %-7dms\n", end6 - start6);
+	printf(" QuickSort: %-7dms\n", end7 - start7);
+
+
 
 	free(a1);
 	free(a2);
@@ -109,6 +120,7 @@ void testtime()
 	free(a4);
 	free(a5);
 	free(a6);
+	free(a7);
 }
 
 int main()
@@ -116,7 +128,7 @@ int main()
 	srand((size_t)time(NULL));
 
 	testfunc();
-	//testtime();
+	testtime();
 
 	return 0;
 }

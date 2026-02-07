@@ -142,8 +142,33 @@ void BubbleSort(int* a, int n) //冒泡排序
 	}
 }
 
+int GetMidIndex(int* a, int left, int right) //三数取中，对key优化
+{
+	int mid = left + (right - left) / 2;
+	if (a[left] > a[right])
+	{
+		if (a[mid] > a[left])
+			return left;
+		else if (a[mid] < a[right])
+			return right;
+		else
+			return mid;
+	}
+	else //a[left] < a[right]
+	{
+		if (a[mid] < a[left])
+			return left;
+		else if (a[mid] > a[right])
+			return right;
+		else
+			return mid;
+	}
+}
+
 int Partsort1(int* a, int left, int right) //单次排序(Hoare法)
 {
+	int midi = GetMidIndex(a, left, right);
+	Swap(&a[midi], &a[left]);
 	int key = left;
 	while (left < right)
 	{	//left找小，right找大，找到后交换
@@ -159,6 +184,9 @@ int Partsort1(int* a, int left, int right) //单次排序(Hoare法)
 
 int Partsort2(int* a, int left, int right) //单次排序(挖坑法)
 {
+	int midi = GetMidIndex(a, left, right);
+	Swap(&a[midi], &a[left]);
+
 	int keyval = a[left], hole = left;
 	while (left < right)
 	{	//left找小，right找大，轮流找，每找到一次就填hole，并更新hole的位置
@@ -177,7 +205,10 @@ int Partsort2(int* a, int left, int right) //单次排序(挖坑法)
 
 int Partsort3(int* a, int left, int right) //单次排序(前后指针法)
 {
-	int key = left, cur = left;
+	int midi = GetMidIndex(a, left, right);
+	Swap(&a[midi], &a[left]);
+
+	int cur = left, key = left;
 	while (cur <= right)
 	{	//cur找大，找到后++left，然后交换
 		while (cur <= right && a[cur] <= a[key]) //先判断后访问
@@ -190,10 +221,13 @@ int Partsort3(int* a, int left, int right) //单次排序(前后指针法)
 }
 
 int Partsort4(int* a, int left, int right) //单次排序(前后指针法)
-{	//cur找大，找到后++left，然后交换
+{
+	int midi = GetMidIndex(a, left, right);
+	Swap(&a[midi], &a[left]);
+
 	int keyi = left, cur = left + 1;
-	while (cur<=right)
-	{
+	while (cur <= right)
+	{	//cur找大，找到后++left，然后交换
 		if (a[cur] > a[keyi] && ++left != cur) //没有找到时不会执行++left
 			Swap(&a[cur], &a[left]);
 		cur++;
@@ -206,7 +240,12 @@ void QuickSort(int* a, int begin, int end) //快速排序
 {
 	if (begin >= end) //返回条件: 1.区间只有一个值 2.区间不存在
 		return;
-	int key = Partsort4(a, begin, end);
+	int key = Partsort1(a, begin, end);
 	QuickSort(a, begin, key - 1);
 	QuickSort(a, key + 1, end);
+} //时间复杂度O(N*logN)
+
+void QuickSort_NonRecursive(int* a, int begin, int end) //非递归实现快排(利用栈)
+{
+
 }
