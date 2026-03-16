@@ -26,6 +26,9 @@ int Partsort3(int* a, int left, int right); //单次排序(前后指针法)
 int Partsort4(int* a, int left, int right); //单次排序(前后指针法)
 void QuickSort(int* a, int begin, int end); //快速排序
 void QuickSort_NonRecursive(int* a, int begin, int end); //快速排序(非递归，利用栈)
+void QuickSort_3WayPartition(int* a, int begin, int end); //快速排序(针对有大量重复数据的优化)
 
 void MergeSort(int* a, int n); //归并排序
-void MergeSort_NonRecursive(int* a, int n); //归并排序(非递归)
+void MergeSort_Optimized(int* a, int n); //归并排序(小区间优化)
+void MergeSort_NonRecursive1(int* a, int n); //归并排序(非递归)
+void MergeSort_NonRecursive2(int* a, int n); //归并排序(非递归)

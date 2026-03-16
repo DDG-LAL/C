@@ -93,7 +93,7 @@ void SelectSort(int* a, int n) //Ö±½ÓÑ¡ÔñÅÅĞò
 		left++;
 		right--;
 	}
-}
+} //Ê±¼ä¸´ÔÓ¶ÈO(N^2)
 
 void AdjustDown(int* a, int parent, int size) //ÏòÏÂµ÷ÕûËã·¨
 {
@@ -122,7 +122,7 @@ void HeapSort(int* a, int n) //¶ÑÅÅĞò
 		Swap(&a[0], &a[j]);
 		AdjustDown(a, 0, j);
 	}
-}
+} //Ê±¼ä¸´ÔÓ¶ÈO(N*logN)
 
 void BubbleSort(int* a, int n) //Ã°ÅİÅÅĞò
 {
@@ -154,7 +154,7 @@ int GetMidIndex(int* a, int left, int right) //ÈıÊıÈ¡ÖĞ£¬¶ÔkeyÓÅ»¯
 		else
 			return mid;
 	}
-	else //a[left] < a[right]
+	else //a[begin] < a[end]
 	{
 		if (a[mid] < a[left])
 			return left;
@@ -169,6 +169,7 @@ int Partsort1(int* a, int left, int right) //µ¥´ÎÅÅĞò(Hoare·¨)
 {
 	int midi = GetMidIndex(a, left, right);
 	Swap(&a[midi], &a[left]);
+
 	int key = left;
 	while (left < right)
 	{	//leftÕÒĞ¡£¬rightÕÒ´ó£¬ÕÒµ½ºó½»»»
@@ -228,7 +229,7 @@ int Partsort4(int* a, int left, int right) //µ¥´ÎÅÅĞò(Ç°ºóÖ¸Õë·¨)
 	int keyi = left, cur = left + 1;
 	while (cur <= right)
 	{	//curÕÒ´ó£¬ÕÒµ½ºó++left£¬È»ºó½»»»
-		if (a[cur] > a[keyi] && ++left != cur) //Ã»ÓĞÕÒµ½Ê±²»»áÖ´ĞĞ++left
+		if (a[cur] > a[keyi] && ++left != cur) //Ã»ÓĞÕÒµ½Ê±²»»áÖ´ĞĞ++begin
 			Swap(&a[cur], &a[left]);
 		cur++;
 	}
@@ -275,22 +276,23 @@ void QuickSort_NonRecursive(int* a, int begin, int end) //¿ìËÙÅÅĞò(·Çµİ¹é£¬ÀûÓÃÕ
 
 void _MergeSort(int* a, int left, int right, int* tmp) //¹é²¢ÅÅĞò×Óº¯Êı
 {
-	if (left == right)
+	if (left == right) //µİ¹é½áÊøÌõ¼ş
 		return;
 	int mid = left + (right - left) / 2; //Óöµ½ÆæÊıÊ±mid»áÏòÏÂÈ¡Õû
-	_MergeSort(a, left, mid, tmp); 
+	_MergeSort(a, left, mid, tmp);
 	_MergeSort(a, mid + 1, right, tmp); //ºóĞò
+
 	int left1 = left, right1 = mid;
 	int left2 = mid + 1, right2 = right;
 	int tmpi = left;
 	while (left1 <= right1 && left2 <= right2)
 	{
-		if (a[left1] > a[left2])
+		if (a[left1] > a[left2]) //½µĞò
 			tmp[tmpi++] = a[left1++];
 		else
 			tmp[tmpi++] = a[left2++];
 	}
-	while (left1 <= right1)
+	while (left1 <= right1) //´¦ÀíÊ£ÓàÊı¾İ
 		tmp[tmpi++] = a[left1++];
 	while (left2 <= right2)
 		tmp[tmpi++] = a[left2++];
@@ -300,11 +302,197 @@ void _MergeSort(int* a, int left, int right, int* tmp) //¹é²¢ÅÅĞò×Óº¯Êı
 void MergeSort(int* a, int n) //¹é²¢ÅÅĞò
 {
 	int* tmp = (int*)malloc(sizeof(int) * n);
+	if (!tmp)
+	{
+		perror("malloc\n");
+		return;
+	}
 	_MergeSort(a, 0, n - 1, tmp);
 	free(tmp);
 } //Ê±¼ä¸´ÔÓ¶ÈO(N*logN)
 
-void MergeSort_NonRecursive(int* a, int n) //¹é²¢ÅÅĞò(·Çµİ¹é)
+void _MergeSort_Optimized(int* a, int left, int right, int* tmp) //¹é²¢ÅÅĞò×Óº¯Êı(Ğ¡Çø¼äÓÅ»¯)
+{
+	if (left == right) //µİ¹é½áÊøÌõ¼ş
+		return;
+
+	if (right - left + 1 < 10) //Ğ¡Çø¼äÓÅ»¯£¬¼õÉÙµİ¹é´ÎÊı£¬Í¬ÑùÊÊÓÃÓÚ¿ìÅÅ
+	{						   //Ğ¡Çø¼äÓÅ»¯Ö»ÔÚÊı¾İÁ¿´óµÄÊ±ºòÓĞĞ§¹û£¬¶øÇÒĞ§¹ûºÜĞ¡
+		InsertSort(a + left, right - left + 1);
+		return;
+	}
+
+	int mid = left + (right - left) / 2; //Óöµ½ÆæÊıÊ±mid»áÏòÏÂÈ¡Õû
+	_MergeSort_Optimized(a, left, mid, tmp);
+	_MergeSort_Optimized(a, mid + 1, right, tmp); //ºóĞò
+
+	int left1 = left, right1 = mid;
+	int left2 = mid + 1, right2 = right;
+	int tmpi = left;
+	while (left1 <= right1 && left2 <= right2)
+	{
+		if (a[left1] > a[left2]) //½µĞò
+			tmp[tmpi++] = a[left1++];
+		else
+			tmp[tmpi++] = a[left2++];
+	}
+	while (left1 <= right1) //´¦ÀíÊ£ÓàÊı¾İ
+		tmp[tmpi++] = a[left1++];
+	while (left2 <= right2)
+		tmp[tmpi++] = a[left2++];
+	memcpy(a + left, tmp + left, sizeof(int) * (right - left + 1));
+}
+
+void MergeSort_Optimized(int* a, int n) //¹é²¢ÅÅĞò(Ğ¡Çø¼äÓÅ»¯)
+{
+	int* tmp = (int*)malloc(sizeof(int) * n);
+	if (!tmp)
+	{
+		perror("malloc\n");
+		return;
+	}
+	_MergeSort_Optimized(a, 0, n - 1, tmp);
+	free(tmp);
+} //Ê±¼ä¸´ÔÓ¶ÈO(N*logN)
+
+void MergeSort_NonRecursive1(int* a, int n) //¹é²¢ÅÅĞò(·Çµİ¹é)
 {
 
+	int* tmp = (int*)malloc(sizeof(int) * n);
+	if (!tmp)
+	{
+		perror("malloc\n");
+		return;
+	}
+	int gap = 1;
+	while (gap < n)
+	{
+		for (int i = 0; i < n; i += 2 * gap)
+		{
+			int left1 = i, right1 = i + gap - 1;
+			int left2 = i + gap, right2 = i + 2 * gap - 1;
+			if (right1 >= n - 1) //´¦Àí±ß½çÌõ¼ş
+				break;
+			else if (right2 > n - 1)
+				right2 = n - 1;
+			int tmpi = i;
+			while (left1 <= right1 && left2 <= right2)
+			{
+				if (a[left1] > a[left2]) //½µĞò
+					tmp[tmpi++] = a[left1++];
+				else
+					tmp[tmpi++] = a[left2++];
+			}
+#pragma warning(push)
+#pragma warning(disable:6386)
+			while (left1 <= right1) //´¦ÀíÊ£ÓàÊı¾İ
+				tmp[tmpi++] = a[left1++];
+#pragma warning(pop)
+			while (left2 <= right2)
+				tmp[tmpi++] = a[left2++];
+			int cpysize = right2 - i + 1;
+#pragma warning(push)
+#pragma warning(disable:6385)
+			memcpy(a + i, tmp + i, sizeof(int) * cpysize);
+#pragma warning(pop)
+		}
+		gap *= 2;
+	}
+	free(tmp);
+} //Ê±¼ä¸´ÔÓ¶ÈO(N*logN)
+
+void MergeSort_NonRecursive2(int* a, int n) //¹é²¢ÅÅĞò(·Çµİ¹é)
+{
+	int* tmp = (int*)malloc(sizeof(int) * n);
+	if (!tmp)
+	{
+		perror("malloc\n");
+		return;
+	}
+	int gap = 1;
+	while (gap < n)
+	{
+		for (int i = 0; i < n; i += 2 * gap)
+		{
+			int begin1 = i, end1 = i + gap - 1;
+			int begin2 = i + gap, end2 = i + 2 * gap - 1;
+			int tmpi = i;
+			if (end1 >= n) //´¦Àí±ß½çÌõ¼ş
+			{
+				end1 = n - 1;
+				begin2 = end2 + 1;
+			}
+			else if (begin2 >= n)
+				begin2 = end2 + 1;
+			else if (end2 >= n)
+				end2 = n - 1;
+			while (begin1 <= end1 && begin2 <= end2)
+			{
+				if (a[begin1] > a[begin2]) //½µĞò
+					tmp[tmpi++] = a[begin1++];
+				else
+					tmp[tmpi++] = a[begin2++];
+			}
+#pragma warning(push)
+#pragma warning(disable:6386)
+			while (begin1 <= end1) //´¦ÀíÊ£ÓàÊı¾İ
+				tmp[tmpi++] = a[begin1++];
+#pragma warning(pop)
+			while (begin2 <= end2)
+				tmp[tmpi++] = a[begin2++];
+		}
+		gap *= 2;
+#pragma warning(push)
+#pragma warning(disable:6385)
+		memcpy(a, tmp, sizeof(int) * n);
+#pragma warning(pop)
+	}
+	free(tmp);
+} //Ê±¼ä¸´ÔÓ¶ÈO(N*logN)
+
+int GetRandIndex(int* a, int left, int right) //Ëæ»úÑ¡ÊıÈ»ºóÈ¡ÖĞ£¬¶ÔkeyÓÅ»¯
+{
+	int mid = left + (rand() % (right - left));
+	if (a[left] > a[right])
+	{
+		if (a[mid] > a[left])
+			return left;
+		else if (a[mid] < a[right])
+			return right;
+		else
+			return mid;
+	}
+	else //a[begin] < a[end]
+	{
+		if (a[mid] < a[left])
+			return left;
+		else if (a[mid] > a[right])
+			return right;
+		else
+			return mid;
+	}
+}
+
+void QuickSort_3WayPartition(int* a, int begin, int end) //¿ìËÙÅÅĞò(Õë¶ÔÓĞ´óÁ¿ÖØ¸´Êı¾İµÄÓÅ»¯)
+{
+	if (begin >= end) //µİ¹é½áÊøÌõ¼ş
+		return;
+
+	int randi = GetRandIndex(a, begin, end); //Ëæ»úÈ¡keyÓÅ»¯
+	Swap(&a[begin], &a[randi]);
+
+	int cur = begin + 1, key = a[begin];
+	int left = begin, right = end;
+	while (cur <= right)	   //ÈıÂ·»®·Ö
+	{
+		if (a[cur] > key)	   //´óÓÚkeyµÄÖµ»»µ½Ç°Ãæ
+			Swap(&a[cur++], &a[left++]);
+		else if (a[cur] < key) //Ğ¡ÓÚkeyµÄÖµ»»µ½ºóÃæ
+			Swap(&a[cur], &a[right--]);
+		else				   //µÈÓÚkeyµÄÖµÁôÔÚÖĞ¼ä
+			cur++;
+	}
+
+	QuickSort_3WayPartition(a, begin, left - 1);
+	QuickSort_3WayPartition(a, right + 1, end);
 }
