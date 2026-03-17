@@ -69,6 +69,11 @@ void testfunc()
 	printf("NRMergeSort2: ");
 	MergeSort_NonRecursive2(a, size);
 	printarr(a, size);
+
+	memcpy(a, reset, sizeof(int) * size);
+	printf("   CountSort: ");
+	CountSort(a, size);
+	printarr(a, size);
 }
 
 void testtime()
@@ -99,6 +104,8 @@ void testtime()
 	if (!a11) return;
 	int* a12 = (int*)malloc(sizeof(int) * N);
 	if (!a12) return;
+	int* a13 = (int*)malloc(sizeof(int) * N);
+	if (!a13) return;
 	for (int i = 0; i < N; ++i)
 	{
 		a1[i] = rand() + 1000 * rand();
@@ -113,6 +120,7 @@ void testtime()
 		a10[i] = a1[i];
 		a11[i] = a1[i];
 		a12[i] = a1[i];
+		a13[i] = a1[i];
 	}
 
 	int start1 = clock();
@@ -172,7 +180,9 @@ void testtime()
 	MergeSort_NonRecursive2(a11, N);
 	int end13 = clock();
 
-
+	int start16 = clock();
+	CountSort(a13, N);
+	int end16 = clock();
 
 	printf("  InsertSort: %-7dms\n", end1 - start1);
 	printf("   ShellSort: %-7dms\n", end2 - start2);
@@ -189,6 +199,7 @@ void testtime()
 	printf("   MergeSort: %-7dms (optimized)\n", end11 - start11);
 	printf("NRMergeSort1: %-7dms\n", end12 - start12);
 	printf("NRMergeSort2: %-7dms\n", end13 - start13);
+	printf("   CountSort: %-7dms\n", end16 - start16);
 
 	free(a1);
 	free(a2);
@@ -202,6 +213,7 @@ void testtime()
 	free(a10);
 	free(a11);
 	free(a12);
+	free(a13);
 }
 
 int main()

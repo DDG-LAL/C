@@ -32,3 +32,5 @@ void MergeSort(int* a, int n); //归并排序
 void MergeSort_Optimized(int* a, int n); //归并排序(小区间优化)
 void MergeSort_NonRecursive1(int* a, int n); //归并排序(非递归)
 void MergeSort_NonRecursive2(int* a, int n); //归并排序(非递归)
+
+void CountSort(int* a, int n); //计数排序

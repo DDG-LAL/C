@@ -357,7 +357,6 @@ void MergeSort_Optimized(int* a, int n) //归并排序(小区间优化)
 
 void MergeSort_NonRecursive1(int* a, int n) //归并排序(非递归)
 {
-
 	int* tmp = (int*)malloc(sizeof(int) * n);
 	if (!tmp)
 	{
@@ -478,7 +477,7 @@ void QuickSort_3WayPartition(int* a, int begin, int end) //快速排序(针对有大量重
 	if (begin >= end) //递归结束条件
 		return;
 
-	int randi = GetRandIndex(a, begin, end); //随机取key优化
+	int randi = GetRandIndex(a, begin, end); //随机数取中key优化
 	Swap(&a[begin], &a[randi]);
 
 	int cur = begin + 1, key = a[begin];
@@ -495,4 +494,32 @@ void QuickSort_3WayPartition(int* a, int begin, int end) //快速排序(针对有大量重
 
 	QuickSort_3WayPartition(a, begin, left - 1);
 	QuickSort_3WayPartition(a, right + 1, end);
+}
+
+void CountSort(int* a, int n) //计数排序
+{
+	int max = a[0], min = a[0];
+	for (int i = 0; i < n; ++i) //确定待排序数据中的最值
+	{
+		if (a[i] > max)
+			max = a[i];
+		if (a[i] < min)
+			min = a[i];
+	}
+	int range = max - min + 1; //确定数据范围
+	int* count = (int*)malloc(sizeof(int) * range); //根据数据范围确定计数数组的大小
+	if (!count)
+	{
+		perror("malloc\n");
+		return;
+	}
+	memset(count, 0, sizeof(int) * range); //将计数数组内容全置为0
+	for (int j = 0; j < n; ++j) //计数，在计数数组中记录a数组中每个元素出现的次数
+		(count[a[j] - min])++;
+	int num = n - 1; //降序
+	for (int k = 0; k < range; ++k) //从计数数组把数据还原到a数组
+	{								//由于计数数组本身的有序，按顺序还原到a数组后得到有序序列
+		while (count[k]--)
+			a[num--] = k + min;
+	}
 }
