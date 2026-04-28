@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exercise1_StringReverseOutput.c">
+    <ClCompile Include="StringReverseOutput.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

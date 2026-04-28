@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exercise9_Myatoi.c">
+    <ClCompile Include="Myatoi.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

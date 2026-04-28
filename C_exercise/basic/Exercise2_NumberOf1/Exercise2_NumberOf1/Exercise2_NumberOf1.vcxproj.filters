@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exercise2_NumberOf1.c">
+    <ClCompile Include="NumberOf1.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -29,7 +29,10 @@ int diff2(int a, int b)
 int main()
 {
 	int x = 0, y = 0;
+#pragma warning(push)
+#pragma warning(disable:6031)
 	scanf("%d %d", &x, &y);
+#pragma warning(pop)
 	printf("%d %d", diff1(x, y), diff2(x, y));
 	return 0;
 }

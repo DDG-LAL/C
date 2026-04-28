@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exercise10_SpaceInString.c">
+    <ClCompile Include="SpaceInString.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

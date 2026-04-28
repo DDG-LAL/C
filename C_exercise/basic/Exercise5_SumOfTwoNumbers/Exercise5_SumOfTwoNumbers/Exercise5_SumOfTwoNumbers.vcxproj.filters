@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exercise5_SumOfTwoNumbers.c">
+    <ClCompile Include="SumOfTwoNumbers.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

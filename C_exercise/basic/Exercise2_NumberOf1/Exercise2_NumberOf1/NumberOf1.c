@@ -23,14 +23,14 @@ int Number2(unsigned int a)  //使用unsigned int来接收参数是为了使用取模运算
 	while (a)
 	{
 		if (a % 2 == 1)  //对于无符号数，模2所得的数即为二进制形式的最低位
-			++sum;  
+			++sum;
 		a = a / 2;  //除以2，相当于右移
 	}
 	return sum;
 }
 
 //效率更高的方法，循环次数等于1的个数
-int Number3(int a)  
+int Number3(int a)
 {
 	int sum = 0;
 	while (a)
@@ -44,7 +44,10 @@ int Number3(int a)
 int main()
 {
 	int a = 0;
+#pragma warning(push)
+#pragma warning(disable:6031)
 	scanf("%d", &a);
+#pragma warning(pop)
 	printf("%d %d %d", Number1(a), Number2(a), Number3(a));
 	return 0;
 }

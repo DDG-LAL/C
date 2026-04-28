@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exercise6_YangMatrix.c">
+    <ClCompile Include="YangMatrix.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

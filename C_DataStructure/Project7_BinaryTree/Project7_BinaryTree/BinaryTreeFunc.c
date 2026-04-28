@@ -139,7 +139,7 @@ void LevelOrder(BTnode* root) //层序遍历
 bool BTcomplete1(BTnode* root) //判断是否为完全二叉树，利用层序遍历
 {							   //若遍历过程中出现空节点，则标记
 	Queue q;				   //标记后，若在遍历结束前出现非空节点，则false
-	Queue* pq = &q;			   //		 若直到遍历结束都没有出现非空节点，则true
+	Queue* pq = &q;			   //若直到遍历结束都没有出现非空节点，则true
 	Qinit(pq);
 	bool flag = true;
 	if (root)

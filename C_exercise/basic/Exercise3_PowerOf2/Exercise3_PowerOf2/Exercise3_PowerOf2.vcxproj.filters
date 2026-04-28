@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exercise3_PowerOf2.c">
+    <ClCompile Include="PowerOf2.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

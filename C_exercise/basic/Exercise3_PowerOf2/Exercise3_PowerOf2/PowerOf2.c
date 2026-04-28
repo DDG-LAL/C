@@ -37,7 +37,10 @@ bool judge2(int a)
 int main()
 {
 	int a = 0;
+#pragma warning(push)
+#pragma warning(disable:6031)
 	scanf("%d", &a);
+#pragma warning(pop)
 	printf("%d %d\n", judge1(a), judge2(a));
 	return 0;
 }
